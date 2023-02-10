@@ -1,0 +1,1091 @@
+* {
+  transition: 300ms;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Raleway", sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: #1f1f1f;
+}
+
+.x {
+  display: none;
+}
+
+.side_nav {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  margin-top: 90px;
+  background-color: white;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.side_nav form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  height: 45px;
+  border: solid 1px silver;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.side_nav form input {
+  padding: 0 10px;
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+}
+
+.side_nav form input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.side_nav form input::placeholder {
+  color: silver;
+}
+
+.side_nav form button {
+  padding: 0 25px;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+}
+
+.side_nav .sidenav_list {
+  margin-top: 15px;
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.side_nav .sidenav_list a {
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  padding: 17px 10px;
+  text-transform: uppercase;
+}
+
+.side_nav .sidenav_list a i {
+  font-size: 28px;
+  color: #54c547;
+}
+
+.side_nav .sidenav_list .cl {
+  color: #1a70c5;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 0 7%;
+  height: 85px;
+  border-bottom: solid 1px silver;
+  position: sticky;
+  top: 0;
+  gap: 25px;
+  background-color: white;
+}
+
+nav .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  letter-spacing: 3px;
+  margin-right: auto;
+}
+
+nav .logo h1 {
+  color: #1f1f1f;
+  font-size: 26px;
+  font-family: "Alexandria", sans-serif;
+  letter-spacing: 5px;
+}
+
+nav .logo p {
+  color: rgb(31, 31, 31, 0.8);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+nav .logo span {
+  color: #2f67fa;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+}
+
+nav form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  height: 50%;
+  outline: solid 1px rgba(143, 144, 145, 0.7);
+  border-radius: 3px;
+  margin-right: 20px;
+}
+
+nav input {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  padding: 0 20px;
+  border: none;
+  outline: none;
+}
+
+nav input::-webkit-search-cancel-button {
+  display: none;
+}
+
+nav button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 70px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #516e84;
+  /* border: solid; */
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: rgb(47, 103, 250, 0.1);
+}
+
+nav button i {
+  font-size: 20px;
+}
+
+nav .icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 25px;
+}
+
+nav .icons .signup {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 30px;
+  padding-right: 20px;
+  background-color: rgba(178, 181, 184, 0.2);
+  color: #1f1f1f;
+}
+
+nav .icons .signup:hover {
+  background-color: rgba(178, 181, 184, 0.6);
+  color: #1f1f1f;
+}
+
+nav .icons .signup i {
+  padding: 6px;
+  background-color: rgba(81, 110, 132, 0.1);
+  border-radius: 100%;
+  color: #1f1f1f;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+nav .icons .cart {
+  padding: 8px 10px;
+  padding-right: 0px;
+}
+
+nav .sp1 {
+  display: none;
+}
+
+nav .s {
+  display: none;
+}
+
+nav .i {
+  display: none;
+  color: #1f1f1f;
+}
+nav .x {
+  display: none;
+  color: #1f1f1f;
+}
+
+header {
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+header .nav2 {
+  width: 100%;
+  padding: 0 7%;
+  border-bottom: solid 1px silver;
+  height: 70px;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+header .nav2 a {
+  padding: 0 20px;
+  height: 100%;
+  color: #1f1f1f;
+  text-transform: capitalize;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  white-space: nowrap;
+}
+
+header .nav2 a:hover {
+  background-color: rgb(47, 103, 250, 0.1);
+}
+
+header .nav3 {
+  width: 100%;
+  background-color: rgb(47, 103, 250, 0.4);
+  background-color: #2048ad;
+  height: 70px;
+  display: flex;
+  padding: 0 7%;
+  align-items: center;
+}
+
+header .nav3 .title {
+  padding: 0 20px;
+  height: 55%;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  color: #2048ad;
+  font-family: "Alexandria", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  background-color: white;
+  border-radius: 5px;
+  margin-right: 25px;
+}
+
+header .nav3 .exams {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  overflow: scroll;
+}
+
+header .nav3 .exams::-webkit-scrollbar {
+  display: none;
+}
+
+header .nav3 .exams a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  text-decoration: underline;
+  text-decoration-color: #2f67fa;
+  text-decoration-thickness: 3px;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+main .sectioni {
+  gap: 25px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 75px 0;
+  height: fit-content;
+}
+
+main .sectioni h1 {
+  font-size: 48px;
+  font-weight: 500;
+  color: #1f1f1f;
+  text-align: center;
+}
+
+main .sectioni h5 {
+  color: #516e84;
+  font-weight: 400;
+  width: 80%;
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  line-height: 150%;
+}
+
+main .sectioni .srch {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 60px;
+  margin-top: 20px;
+}
+
+main .sectioni .srch input {
+  height: 100%;
+  width: 350px;
+  border-radius: 5px;
+  border: none;
+  outline: solid 1px silver;
+  padding: 0 15px;
+  font-size: 18px;
+}
+
+main .sectioni .srch button {
+  height: 100%;
+  width: 150px;
+  background-color: #2048ad;
+  color: white;
+  border-color: #2048ad;
+  outline: none;
+  font-size: 22px;
+  letter-spacing: 1.5px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+main .sectionii {
+  padding: 60px 0;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  row-gap: 30px;
+  background-color: rgba(26, 112, 197, 0.2);
+}
+
+main .sectionii .txt {
+  font-size: 35px;
+  color: #354c5e;
+  letter-spacing: 1.5px;
+}
+
+main .sectionii .fl {
+  width: 100%;
+  padding: 0 7%;
+}
+
+main .sectionii .fl span {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  overflow-y: scroll;
+}
+
+main .sectionii .fl span::-webkit-scrollbar {
+  display: none;
+}
+
+main .sectionii .fl a {
+  background-color: white;
+  height: 200px;
+  padding: 0 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 5px;
+  background-size: cover;
+  background-position: center;
+  outline: solid 1px silver;
+  border: solid 5px white;
+}
+
+main .sectionii .fl a:hover {
+  box-shadow: 0 0 20px rgb(47, 103, 250, 0.4);
+}
+
+main .sectionii .seeall {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px #354c5e;
+  padding: 10px 40px;
+  gap: 10px;
+  color: #354c5e;
+  border-radius: 30px;
+}
+
+main .sectioniii {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 80px 7%;
+}
+
+main .sectioniii .txt {
+  width: 100%;
+  text-align: left;
+  font-size: 36px;
+}
+
+main .sectioniii .list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+main .sectioniii .list span {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: solid 1px silver;
+}
+
+/* main .sectioniii .list span .vendor{padding: 0 20px; padding-right: 80px;}
+
+main .sectioniii .list span .exam{padding: 0 20px; padding-right: 100px;}
+
+main .sectioniii .list span .file{
+    padding: 0 20px; padding-right: 100px;
+} */
+
+main .sectioniii .list span a {
+  width: 200px;
+  padding-left: 10px;
+  white-space: nowrap;
+  height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #2f67fa;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+main .sectioniii .list .top a {
+  color: #1f1f1f;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+main .sectioniii .list span .file {
+  width: 400px;
+}
+
+footer {
+  background-color: #fcfcfc;
+  width: 100%;
+  padding: 30px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.footer_link {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.footer_link a {
+  color: #2f67fa;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.footer_description {
+  color: gray;
+  width: 90%;
+  text-align: center;
+}
+
+/* Exam Page Styles */
+.sectiona {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.sectiona p {
+  color: #354c5e;
+  padding: 10px;
+}
+
+.sectiona .product {
+  background-color: #fafcff;
+  max-width: 80%;
+  padding: 30px;
+  display: flex;
+  height: 100%;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  border-top-left-radius: 220px;
+  border: 0.5px solid #e0e0e0;
+}
+
+.product .image_container {
+  display: flex;
+  align-items: center;
+  color: #354c5e;
+  font-size: 20px;
+}
+
+.product .product_description {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-bottom: 0.5px solid lightgray;
+}
+
+.product .product_description a {
+  color: #1a70c5;
+  font-size: 22px;
+}
+
+.product .product_description p {
+  font-size: 22px;
+}
+
+.product .product_description span {
+  margin-bottom: 20px;
+}
+
+.product .price_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product .price_container h2 {
+  color: #1a70c5;
+}
+
+.product .price_container a {
+  background-color: #54c547;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  color: white;
+  margin-top: 10px;
+  border-radius: 3px;
+  border-bottom: 0.5px solid lightgray;
+  margin-bottom: 30px;
+}
+
+.product .extra_description {
+  margin-top: 20px;
+  color: gray;
+}
+
+.product .extra_description a {
+  color: #1a70c5;
+}
+
+.sectionb {
+  width: 95%;
+  margin-top: 40px;
+  max-width: 1300px;
+}
+
+.sectionb h2 {
+  color: #354c5e;
+}
+
+.sectionb .table_container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionb .table_container .table_active {
+  background-color: #f7f8fa;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.sectionb .table_container .table_active .table_active_item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 10px;
+  flex: 1;
+  max-width: 33.3%;
+}
+
+.sectionb .table_container .table_active .table_active_item small {
+  font-size: 11px;
+}
+
+.sectionb .table_container .table_active .table_active_item a {
+  color: #1a70c5;
+  margin-top: 5px;
+  text-decoration: underline;
+}
+
+.sectionb .table_container .table_active .table_active_item p {
+  font-weight: 500;
+  margin-top: 5px;
+  color: #354c5e;
+}
+
+.sectionc {
+  width: 90%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.sectionc h3 {
+  color: #354c5e;
+  margin-bottom: 10px;
+}
+
+.sectionc p {
+  color: #516e84;
+  margin-bottom: 10px;
+}
+
+.sectionc a {
+  text-decoration: underline;
+  color: #1a70c5;
+}
+
+.list_info {
+  width: 90%;
+  color: #516e84;
+}
+
+.list_info a {
+  color: #1a70c5;
+  text-decoration: underline;
+}
+
+/* Register Page */
+.form_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 70px;
+}
+
+.form_container h2 {
+  color: #354c5e;
+}
+
+.form_container form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+form .input_container {
+  width: 100%;
+  max-width: 400px;
+}
+
+form .input_container p {
+  color: #354c5e;
+}
+
+form .input_container input {
+  padding: 10px;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  outline: none;
+  border: 1px solid silver;
+  font-size: 16px;
+}
+
+form .input_container input::placeholder {
+  color: silver;
+}
+
+.form_container form .form_extra {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 400px;
+}
+
+.form_container form .form_extra a {
+  color: #1a70c5;
+}
+
+.form_container form .form_extra .radio_container {
+  display: flex;
+  align-items: center;
+}
+
+.form_container form .form_extra .radio_container p {
+  margin-left: 10px;
+  color: #354c5e;
+}
+
+form button {
+  width: 100%;
+  max-width: 400px;
+  background-color: #54c547;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form_container p a {
+  color: #1a70c5;
+  font-weight: 700;
+}
+
+/* FAQ Styling */
+.faq_sectiona {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.faq_sectiona h1 {
+  color: #354c5e;
+}
+
+.faq_container h2 {
+  color: #354c5e;
+  font-size: 20px;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.faq_container div {
+  background-color: #fafcff;
+  width: 100%;
+  max-width: 700px;
+  padding: 10px;
+  border: 0.5px solid rgb(235, 235, 235);
+}
+
+.faq_container div a {
+  color: #1a70c5;
+  text-decoration: underline;
+}
+
+.faq_container div p {
+  line-height: 30px;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 1000px) {
+  nav {
+    padding: 0 4%;
+    height: 90px;
+  }
+  nav .logo {
+    font-size: 32px;
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-right: auto;
+  }
+  header .nav2 {
+    padding: 0 4%;
+  }
+
+  header .nav3 {
+    padding: 0 4%;
+  }
+
+  main .sectionii .fl {
+    width: 100%;
+    padding: 0 4%;
+  }
+
+  main .sectioniii .list span a {
+    width: 80px;
+    padding-left: 10px;
+    white-space: nowrap;
+    height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #2f67fa;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  nav form {
+    width: 300px;
+  }
+
+  nav .icons .spp {
+    display: none;
+  }
+
+  nav .i {
+    display: flex;
+    color: #1f1f1f;
+    font-size: 24px;
+    margin-left: 10px;
+  }
+
+  main .sectioni h1 {
+    font-size: 36px;
+    width: 80%;
+  }
+
+  main .sectioni h5 {
+    color: #516e84;
+    font-weight: 400;
+    width: 80%;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+  }
+
+  main .sectionii {
+    padding: 40px 0;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    row-gap: 20px;
+    background-color: rgba(26, 112, 197, 0.2);
+  }
+
+  main .sectionii .fl a {
+    height: 150px;
+    padding: 0 80px;
+    margin: 20px 5px;
+  }
+
+  main .sectionii .fl span {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    overflow-y: scroll;
+  }
+
+  main .sectioniii .list span .file {
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  nav {
+    padding: 0 5%;
+  }
+
+  nav .logo {
+    margin-right: auto;
+    margin-left: 0;
+  }
+
+  nav form {
+    width: 200px;
+  }
+
+  nav .s {
+    margin-left: auto;
+    font-size: 24px;
+  }
+
+  nav .i {
+    display: flex;
+    color: #1f1f1f;
+    font-size: 24px;
+    margin-left: 10px;
+  }
+
+  header .nav2 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  nav form {
+    display: none;
+  }
+
+  nav .s {
+    margin-left: auto;
+    font-size: 24px;
+    display: flex;
+    padding: 8px;
+    background-color: rgba(178, 181, 184, 0.2);
+    border-radius: 100%;
+  }
+
+  nav .i {
+    display: flex;
+    color: #1f1f1f;
+    font-size: 24px;
+    margin-left: 10px;
+  }
+
+  nav .icons .cart {
+    display: none;
+  }
+
+  header .nav3 .title {
+    display: none;
+  }
+
+  main .sectioni {
+    gap: 20px;
+    padding: 30px 0;
+    height: fit-content;
+  }
+
+  main .sectioni h1 {
+    font-size: 28px;
+    width: 90%;
+    text-align: left;
+  }
+
+  main .sectioni h5 {
+    text-align: left;
+    width: 90%;
+  }
+
+  main .sectioni .srch {
+    gap: 10px;
+    height: 50px;
+    margin-top: 20px;
+  }
+
+  main .sectioni .srch input {
+    height: 100%;
+    width: 200px;
+  }
+
+  main .sectioni .srch button {
+    height: 100%;
+    width: 130px;
+    background-color: #2048ad;
+    color: white;
+    border-color: #2048ad;
+    outline: none;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    border-radius: 5px;
+  }
+
+  main .sectionii {
+    padding: 40px 0;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    row-gap: 14px;
+    background-color: rgba(26, 112, 197, 0.2);
+    margin-top: 25px;
+  }
+
+  main .sectionii .txt {
+    font-size: 26px;
+    color: #354c5e;
+    letter-spacing: 1.5px;
+    text-align: left;
+    width: 90%;
+  }
+
+  main .sectionii .fl a {
+    height: 150px;
+    padding: 0 80px;
+    margin: 20px 5px;
+  }
+
+  main .sectioniii .list span .file {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
