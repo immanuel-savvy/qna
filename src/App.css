@@ -377,7 +377,6 @@ main .sectioni .srch input {
 main .sectioni .srch button {
   height: 100%;
   width: 150px;
-  background-color: #2048ad;
   color: white;
   border-color: #2048ad;
   outline: none;
@@ -794,6 +793,7 @@ form .input_container input::placeholder {
   color: #354c5e;
 }
 
+form button,
 button {
   width: 100%;
   max-width: 400px;
