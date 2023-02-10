@@ -794,7 +794,7 @@ form .input_container input::placeholder {
   color: #354c5e;
 }
 
-form button {
+button {
   width: 100%;
   max-width: 400px;
   background-color: #54c547;

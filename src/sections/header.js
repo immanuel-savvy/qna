@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Nav from "../components/nav";
 
 class Header extends React.Component {
@@ -14,31 +15,31 @@ class Header extends React.Component {
         <Nav />
         <header>
           <div class="nav2">
-            <a href="">Home</a>
-            <a href="">E-books</a>
-            <a href="">Contact Us</a>
-            <a href="./faq.html">FAQ</a>
+            <Link to="/">Home</Link>
+            <Link href="">E-books</Link>
+            <Link href="">Contact Us</Link>
+            <Link href="./faq.html">FAQ</Link>
           </div>
           <div class="nav3">
             <span class="title">Exams :</span>
             <span class="exams">
-              <a href="">Microsoft</a>
-              <a href="">Cisco</a>
-              <a href="">compTIA</a>
-              <a href="">AMAZON</a>
-              <a href="">PIM</a>
-              <a href="">compTIA</a>
-              <a href="">AMAZON</a>
-              <a href="">PIM</a>
-              <a href="">compTIA</a>
-              <a href="">AMAZON</a>
-              <a href="">PIM</a>
-              <a href="">compTIA</a>
-              <a href="">AMAZON</a>
-              <a href="">PIM</a>
-              <a href="">compTIA</a>
-              <a href="">AMAZON</a>
-              <a href="">PIM</a>
+              <Link href="">Microsoft</Link>
+              <Link href="">Cisco</Link>
+              <Link href="">compTIA</Link>
+              <Link href="">AMAZON</Link>
+              <Link href="">PIM</Link>
+              <Link href="">compTIA</Link>
+              <Link href="">AMAZON</Link>
+              <Link href="">PIM</Link>
+              <Link href="">compTIA</Link>
+              <Link href="">AMAZON</Link>
+              <Link href="">PIM</Link>
+              <Link href="">compTIA</Link>
+              <Link href="">AMAZON</Link>
+              <Link href="">PIM</Link>
+              <Link href="">compTIA</Link>
+              <Link href="">AMAZON</Link>
+              <Link href="">PIM</Link>
             </span>
           </div>
         </header>

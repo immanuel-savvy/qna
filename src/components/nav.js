@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -10,10 +11,10 @@ class Nav extends React.Component {
   render() {
     return (
       <nav>
-        <a href="" class="logo">
+        <Link to="/" class="logo">
           <h1>QNA.</h1>
           <p>Digitalized assesment</p>
-        </a>
+        </Link>
         <form action="">
           <input type="search" name="" id="" placeholder="Search... " />
           <button type="submit">
@@ -21,12 +22,9 @@ class Nav extends React.Component {
           </button>
         </form>
         <span class="icons">
-          <a href="./register.html" class="signup spp">
+          <Link to="/signup" class="signup spp">
             <i class="material-icons-outlined">person</i> Sign Up
-          </a>
-          <a href="" class="signup cart">
-            <i class="material-icons-outlined">shopping_cart</i>
-          </a>
+          </Link>
         </span>
         <i class="material-icons s">search</i>
         <i class="material-icons i" id="i" onclick="sideNavOn();">

@@ -11,19 +11,14 @@ class Footer extends React.Component {
     return (
       <footer>
         <div class="footer_link">
-          <a href="#">Share VCE File</a>
+          <a href="#">Share Results</a>
           <a href="#">All Vendors</a>
-          <a href="#">Video Course</a>
+          <a href="#">eBooks</a>
           <a href="#">Certifications Guide</a>
           <a href="#">Archive</a>
           <a href="#">Blog</a>
           <a href="#">What We Offer</a>
-          <a href="#">VCE Exam Simulator</a>
-          <a href="#">VCE Player</a>
-          <a href="#">Download VCE Online</a>
-          <a href="#">Open VCE Files</a>
-          <a href="#">Exam Formatter</a>
-          <a href="#">VCE Mobile Tutorial</a>
+          <a href="#">Exam Simulator</a>
           <a href="#">Terms of Service</a>
           <a href="#">Privacy Policy</a>
         </div>
@@ -37,16 +32,15 @@ class Footer extends React.Component {
 
         <div class="footer_description">
           <p>
-            Examcollection.com is owned by Boltprep Ltd. Company address:
-            Wisteria Grange Barn, Pikes End, Pinner, Middlesex, United Kingdom,
-            HA5 2EX
+            QNA.com is owned by GIIT Africa. Company address: 3 Obafemi Awolowo
+            way, Ikeja, Lagos, Nigeria.
           </p>
         </div>
 
         <div class="footer_description">
           <p>
-            Payments will appear on your bank statement as "Examcollection.com".
-            © 2023 ExamCollection
+            Payments will appear on your bank statement as "QNA.com". ©{" "}
+            {new Date().getFullYear()} ExamCollection
           </p>
         </div>
       </footer>

@@ -4,6 +4,10 @@ import { Loggeduser } from "./contexts";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
+import Forgot_password from "./pages/forgot_password";
+import Page_not_found from "./pages/404";
 
 class Qna extends React.Component {
   constructor(props) {
@@ -20,6 +24,10 @@ class Qna extends React.Component {
         <BrowserRouter>
           <Routes>
             <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="forgot_password" element={<Forgot_password />} />
+            <Route path="*" element={<Page_not_found />} />
           </Routes>
         </BrowserRouter>
       </Loggeduser.Provider>
