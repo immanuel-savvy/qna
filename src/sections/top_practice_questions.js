@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Top_practice_questions extends React.Component {
   constructor(props) {
@@ -18,85 +19,85 @@ class Top_practice_questions extends React.Component {
             <a class="file p1">Certifications</a>
           </span>
           <span class="">
-            <a href="./vendors.html" class="vendor">
+            <Link to="/vendor" class="vendor">
               Microsoft
-            </a>
-            <a href="./exam.html" class="exam">
+            </Link>
+            <Link to="/start_exam" class="exam">
               DOY24
-            </a>
-            <a class="file">MCSE</a>
+            </Link>
+            <Link class="file">MCSE</Link>
           </span>
           <span class="">
-            <a href="./vendors.html" class="vendor">
+            <Link to="/vendor" class="vendor">
               Comptia
-            </a>
-            <a href="./exam.html" class="exam">
+            </Link>
+            <Link to="/start_exam" class="exam">
               SLL23
-            </a>
-            <a class="file">Comptia Security Master</a>
+            </Link>
+            <Link class="file">Comptia Security Master</Link>
           </span>
           <span class="">
-            <a href="./vendors.html" class="vendor">
+            <Link to="/vendor" class="vendor">
               AMAZON
-            </a>
-            <a href="./exam.html" class="exam">
+            </Link>
+            <Link to="/start_exam" class="exam">
               3000
-            </a>
-            <a class="file">AWS Certified Expert</a>
+            </Link>
+            <Link class="file">AWS Certified Expert</Link>
           </span>
           <span class="">
-            <a href="./vendors.html" class="vendor">
+            <Link to="/vendor" class="vendor">
               Microsoft
-            </a>
-            <a href="./exam.html" class="exam">
+            </Link>
+            <Link to="/start_exam" class="exam">
               DOY24
-            </a>
-            <a class="file">MCSE</a>
+            </Link>
+            <Link class="file">MCSE</Link>
           </span>
           <span class="">
-            <a href="./vendors.html" class="vendor">
+            <Link to="/vendor" class="vendor">
               Comptia
-            </a>
-            <a href="./exam.html" class="exam">
+            </Link>
+            <Link to="/start_exam" class="exam">
               SLL23
-            </a>
-            <a class="file">Comptia Security Master</a>
+            </Link>
+            <Link class="file">Comptia Security Master</Link>
           </span>
           <span class="">
-            <a href="./vendors.html" class="vendor">
+            <Link to="/vendor" class="vendor">
               AMAZON
-            </a>
-            <a href="./exam.html" class="exam">
+            </Link>
+            <Link to="/start_exam" class="exam">
               3000
-            </a>
-            <a class="file">AWS Certified Expert</a>
+            </Link>
+            <Link class="file">AWS Certified Expert</Link>
           </span>{" "}
           <span class="">
-            <a href="./vendors.html" class="vendor">
+            <Link to="/vendor" class="vendor">
               Microsoft
-            </a>
-            <a href="./exam.html" class="exam">
+            </Link>
+            <Link to="/start_exam" class="exam">
               DOY24
-            </a>
-            <a class="file">MCSE</a>
+            </Link>
+            <Link class="file">MCSE</Link>
           </span>
           <span class="">
-            <a href="./vendors.html" class="vendor">
+            <Link to="/vendor" class="vendor">
               Comptia
-            </a>
-            <a href="./exam.html" class="exam">
+            </Link>
+            <Link to="/start_exam" class="exam">
               SLL23
-            </a>
-            <a class="file">Comptia Security Master</a>
+            </Link>
+            <Link class="file">Comptia Security Master</Link>
           </span>
           <span class="">
-            <a href="./vendors.html" class="vendor">
+            <Link to="/vendor" class="vendor">
               AMAZON
-            </a>
-            <a href="./exam.html" class="exam">
+            </Link>
+            <Link to="/start_exam" class="exam">
               3000
-            </a>
-            <a class="file">AWS Certified Expert</a>
+            </Link>
+            <Link class="file">AWS Certified Expert</Link>
           </span>
         </div>
       </section>

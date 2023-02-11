@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Forgot_password from "./pages/forgot_password";
 import Page_not_found from "./pages/404";
+import Start_exam from "./pages/start_exam";
 
 class Qna extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class Qna extends React.Component {
         <BrowserRouter>
           <Routes>
             <Route index element={<Home />} />
+            <Route path="start_exam" element={<Start_exam />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="forgot_password" element={<Forgot_password />} />

@@ -425,6 +425,7 @@ main .sectionii .fl span::-webkit-scrollbar {
 
 main .sectionii .fl a {
   background-color: white;
+  background-repeat: no-repeat;
   height: 200px;
   padding: 0 100px;
   display: flex;
