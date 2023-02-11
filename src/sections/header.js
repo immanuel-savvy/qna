@@ -16,30 +16,30 @@ class Header extends React.Component {
         <header>
           <div class="nav2">
             <Link to="/">Home</Link>
-            <Link href="">E-books</Link>
-            <Link href="">Contact Us</Link>
-            <Link href="./faq.html">FAQ</Link>
+            <Link to="/ebooks">E-books</Link>
+            <Link to="/contact">Contact Us</Link>
+            <Link to="/faq">FAQ</Link>
           </div>
           <div class="nav3">
             <span class="title">Exams :</span>
             <span class="exams">
-              <Link href="">Microsoft</Link>
-              <Link href="">Cisco</Link>
-              <Link href="">compTIA</Link>
-              <Link href="">AMAZON</Link>
-              <Link href="">PIM</Link>
-              <Link href="">compTIA</Link>
-              <Link href="">AMAZON</Link>
-              <Link href="">PIM</Link>
-              <Link href="">compTIA</Link>
-              <Link href="">AMAZON</Link>
-              <Link href="">PIM</Link>
-              <Link href="">compTIA</Link>
-              <Link href="">AMAZON</Link>
-              <Link href="">PIM</Link>
-              <Link href="">compTIA</Link>
-              <Link href="">AMAZON</Link>
-              <Link href="">PIM</Link>
+              <Link to="/vendor">Microsoft</Link>
+              <Link to="/vendor">Cisco</Link>
+              <Link to="/vendor">compTIA</Link>
+              <Link to="/vendor">AMAZON</Link>
+              <Link to="/vendor">PIM</Link>
+              <Link to="/vendor">compTIA</Link>
+              <Link to="/vendor">AMAZON</Link>
+              <Link to="/vendor">PIM</Link>
+              <Link to="/vendor">compTIA</Link>
+              <Link to="/vendor">AMAZON</Link>
+              <Link to="/vendor">PIM</Link>
+              <Link to="/vendor">compTIA</Link>
+              <Link to="/vendor">AMAZON</Link>
+              <Link to="/vendor">PIM</Link>
+              <Link to="/vendor">compTIA</Link>
+              <Link to="/vendor">AMAZON</Link>
+              <Link to="/vendor">PIM</Link>
             </span>
           </div>
         </header>

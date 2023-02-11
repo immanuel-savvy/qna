@@ -32,15 +32,15 @@ class Footer extends React.Component {
 
         <div class="footer_description">
           <p>
-            QNA.com is owned by GIIT Africa. Company address: 3 Obafemi Awolowo
-            way, Ikeja, Lagos, Nigeria.
+            QNA.com is owned by GIIT Africa. <br />
+            Company address: 3 Obafemi Awolowo way, Ikeja, Lagos, Nigeria.
           </p>
         </div>
 
         <div class="footer_description">
           <p>
             Payments will appear on your bank statement as "QNA.com". ©{" "}
-            {new Date().getFullYear()} ExamCollection
+            {new Date().getFullYear()} QNA
           </p>
         </div>
       </footer>
