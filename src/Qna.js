@@ -11,6 +11,7 @@ import Page_not_found from "./pages/404";
 import Start_exam from "./pages/start_exam";
 import Vendor from "./pages/vendor";
 import FAQ from "./pages/faq";
+import Verify_email from "./pages/verify_email";
 
 class Qna extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class Qna extends React.Component {
             <Route path="start_exam" element={<Start_exam />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="verify_email" element={<Verify_email />} />
             <Route path="forgot_password" element={<Forgot_password />} />
             <Route path="*" element={<Page_not_found />} />
           </Routes>

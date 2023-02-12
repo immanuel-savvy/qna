@@ -2,7 +2,6 @@ import { USERS, USERS_HASH } from "../ds/conn";
 import nodemailer from "nodemailer";
 import { generate_random_string } from "generalised-datastore/utils/functions";
 import { verification } from "./emails";
-import { save_image } from "./utils";
 
 let email_verification_codes = new Object();
 
@@ -27,31 +26,23 @@ const send_mail = ({
   html,
   to,
 }) => {
-  let transporter;
-  try {
-    transporter = nodemailer.createTransport({
-      host: "66.29.137.48" || "udaralinksapp.com",
-      port: 465,
-      secure: true,
-      tls: {
-        servername: "udaralinksapp.com",
-      },
-      auth: {
-        user: sender,
-        pass: sender_pass,
-      },
-    });
-  } catch (e) {}
+  let transporter = nodemailer.createTransport({
+    host: "premium217.web-hosting.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: sender,
+      pass: sender_pass,
+    },
+  });
 
-  try {
-    transporter.sendMail({
-      from: `${sender_name} <${sender}>`,
-      to: to || `${recipient_name} <${recipient}>`,
-      subject,
-      text,
-      html,
-    });
-  } catch (e) {}
+  transporter.sendMail({
+    from: `${sender_name} <${sender}>`,
+    to: to || `${recipient_name} <${recipient}>`,
+    subject,
+    text,
+    html,
+  });
 };
 
 const signup = (req, res) => {
@@ -87,10 +78,10 @@ const signup = (req, res) => {
   send_mail({
     recipient: user.email,
     recipient_name: "",
-    subject: "[Voucher Africa] Please verify your email",
-    sender: "signup@udaralinksapp.com",
-    sender_name: "Voupon",
-    sender_pass: "signupudaralinks",
+    subject: "[QNA] Please verify your email",
+    sender: "signup@giitafrica.com",
+    sender_name: "QNA",
+    sender_pass: "signupgiitafrica",
     html: verification(code, ""),
   });
 
@@ -123,6 +114,7 @@ const verify_email = (req, res) => {
 
   let user = USERS.readone({ email });
   USERS.update(user._id, { verified: true });
+  delete email_verification_codes[email];
 
   res.json({ ok: true, message: "user email verified", data: user });
 };
