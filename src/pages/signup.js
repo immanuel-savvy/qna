@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { email_regex } from "../assets/js/functions";
 import { post_request } from "../assets/js/services";
+import Alert_message from "../components/alert_msg";
 import { Loggeduser } from "../contexts";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
@@ -24,7 +25,9 @@ class Signup extends React.Component {
     );
   };
 
-  signup = async () => {
+  signup = async (e) => {
+    e.preventDefault();
+
     let { email, password, loading } = this.state;
     if (loading) return;
 
@@ -32,6 +35,7 @@ class Signup extends React.Component {
 
     let user = { email, password };
     let res = await post_request("signup", user);
+    console.log(res);
     if (!res._id) return this.setState({ message: res, loading: false });
 
     user._id = res._id;
@@ -42,7 +46,7 @@ class Signup extends React.Component {
   };
 
   render() {
-    let { email } = this.state;
+    let { email, message } = this.state;
 
     return (
       <Loggeduser.Consumer>
@@ -60,7 +64,7 @@ class Signup extends React.Component {
                     <p>Email*</p>
                     <input
                       onChange={({ target }) =>
-                        this.setState({ email: target.value })
+                        this.setState({ email: target.value, message: "" })
                       }
                       type="email"
                       placeholder="E-mail"
@@ -71,7 +75,7 @@ class Signup extends React.Component {
                     <p>Password*</p>
                     <input
                       onChange={({ target }) =>
-                        this.setState({ password: target.value })
+                        this.setState({ password: target.value, message: "" })
                       }
                       type="password"
                       placeholder="Password"
@@ -82,7 +86,10 @@ class Signup extends React.Component {
                     <p>Confirm Password*</p>
                     <input
                       onChange={({ target }) =>
-                        this.setState({ confirm_password: target.value })
+                        this.setState({
+                          confirm_password: target.value,
+                          message: "",
+                        })
                       }
                       type="password"
                       placeholder="Password"
@@ -104,6 +111,13 @@ class Signup extends React.Component {
                       </label>
                     </div>
                   </div>
+
+                  {message ? (
+                    <>
+                      <br />
+                      <Alert_message msg={message} />
+                    </>
+                  ) : null}
 
                   <br />
                   <button

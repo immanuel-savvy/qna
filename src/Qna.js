@@ -12,6 +12,10 @@ import Start_exam from "./pages/start_exam";
 import Vendor from "./pages/vendor";
 import FAQ from "./pages/faq";
 import Verify_email from "./pages/verify_email";
+import Emitter from "semitter";
+import { client_domain } from "./assets/js/utils";
+
+const emitter = new Emitter();
 
 class Qna extends React.Component {
   constructor(props) {
@@ -19,6 +23,34 @@ class Qna extends React.Component {
 
     this.state = {};
   }
+
+  logout = () =>
+    this.setState({ loggeduser: null }, () => {
+      window.sessionStorage.removeItem("loggeduser");
+      window.location.assign(client_domain);
+    });
+
+  restore_loggeduser = (loggeduser) =>
+    this.setState({ loggeduser }, () =>
+      window.sessionStorage.setItem("loggeduser", JSON.stringify(loggeduser))
+    );
+
+  login = (user, no_redirect) =>
+    this.setState({ loggeduser: user }, () => {
+      window.sessionStorage.setItem("loggeduser", JSON.stringify(user));
+
+      if (no_redirect) return;
+
+      let red = window.sessionStorage.getItem("redirect");
+
+      window.sessionStorage.removeItem("redirect");
+      window.location.assign(red || client_domain);
+    });
+
+  log_admin = (admin) =>
+    this.setState({ admin_logged: admin }, () => {
+      window.sessionStorage.setItem("logged_admin", JSON.stringify(admin));
+    });
 
   render() {
     let { loggeduser } = this.state;
@@ -44,3 +76,4 @@ class Qna extends React.Component {
 }
 
 export default Qna;
+export { emitter };
