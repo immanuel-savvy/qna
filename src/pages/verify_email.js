@@ -31,7 +31,7 @@ class Verify_email extends React.Component {
   is_set = () => {
     let { verification_code } = this.state;
 
-    return /[0-9]{6}/.test(verification_code.length);
+    return /[0-9]{6}/.test(verification_code);
   };
 
   verify = async (e) => {
@@ -46,13 +46,13 @@ class Verify_email extends React.Component {
       email,
       verification_code,
     });
-    if (!result._id) return this.setState({ message: result });
+    if (!result._id) return this.setState({ message: result, loading: false });
 
     this.login(result);
   };
 
   render() {
-    let { email } = this.state;
+    let { email, message } = this.state;
 
     return (
       <Loggeduser.Consumer>
@@ -93,6 +93,7 @@ class Verify_email extends React.Component {
                     />
                   </div>
 
+                  {message ? <Alert_message msg={message} /> : null}
                   <br />
                   <button
                     onClick={this.verify}
