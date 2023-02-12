@@ -24,6 +24,15 @@ class Qna extends React.Component {
     this.state = {};
   }
 
+  componentDidMount = () => {
+    let loggeduser = window.sessionStorage.getItem("loggeduser");
+    if (loggeduser) {
+      try {
+        this.setState({ loggeduser: JSON.parse(loggeduser) });
+      } catch (e) {}
+    }
+  };
+
   logout = () =>
     this.setState({ loggeduser: null }, () => {
       window.sessionStorage.removeItem("loggeduser");
@@ -56,7 +65,9 @@ class Qna extends React.Component {
     let { loggeduser } = this.state;
 
     return (
-      <Loggeduser.Provider value={{ loggeduser, login: this.login }}>
+      <Loggeduser.Provider
+        value={{ loggeduser, login: this.login, logout: this.logout }}
+      >
         <BrowserRouter>
           <Routes>
             <Route index element={<Home />} />
