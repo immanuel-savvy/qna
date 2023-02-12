@@ -2,7 +2,7 @@ import fs from "fs";
 import { generate_random_string } from "generalised-datastore/utils/functions";
 
 let strip_length = 8,
-  prefix = "voucher_africa";
+  prefix = "qna";
 
 const save_image = (base64_image, image_name) => {
   if (!base64_image || (base64_image && !base64_image.startsWith("data")))
