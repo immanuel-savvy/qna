@@ -13,7 +13,7 @@ class Nav extends React.Component {
       <nav>
         <Link to="/" class="logo">
           <h1>QNA.</h1>
-          <p>Digitalized assesment</p>
+          <p>Digitalized assessment</p>
         </Link>
         <form action="">
           <input type="search" name="" id="" placeholder="Search... " />
