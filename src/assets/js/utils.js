@@ -4,7 +4,7 @@ const hostname = DEV ? "http://localhost" : "https://qna.giitafrica.com";
 
 const client_domain = DEV
   ? `${hostname}:3000`
-  : "https://qna-exams.netlify.app/";
+  : "https://qna-exams.netlify.app";
 
 const domain = DEV ? `${hostname}:1448` : `https://qna.giitafrica.com`;
 
