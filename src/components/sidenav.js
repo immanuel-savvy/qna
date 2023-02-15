@@ -9,7 +9,7 @@ class Sidenar extends React.Component {
 
   render() {
     return (
-      <div class="side_nav" id="sideNav">
+      <div class="side_nav" id="sideNav" style={{ display: "flex" }}>
         <form>
           <input placeholder="Search" type="search" class="search" />
           <button type="submit">

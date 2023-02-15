@@ -14,15 +14,15 @@ class Header extends React.Component {
       <>
         <Nav />
         <header>
-          <div class="nav2">
+          <div className="nav2">
             <Link to="/">Home</Link>
             <Link to="/ebooks">E-books</Link>
-            <Link to="/contact">Contact Us</Link>
+            <Link to="/forum">Forum</Link>
             <Link to="/faq">FAQ</Link>
           </div>
-          <div class="nav3">
-            <span class="title">Exams :</span>
-            <span class="exams">
+          <div className="nav3">
+            <span className="title">Exams :</span>
+            <span className="exams">
               <Link to="/vendor">Microsoft</Link>
               <Link to="/vendor">Cisco</Link>
               <Link to="/vendor">compTIA</Link>
