@@ -8,10 +8,20 @@ class Question_discussion extends React.Component {
   }
 
   render() {
+    let { toggle } = this.props;
     return (
-      <div class="discussionmodal" id="discussionnmodal">
+      <div
+        class="discussionmodal"
+        id="discussionnmodal"
+        style={{ display: "flex" }}
+      >
         <div class="disc">
-          <i class="material-icons c" onclick="closeModal()">
+          <i
+            onClick={toggle}
+            style={{ cursor: "pointer" }}
+            class="material-icons c"
+            onclick="closeModal()"
+          >
             close
           </i>
           <form action="">

@@ -1,4 +1,5 @@
 import React from "react";
+import { emitter } from "../Qna";
 
 class Question extends React.Component {
   constructor(props) {
@@ -7,12 +8,19 @@ class Question extends React.Component {
     this.state = {};
   }
 
+  toggle_answer = () => this.setState({ show_answer: !this.state.show_answer });
+
+  toggle_discussions = () =>
+    emitter.emit("question_discussion", this.props.question?._id || true);
+
   render() {
+    let { show_answer } = this.state;
+
     return (
-      <div class="ex">
-        <span class="t1">Question 1</span>
-        <span class="Question">
-          <p class="t">
+      <div className="ex">
+        <span className="t1">Question 1</span>
+        <span className="Question">
+          <p className="t">
             A customer, Ann, has requested two custom PCs, one to be used for
             gaming and the other to be used as a virtualization workstation for
             her business. The gaming PC should support the latest games and
@@ -31,17 +39,36 @@ class Question extends React.Component {
             <li>Ellip</li>
             <li>WEQSBD</li>
           </ol>
-          <span class="ansdiv">
-            <a class="a1" onclick="showAns()">
-              Reveal solution
+          <span className="ansdiv">
+            <a
+              style={{ cursor: "pointer" }}
+              className="a1"
+              onClick={this.toggle_answer}
+            >
+              {show_answer ? "Hide" : "Reveal"} solution
             </a>
-            <a class="a2" onclick="openmodal()">
-              <i class="material-icons">question_answer</i> Discussion
+            <a
+              style={{ cursor: "pointer" }}
+              className="a2"
+              onClick={this.toggle_discussions}
+            >
+              <i className="material-icons">question_answer</i> Discussion
             </a>
           </span>
-          <div class="answer Question" id="answer">
-            <p class="t">A. Compt</p>
-          </div>
+          {show_answer ? (
+            <div
+              className="answer Question"
+              id="answer"
+              style={{ display: "flex" }}
+            >
+              <p className="t">
+                A. Officia ut ipsum officia aliquip. Sit excepteur nostrud et
+                adipisicing consequat voluptate incididunt sit labore cupidatat
+                velit ea proident. Do duis consequat anim minim enim consectetur
+                aliqua ex sint.
+              </p>
+            </div>
+          ) : null}
         </span>
       </div>
     );
