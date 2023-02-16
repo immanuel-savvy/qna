@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { email_regex } from "../assets/js/functions";
 import { post_request } from "../assets/js/services";
 import Alert_message from "../components/alert_msg";
+import Stretch_btn from "../components/stretch_btn";
 import { Loggeduser } from "../contexts";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
@@ -15,13 +16,16 @@ class Signup extends React.Component {
   }
 
   is_set = () => {
-    let { email, password, confirm_password, confirm } = this.state;
+    let { email, password, loading, message, confirm_password, confirm } =
+      this.state;
 
     return (
       email_regex.test(email) &&
       password.trim() &&
       password === confirm_password &&
-      confirm
+      confirm &&
+      !loading &&
+      !message
     );
   };
 
@@ -35,7 +39,7 @@ class Signup extends React.Component {
 
     let user = { email, password };
     let res = await post_request("signup", user);
-    console.log(res);
+
     if (!res._id) return this.setState({ message: res, loading: false });
 
     user._id = res._id;
@@ -46,7 +50,7 @@ class Signup extends React.Component {
   };
 
   render() {
-    let { email, message } = this.state;
+    let { email, message, loading } = this.state;
 
     return (
       <Loggeduser.Consumer>
@@ -120,13 +124,13 @@ class Signup extends React.Component {
                   ) : null}
 
                   <br />
-                  <button
-                    onClick={this.signup}
+
+                  <Stretch_btn
+                    action={this.signup}
                     disabled={!this.is_set()}
-                    type="submit"
-                  >
-                    Register Now
-                  </button>
+                    title="register now"
+                    loading={loading}
+                  />
                 </form>
 
                 <p>

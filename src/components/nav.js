@@ -25,7 +25,7 @@ class Nav extends React.Component {
   handle_user = () => {
     if (this.loggeduser) {
       window.confirm("Are you sure you want to logout?") && this.logout();
-    } else window.location.assign(`${client_domain}/signup`);
+    } // else window.location.assign(`${client_domain}/signup`);
   };
 
   toggle_sidenav = () => this.setState({ sidenav_on: !this.state.sidenav_on });
@@ -62,10 +62,14 @@ class Nav extends React.Component {
                   </button>
                 </form>
                 <span className="icons">
-                  <a href="#" onClick={this.handle_user} className="signup spp">
+                  <Link
+                    to={loggeduser ? null : "/signup"}
+                    onClick={this.handle_user}
+                    className="signup spp"
+                  >
                     <i className="material-icons-outlined">person</i>{" "}
                     {loggeduser ? "" : "Sign Up"}
-                  </a>
+                  </Link>
                 </span>
                 <i className="material-icons s">search</i>
                 <i

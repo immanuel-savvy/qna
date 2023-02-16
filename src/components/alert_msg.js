@@ -1,9 +1,10 @@
 import React from "react";
+import { Alert } from "react-bootstrap";
 
 const Alert_message = ({ msg, type }) => (
-  <div className={`alert alert-${type || "danger"}`} role="alert">
+  <Alert className="mt-3" variant={type || "danger"}>
     {msg}
-  </div>
+  </Alert>
 );
 
 export default Alert_message;

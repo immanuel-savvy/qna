@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { email_regex } from "../assets/js/functions";
 import { post_request } from "../assets/js/services";
 import Alert_message from "../components/alert_msg";
+import Stretch_btn from "../components/stretch_btn";
 import { Loggeduser } from "../contexts";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
@@ -15,25 +16,33 @@ class Login extends React.Component {
   }
 
   is_set = () => {
-    let { email, password } = this.state;
+    let { email, password, message, loading } = this.state;
 
-    return email_regex.test(email) && password;
+    return email_regex.test(email) && password && !message && !loading;
   };
 
   submit = async (e) => {
     e.preventDefault();
 
     let { email, password } = this.state;
+    this.setState({ loading: true });
 
     let res = await post_request("login", { email, password });
 
     if (res && res._id) {
       this.login(res);
-    } else this.setState({ message: res, logging_in: false });
+    } else
+      this.setState({
+        message:
+          typeof res === "string"
+            ? res
+            : "Cannot login at the moment, try again.",
+        loading: false,
+      });
   };
 
   render() {
-    let { message } = this.state;
+    let { message, loading } = this.state;
 
     return (
       <Loggeduser.Consumer>
@@ -77,13 +86,12 @@ class Login extends React.Component {
                   {message ? <Alert_message msg={message} /> : null}
                   <br />
 
-                  <button
-                    disabled={!this.is_set()}
-                    type="submit"
-                    onClick={this.submit}
-                  >
-                    Login
-                  </button>
+                  <Stretch_btn
+                    title="login"
+                    action={this.submit}
+                    disbaled={!this.is_set()}
+                    loading={loading}
+                  />
                 </form>
 
                 <p>
