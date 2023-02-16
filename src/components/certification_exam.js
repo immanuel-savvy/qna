@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const scroll_to_top = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
 class Certification_exam extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,9 @@ class Certification_exam extends React.Component {
       >
         <div class="table_active_item">
           <small>Exam</small>
-          <Link to="/take_exam">220-1002</Link>
+          <Link to="/take_exam">
+            <span onClick={scroll_to_top}>220-1002</span>
+          </Link>
         </div>
         <div class="table_active_item">
           <small>Questions</small>
