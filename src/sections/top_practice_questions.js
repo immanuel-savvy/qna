@@ -27,6 +27,14 @@ class Top_practice_questions extends React.Component {
           <Practice_question />
           <Practice_question />
           <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
         </div>
       </section>
     );
