@@ -6,6 +6,10 @@
   font-family: "Raleway", sans-serif;
 }
 
+*::-webkit-scrollbar {
+  display: none !important;
+}
+
 button {
   cursor: pointer;
 }
@@ -377,6 +381,7 @@ main .sectioni .srch input {
 main .sectioni .srch button {
   height: 100%;
   width: 150px;
+  background-color: #2048ad;
   color: white;
   border-color: #2048ad;
   outline: none;
@@ -406,28 +411,29 @@ main .sectionii .txt {
 }
 
 main .sectionii .fl {
-  width: 100%;
-  padding: 0 7%;
+  width: 83%;
+  padding: 0 0%;
+  overflow: scroll;
 }
 
-main .sectionii .fl span {
-  width: 100%;
+main .sectionii .fl .span {
+  width: fit-content;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 20px;
-  overflow-y: scroll;
+  overflow: scroll;
 }
 
-main .sectionii .fl span::-webkit-scrollbar {
+main .sectionii .fl .span::-webkit-scrollbar {
   display: none;
 }
 
-main .sectionii .fl a {
+main .sectionii .fl .span a {
   background-color: white;
-  background-repeat: no-repeat;
   height: 200px;
-  padding: 0 100px;
+  width: 200px;
+  padding: 0 00px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -438,8 +444,29 @@ main .sectionii .fl a {
   border: solid 5px white;
 }
 
-main .sectionii .fl a:hover {
+main .sectionii .fl .span a:hover {
   box-shadow: 0 0 20px rgb(47, 103, 250, 0.4);
+}
+
+main .sectionii .fl .span a .content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(51, 50, 50, 0.9);
+  opacity: 0;
+  padding: 20px;
+}
+
+main .sectionii .fl .span a .content:hover {
+  opacity: 1;
+}
+
+main .sectionii .fl .span a .content p {
+  text-align: center;
+  color: white;
+  font-size: 18px;
 }
 
 main .sectionii .seeall {
@@ -651,10 +678,13 @@ footer {
 
 .sectionb h2 {
   color: #354c5e;
+  font-size: 48px;
+  text-align: center;
+  margin: 30px 0;
 }
 
 .sectionb .table_container {
-  margin-top: 20px;
+  margin-top: 60px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -794,8 +824,7 @@ form .input_container input::placeholder {
   color: #354c5e;
 }
 
-form button,
-button {
+form button {
   width: 100%;
   max-width: 400px;
   background-color: #54c547;
@@ -954,6 +983,10 @@ button {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  .sectionb h2 {
+    font-size: 36px;
+  }
 }
 
 @media screen and (max-width: 720px) {
@@ -1088,6 +1121,37 @@ button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .sectionb h2 {
+    font-size: 28px;
+  }
+
+  main .sectionii .fl .span a {
+    background-color: white;
+    height: 130px;
+    width: 130px;
+    padding: 0 00px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 5px;
+    background-size: cover;
+    background-position: center;
+    outline: solid 1px silver;
+    border: solid 1px white;
+    padding: 5px;
+  }
+
+  main .sectionii .fl .span a .content {
+    padding: 5px;
+  }
+
+  main .sectionii .fl .span a .content p {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    /* border: solid white 1px; */
   }
 }
 
@@ -1993,4 +2057,29 @@ textarea {
     -webkit-line-clamp: 2;
     overflow: hidden;
   }
+}
+
+main .sectionii .fl .span a:hover {
+  box-shadow: 0 0 20px rgb(47, 103, 250, 0.4);
+}
+
+main .sectionii .fl .span a .content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(51, 50, 50, 0.9);
+  opacity: 0;
+  padding: 20px;
+}
+
+main .sectionii .fl .span a .content:hover {
+  opacity: 1;
+}
+
+main .sectionii .fl .span a .content p {
+  text-align: center;
+  color: white;
+  font-size: 18px;
 }
