@@ -20,8 +20,8 @@ class Certification_exam extends React.Component {
       >
         <div class="table_active_item">
           <small>Exam</small>
-          <Link to="/take_exam">
-            <span onClick={scroll_to_top}>220-1002</span>
+          <Link onClick={scroll_to_top} to="/take_exam">
+            <span>220-1002</span>
           </Link>
         </div>
         <div class="table_active_item">

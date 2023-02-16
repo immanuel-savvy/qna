@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Practice_question from "../components/practice_question";
 
 class Top_practice_questions extends React.Component {
   constructor(props) {
@@ -18,87 +18,15 @@ class Top_practice_questions extends React.Component {
             <a class="exam p1">Exam</a>
             <a class="file p1">Certifications</a>
           </span>
-          <span class="">
-            <Link to="/vendor" class="vendor">
-              Microsoft
-            </Link>
-            <Link to="/start_exam" class="exam">
-              DOY24
-            </Link>
-            <Link class="file">MCSE</Link>
-          </span>
-          <span class="">
-            <Link to="/vendor" class="vendor">
-              Comptia
-            </Link>
-            <Link to="/start_exam" class="exam">
-              SLL23
-            </Link>
-            <Link class="file">Comptia Security Master</Link>
-          </span>
-          <span class="">
-            <Link to="/vendor" class="vendor">
-              AMAZON
-            </Link>
-            <Link to="/start_exam" class="exam">
-              3000
-            </Link>
-            <Link class="file">AWS Certified Expert</Link>
-          </span>
-          <span class="">
-            <Link to="/vendor" class="vendor">
-              Microsoft
-            </Link>
-            <Link to="/start_exam" class="exam">
-              DOY24
-            </Link>
-            <Link class="file">MCSE</Link>
-          </span>
-          <span class="">
-            <Link to="/vendor" class="vendor">
-              Comptia
-            </Link>
-            <Link to="/start_exam" class="exam">
-              SLL23
-            </Link>
-            <Link class="file">Comptia Security Master</Link>
-          </span>
-          <span class="">
-            <Link to="/vendor" class="vendor">
-              AMAZON
-            </Link>
-            <Link to="/start_exam" class="exam">
-              3000
-            </Link>
-            <Link class="file">AWS Certified Expert</Link>
-          </span>{" "}
-          <span class="">
-            <Link to="/vendor" class="vendor">
-              Microsoft
-            </Link>
-            <Link to="/start_exam" class="exam">
-              DOY24
-            </Link>
-            <Link class="file">MCSE</Link>
-          </span>
-          <span class="">
-            <Link to="/vendor" class="vendor">
-              Comptia
-            </Link>
-            <Link to="/start_exam" class="exam">
-              SLL23
-            </Link>
-            <Link class="file">Comptia Security Master</Link>
-          </span>
-          <span class="">
-            <Link to="/vendor" class="vendor">
-              AMAZON
-            </Link>
-            <Link to="/start_exam" class="exam">
-              3000
-            </Link>
-            <Link class="file">AWS Certified Expert</Link>
-          </span>
+
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
+          <Practice_question />
         </div>
       </section>
     );

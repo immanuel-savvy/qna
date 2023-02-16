@@ -21,6 +21,16 @@ class Top_certifications extends React.Component {
             <Certification />
             <Certification />
             <Certification />
+            <Certification />
+            <Certification />
+            <Certification />
+            <Certification />
+            <Certification />
+            <Certification />
+            <Certification />
+            <Certification />
+            <Certification />
+            <Certification />
           </div>
         </div>
         <a href="" class="seeall">
