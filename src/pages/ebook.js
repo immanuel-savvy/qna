@@ -1,4 +1,5 @@
 import React from "react";
+import Certification_exam from "../components/certification_exam";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
 
@@ -45,7 +46,7 @@ class Ebook extends React.Component {
               </div>
 
               <div class="product_description price_container">
-                <a href="#">Start Exam</a>
+                <a href="#">Download</a>
               </div>
 
               <span class="extra_description">
@@ -59,65 +60,11 @@ class Ebook extends React.Component {
             <h2>Access Free CompTIA A+ Practice Test Questions</h2>
 
             <div class="table_container">
-              <div class="table_active">
-                <div class="table_active_item">
-                  <small>Exam</small>
-                  <a href="#">220-1001</a>
-                </div>
-                <div class="table_active_item">
-                  <small>Questions</small>
-                  <a href="#">176</a>
-                </div>
-                <div class="table_active_item">
-                  <small>Title</small>
-                  <p>CompTIA A+ Certification Exam: Core 1</p>
-                </div>
-              </div>
-
-              <div class="table_active" style={{ backgroundColor: "#fff" }}>
-                <div class="table_active_item">
-                  <small>Exam</small>
-                  <a href="#">220-1001</a>
-                </div>
-                <div class="table_active_item">
-                  <small>Files</small>
-                  <a href="#">176</a>
-                </div>
-                <div class="table_active_item">
-                  <small>Title</small>
-                  <p>CompTIA A+ Certification Exam: Core 1</p>
-                </div>
-              </div>
-
-              <div class="table_active">
-                <div class="table_active_item">
-                  <small>Exam</small>
-                  <a href="#">220-1001</a>
-                </div>
-                <div class="table_active_item">
-                  <small>Files</small>
-                  <a href="#">176</a>
-                </div>
-                <div class="table_active_item">
-                  <small>Title</small>
-                  <p>CompTIA A+ Certification Exam: Core 1</p>
-                </div>
-              </div>
-
-              <div class="table_active" style={{ backgroundColor: "#fff" }}>
-                <div class="table_active_item">
-                  <small>Exam</small>
-                  <a href="#">220-1001</a>
-                </div>
-                <div class="table_active_item">
-                  <small>Files</small>
-                  <a href="#">176</a>
-                </div>
-                <div class="table_active_item">
-                  <small>Title</small>
-                  <p>CompTIA A+ Certification Exam: Core 1</p>
-                </div>
-              </div>
+              <Certification_exam />
+              <Certification_exam />
+              <Certification_exam />
+              <Certification_exam />
+              <Certification_exam />
             </div>
           </div>
 

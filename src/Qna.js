@@ -19,6 +19,7 @@ import Forum from "./pages/forum";
 import Ebook from "./pages/ebook";
 import Ebooks from "./pages/ebooks";
 import Take_exam from "./pages/take_exam";
+import Admin from "./pages/admin";
 
 const emitter = new Emitter();
 
@@ -84,6 +85,7 @@ class Qna extends React.Component {
               <Route path="take_exam" element={<Take_exam />} />
               <Route path="vendor" element={<Vendor />} />
               <Route path="start_exam" element={<Start_exam />} />
+              <Route path="admin" element={<Admin />} />
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />
               <Route path="verify_email" element={<Verify_email />} />

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { client_domain } from "../assets/js/utils";
 import { Loggeduser } from "../contexts";
 import { emitter } from "../Qna";
 import Question_discussion from "../sections/question_discussion";

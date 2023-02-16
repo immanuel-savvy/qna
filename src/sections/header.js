@@ -9,7 +9,17 @@ class Header extends React.Component {
     this.state = {};
   }
 
+  componentDidMount = () => {
+    let href = window.location.href.split("?")[1];
+    if (href === "admin" || window.sessionStorage.getItem("admin"))
+      this.setState({ admin: true }, () =>
+        window.sessionStorage.setItem("admin", true)
+      );
+  };
+
   render() {
+    let { admin } = this.state;
+
     return (
       <>
         <Nav />
@@ -19,6 +29,7 @@ class Header extends React.Component {
             <Link to="/ebooks">E-books</Link>
             <Link to="/forum">Forum</Link>
             <Link to="/faq">FAQ</Link>
+            {admin ? <Link to="/admin">Admin</Link> : null}
           </div>
           <div className="nav3">
             <span className="title">Exams :</span>
