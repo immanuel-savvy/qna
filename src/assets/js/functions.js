@@ -35,6 +35,13 @@ const to_title = (string) => {
   return str.trim();
 };
 
+const sentence_case = (string) => {
+  if (!string || typeof string !== "string") return string;
+
+  string = string.trim();
+  return string[0].toUpperCase() + string.slice(1);
+};
+
 const date_string = (timestamp) => {
   let date = new Date(timestamp);
   return `${date.getDate().toString().padStart(2, "0")} ${to_title(
@@ -125,4 +132,5 @@ export {
   next_quarter,
   shuffle_array,
   countdown,
+  sentence_case,
 };

@@ -11,9 +11,9 @@ class Header extends React.Component {
 
   componentDidMount = () => {
     let href = window.location.href.split("?")[1];
-    if (href === "admin" || window.sessionStorage.getItem("admin"))
+    if (href === "admin" || window.sessionStorage.getItem("admin_header"))
       this.setState({ admin: true }, () =>
-        window.sessionStorage.setItem("admin", true)
+        window.sessionStorage.setItem("admin_header", true)
       );
   };
 
