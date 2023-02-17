@@ -1,5 +1,8 @@
 import React from "react";
+import "../assets/css/ebook.css";
+import { get_request } from "../assets/js/services";
 import Ebook from "../components/ebook";
+import Loadindicator from "../components/loadindicator";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
 
@@ -10,7 +13,14 @@ class Ebooks extends React.Component {
     this.state = {};
   }
 
+  componentDidMount = async () => {
+    let ebooks = await get_request("ebooks/all");
+    this.setState({ ebooks });
+  };
+
   render() {
+    let { ebooks } = this.state;
+
     return (
       <>
         <Header />
@@ -29,22 +39,15 @@ class Ebooks extends React.Component {
           </section>
           <section className="sectiona1 sectionaii">
             <div className="existingebooks">
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
-              <Ebook />
+              {ebooks ? (
+                ebooks.length ? (
+                  ebooks.map((ebook) => <Ebook ebook={ebook} key={ebook._id} />)
+                ) : (
+                  <></>
+                )
+              ) : (
+                <Loadindicator />
+              )}
             </div>
           </section>
         </main>

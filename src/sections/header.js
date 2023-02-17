@@ -32,7 +32,7 @@ class Header extends React.Component {
             {admin ? <Link to="/admin">Admin</Link> : null}
           </div>
           <div className="nav3">
-            <span className="title">Exams :</span>
+            <span className="title">Vendors :</span>
             <span className="exams">
               <Link to="/vendor">Microsoft</Link>
               <Link to="/vendor">Cisco</Link>

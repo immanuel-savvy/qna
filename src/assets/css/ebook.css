@@ -1,0 +1,85 @@
+/* Ebook */
+main .sectioni h5 {
+  width: 40%;
+}
+
+main .sectionaii {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 30px 7%;
+}
+
+main .sectiona1 .existingebooks {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+main .sectiona1 .existingebooks .ebook {
+  width: 450px;
+  border: solid 1px silver;
+  border-radius: 10px;
+  height: 200px;
+  display: flex;
+  padding: 10px;
+}
+
+main .sectiona1 .existingebooks .ebook .img {
+  width: 40%;
+  height: 100%;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  /* border: solid; */
+  background-color: rgb(232, 228, 228);
+}
+
+main .sectiona1 .existingebooks .ebook .text {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 5px 15px;
+  height: 100%;
+  row-gap: 4px;
+}
+
+@media screen and (max-width: 700px) {
+  main .sectionaii {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px 0%;
+  }
+
+  main .sectioni h1 {
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  main .sectioni h5 {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  main .sectiona1 .existingebooks .ebook {
+    width: 95%;
+    border: solid 1px silver;
+    border-radius: 10px;
+    height: 150px;
+    display: flex;
+    padding: 10px;
+    margin: 0 auto;
+  }
+}

@@ -25,7 +25,7 @@ class Footer extends React.Component {
 
         <div class="footer_description">
           <p>
-            Exere materials do not contain actual questions and answers from
+            QNA materials do not contain actual questions and answers from
             Cisco's certifications exams
           </p>
         </div>

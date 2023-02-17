@@ -4,6 +4,7 @@ import { Loggeduser } from "../contexts";
 import { emitter } from "../Qna";
 import Question_discussion from "../sections/question_discussion";
 import Sidenav from "./sidenav";
+import Upload_ebook from "./upload_ebook";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -14,12 +15,17 @@ class Nav extends React.Component {
 
   componentDidMount = () => {
     this.question_discussion = (question) => this.setState({ question });
+    this.toggle_upload_ebook = () =>
+      this.setState({ upload_ebook: !this.state.upload_ebook });
 
+    emitter.listen("toggle_upload_ebook", this.toggle_upload_ebook);
     emitter.listen("question_discussion", this.question_discussion);
   };
 
-  componentWillUnmount = () =>
+  componentWillUnmount = () => {
+    emitter.remove_listener("toggle_upload_ebook", this.toggle_upload_ebook);
     emitter.remove_listener("question_discussion", this.question_discussion);
+  };
 
   handle_user = () => {
     if (this.loggeduser) {
@@ -32,7 +38,7 @@ class Nav extends React.Component {
   close_discussion = () => this.setState({ question: null });
 
   render() {
-    let { sidenav_on, question } = this.state;
+    let { sidenav_on, question, upload_ebook } = this.state;
 
     return (
       <Loggeduser.Consumer>
@@ -42,6 +48,9 @@ class Nav extends React.Component {
 
           return (
             <>
+              {upload_ebook ? (
+                <Upload_ebook toggle={this.toggle_upload_ebook} />
+              ) : null}
               {question ? (
                 <Question_discussion
                   toggle={this.close_discussion}
