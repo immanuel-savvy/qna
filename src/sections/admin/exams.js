@@ -1,4 +1,5 @@
 import React from "react";
+import { emitter } from "../../Qna";
 
 class Exams extends React.Component {
   constructor(props) {
@@ -38,7 +39,11 @@ class Exams extends React.Component {
             </span>
           </div>
           <div class="item">
-            <a href="Questionupload.html" class="upload">
+            <a
+              onClick={() => emitter.emit("toggle_create_exam")}
+              href="#"
+              class="upload"
+            >
               <i class="material-icons">description</i>
               <p>Create new exam</p>
             </a>
