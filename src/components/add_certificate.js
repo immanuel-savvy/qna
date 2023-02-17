@@ -32,9 +32,11 @@ class Add_certificate extends Handle_file_upload {
 
     this.setState({ loading: true });
     let certificate = { title, vendor, image, description };
-    let res = await post_request("new_certificate", certificate);
+    let res = await post_request("add_certificate", certificate);
+    console.log(res);
     if (res._id) {
       certificate._id = res._id;
+      certificate.image = res.image;
       certificate.created = res.created;
 
       toggle();
@@ -48,17 +50,13 @@ class Add_certificate extends Handle_file_upload {
 
   render() {
     let { toggle } = this.props;
-    let { message, vendors } = this.state;
+
+    let { message, vendors, image_filename } = this.state;
 
     return (
       <div class="addmodal" id="modal" style={{ display: "flex" }}>
         <form action="">
-          <i
-            onClick={toggle}
-            class="material-icons clo"
-            id="close"
-            onclick="closemode()"
-          >
+          <i onClick={toggle} class="material-icons clo" id="close">
             close
           </i>
           <div class="forms">
@@ -76,6 +74,12 @@ class Add_certificate extends Handle_file_upload {
                   onChange={(e) => this.handle_file(e, "image")}
                 />
               </span>
+
+              {image_filename ? (
+                <p>
+                  <em>{image_filename}</em>
+                </p>
+              ) : null}
 
               <label for="">
                 Certificate Title <span className="text-danger">*</span>
@@ -108,10 +112,11 @@ class Add_certificate extends Handle_file_upload {
                   <select
                     id="selection"
                     onChange={({ target }) => {
-                      this.setState({ loan_type: target.value });
+                      this.setState({ vendor: target.value });
                     }}
                     aria-valuenow="20"
                   >
+                    <option>-- Select Vendor --</option>
                     {vendors.map(({ name, _id }) => (
                       <option key={_id} value={_id}>
                         {to_title(name)}

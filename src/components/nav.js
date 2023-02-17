@@ -20,7 +20,7 @@ class Nav extends React.Component {
     this.toggle_add_vendor = () =>
       this.setState({ add_vendor: !this.state.add_vendor });
     this.toggle_add_certificate = () =>
-      this.setState({ add_certificate: !this.state.toggle_add_certificate });
+      this.setState({ add_certificate: !this.state.add_certificate });
     this.toggle_upload_ebook = () =>
       this.setState({ upload_ebook: !this.state.upload_ebook });
 
@@ -66,7 +66,7 @@ class Nav extends React.Component {
                 <Upload_ebook toggle={this.toggle_upload_ebook} />
               ) : null}
               {add_certificate ? (
-                <Add_certificate toggle={this.toggle_add_vendor} />
+                <Add_certificate toggle={this.toggle_add_certificate} />
               ) : null}
               {add_vendor ? (
                 <Add_new_vendor toggle={this.toggle_add_vendor} />
@@ -81,7 +81,7 @@ class Nav extends React.Component {
               <nav>
                 <Link to="/" className="logo">
                   <h1>QNA.</h1>
-                  <p>Digitalized assessment</p>
+                  <p>Digitalised assessment</p>
                 </Link>
                 <form action="">
                   <input type="search" name="" id="" placeholder="Search... " />

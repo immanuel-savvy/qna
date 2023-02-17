@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { Loggeduser, Logged_admin } from "./contexts";
+import { Loggeduser, Logged_admin, Nav_context } from "./contexts";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
@@ -20,6 +20,7 @@ import Ebook from "./pages/ebook";
 import Ebooks from "./pages/ebooks";
 import Take_exam from "./pages/take_exam";
 import Admin from "./pages/admin";
+import { get_request } from "./assets/js/services";
 
 const emitter = new Emitter();
 
@@ -30,13 +31,15 @@ class Qna extends React.Component {
     this.state = {};
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     let loggeduser = window.sessionStorage.getItem("loggeduser");
     if (loggeduser) {
       try {
         this.setState({ loggeduser: JSON.parse(loggeduser) });
       } catch (e) {}
     }
+    let vendors = await get_request("vendors/all");
+    this.setState({ vendors });
   };
 
   logout = () =>
@@ -68,31 +71,33 @@ class Qna extends React.Component {
     });
 
   render() {
-    let { loggeduser, admin } = this.state;
+    let { loggeduser, admin, vendors } = this.state;
 
     return (
       <Logged_admin.Provider value={{ admin, admin_login: this.log_admin }}>
         <Loggeduser.Provider
           value={{ loggeduser, login: this.login, logout: this.logout }}
         >
-          <BrowserRouter>
-            <Routes>
-              <Route index element={<Home />} />
-              <Route path="faq" element={<FAQ />} />
-              <Route path="forum" element={<Forum />} />
-              <Route path="ebook" element={<Ebook />} />
-              <Route path="ebooks" element={<Ebooks />} />
-              <Route path="take_exam" element={<Take_exam />} />
-              <Route path="vendor" element={<Vendor />} />
-              <Route path="start_exam" element={<Start_exam />} />
-              <Route path="admin" element={<Admin />} />
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<Signup />} />
-              <Route path="verify_email" element={<Verify_email />} />
-              <Route path="forgot_password" element={<Forgot_password />} />
-              <Route path="*" element={<Page_not_found />} />
-            </Routes>
-          </BrowserRouter>
+          <Nav_context.Provider value={{ vendors }}>
+            <BrowserRouter>
+              <Routes>
+                <Route index element={<Home />} />
+                <Route path="faq" element={<FAQ />} />
+                <Route path="forum" element={<Forum />} />
+                <Route path="ebook" element={<Ebook />} />
+                <Route path="ebooks" element={<Ebooks />} />
+                <Route path="take_exam" element={<Take_exam />} />
+                <Route path="vendor" element={<Vendor />} />
+                <Route path="start_exam" element={<Start_exam />} />
+                <Route path="admin" element={<Admin />} />
+                <Route path="login" element={<Login />} />
+                <Route path="signup" element={<Signup />} />
+                <Route path="verify_email" element={<Verify_email />} />
+                <Route path="forgot_password" element={<Forgot_password />} />
+                <Route path="*" element={<Page_not_found />} />
+              </Routes>
+            </BrowserRouter>
+          </Nav_context.Provider>
         </Loggeduser.Provider>
       </Logged_admin.Provider>
     );
