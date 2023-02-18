@@ -111,6 +111,15 @@ const next_quarter = () => {
   };
 };
 
+const minutes_to_hours = (minutes) => {
+  if (minutes < 60) return { string: `${minutes} mins`, hours: 0, minutes };
+
+  let hours = Math.floor(minutes / 60);
+  minutes = minutes - hours * 60;
+
+  return { string: `${hours} hrs ${minutes} mins`, hours, minutes };
+};
+
 const countdown = (date) => {};
 
 const _id = (prefix) => {
@@ -133,4 +142,5 @@ export {
   shuffle_array,
   countdown,
   sentence_case,
+  minutes_to_hours,
 };

@@ -27,7 +27,7 @@ class Practice_question extends React.Component {
         </Link>
         <Link
           onClick={() => this.save_to_session("exam", exam)}
-          to="/start_exam"
+          to="/take_exam"
           class="exam"
         >
           {to_title(title)}

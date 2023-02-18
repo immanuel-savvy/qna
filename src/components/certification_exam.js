@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { to_title } from "../assets/js/functions";
 
 const scroll_to_top = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -11,7 +12,8 @@ class Certification_exam extends React.Component {
   }
 
   render() {
-    let { index, exam } = this.props;
+    let { index, certification } = this.props;
+    let { title, exams, questions } = certification;
 
     return (
       <div
@@ -19,18 +21,18 @@ class Certification_exam extends React.Component {
         style={index % 2 ? null : { backgroundColor: "#fff" }}
       >
         <div class="table_active_item">
-          <small>Exam</small>
+          <small>Certificate</small>
           <Link onClick={scroll_to_top} to="/take_exam">
-            <span>220-1002</span>
+            <span>{to_title(title)}</span>
           </Link>
         </div>
         <div class="table_active_item">
-          <small>Questions</small>
-          <a href="#">11</a>
+          <small>Exams</small>
+          <a href="#">{exams || 0}</a>
         </div>
         <div class="table_active_item">
-          <small>Title</small>
-          <p>CompTIA A+ Certification Exam: Core 2</p>
+          <small>Questions</small>
+          <p>{questions || 0}</p>
         </div>
       </div>
     );
