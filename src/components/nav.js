@@ -10,6 +10,7 @@ import Sidenav from "./sidenav";
 import Upload_ebook from "./upload_ebook";
 import { save_to_session } from "./practice_question";
 import { client_domain } from "../assets/js/utils";
+import Add_question from "./add_question";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Nav extends React.Component {
 
   componentDidMount = () => {
     this.question_discussion = (question) => this.setState({ question });
+    this.toggle_questions_upload = (exam) => this.setState({ exam });
     this.toggle_add_vendor = () =>
       this.setState({ add_vendor: !this.state.add_vendor });
     this.toggle_create_exam = () =>
@@ -29,6 +31,7 @@ class Nav extends React.Component {
     this.toggle_upload_ebook = () =>
       this.setState({ upload_ebook: !this.state.upload_ebook });
 
+    emitter.listen("toggle_questions_upload", this.toggle_questions_upload);
     emitter.listen("toggle_add_vendor", this.toggle_add_vendor);
     emitter.listen("toggle_create_exam", this.toggle_create_exam);
     emitter.listen("toggle_add_certificate", this.toggle_add_certificate);
@@ -42,6 +45,10 @@ class Nav extends React.Component {
       this.toggle_add_certificate
     );
     emitter.remove_listener("toggle_add_vendor", this.toggle_add_vendor);
+    emitter.remove_listener(
+      "toggle_questions_upload",
+      this.toggle_questions_upload
+    );
     emitter.remove_listener("toggle_create_exam", this.toggle_create_exam);
     emitter.remove_listener("toggle_upload_ebook", this.toggle_upload_ebook);
     emitter.remove_listener("question_discussion", this.question_discussion);
@@ -75,6 +82,7 @@ class Nav extends React.Component {
       add_certificate,
       add_vendor,
       upload_ebook,
+      exam,
     } = this.state;
 
     return (
@@ -87,6 +95,9 @@ class Nav extends React.Component {
             <>
               {upload_ebook ? (
                 <Upload_ebook toggle={this.toggle_upload_ebook} />
+              ) : null}
+              {exam ? (
+                <Add_question exam={exam} toggle={this.toggle_upload_ebook} />
               ) : null}
               {create_exam ? (
                 <Create_exam toggle={this.toggle_create_exam} />

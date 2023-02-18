@@ -1,0 +1,84 @@
+main .sectionaa1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 40px 0;
+}
+
+main .sectionaa1 p {
+  font-size: 30px;
+}
+
+main .sectionaa1 form {
+  width: 450px;
+  /* border: solid; */
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 30px;
+}
+
+main .sectionaa1 form .sp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  row-gap: 10px;
+  width: 100%;
+}
+
+main .sectionaa1 form .sp label {
+  font-size: 22px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+main .sectionaa1 form .sp label h6 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+
+main .sectionaa1 form .sp input,
+textarea {
+  width: 100%;
+  border-radius: 10px;
+  padding: 0 20px;
+  border: solid 1px;
+  outline: none;
+  height: 45px;
+}
+
+main .sectionaa1 form .sp textarea {
+  width: 100%;
+  border-radius: 10px;
+  padding: 20px;
+  height: fit-content;
+}
+
+main .sectionaa1 form button {
+  width: 100%;
+  border-radius: 10px;
+  padding: 20px 0px;
+  height: fit-content;
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  main .sectionaa1 form {
+    width: 90%;
+    /* border: solid; */
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 30px;
+  }
+}
