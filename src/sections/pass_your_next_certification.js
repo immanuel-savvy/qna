@@ -1,4 +1,6 @@
 import React from "react";
+import { client_domain } from "../assets/js/utils";
+import { save_to_session } from "../components/practice_question";
 
 class Pass_your_next_certification extends React.Component {
   constructor(props) {
@@ -6,6 +8,18 @@ class Pass_your_next_certification extends React.Component {
 
     this.state = {};
   }
+
+  componentDidMount = () => {};
+
+  handle_search = async (e) => {
+    e.preventDefault();
+
+    let { query } = this.state;
+    if (!query) return;
+
+    save_to_session("query", query);
+    window.location.assign(`${client_domain}/exams_search_result`);
+  };
 
   render() {
     return (
@@ -19,8 +33,16 @@ class Pass_your_next_certification extends React.Component {
         </h5>
 
         <form action="" class="srch">
-          <input type="search" name="" id="" placeholder="Find Your Exam" />
-          <button type="submit">Search</button>
+          <input
+            onChange={({ target }) => this.setState({ query: target.value })}
+            type="search"
+            name=""
+            id=""
+            placeholder="Find Your Exam"
+          />
+          <button onClick={this.handle_search} type="submit">
+            Search
+          </button>
         </form>
       </section>
     );

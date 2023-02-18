@@ -13,6 +13,7 @@ const get_session = (key) => {
       return JSON.parse(val);
     } catch (e) {}
   }
+  return val;
 };
 
 class Practice_question extends React.Component {

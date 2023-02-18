@@ -16,7 +16,9 @@ class Exams_search_result extends React.Component {
   componentDidMount = async () => {
     let query = get_session("query");
 
+    console.log(query);
     let exams = await post_request("search_exams", { query });
+    console.log(exams);
     this.setState({ exams });
   };
 
@@ -31,15 +33,19 @@ class Exams_search_result extends React.Component {
           <div class="sectionb">
             <h2>Search results for "{query}"</h2>
 
-            {exams ? (
-              exams.length ? (
-                exams.map((exam) => <Vendor_exam key={exam._id} exam={exam} />)
+            <div class="table_container">
+              {exams ? (
+                exams.length ? (
+                  exams.map((exam) => (
+                    <Vendor_exam key={exam._id} exam={exam} />
+                  ))
+                ) : (
+                  <h3>No result found!</h3>
+                )
               ) : (
-                <h3>No result found!</h3>
-              )
-            ) : (
-              <Loadindicator />
-            )}
+                <Loadindicator />
+              )}
+            </div>
           </div>
         </main>
         <Footer />

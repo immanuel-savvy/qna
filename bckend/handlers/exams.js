@@ -63,10 +63,21 @@ const vendor_exams = (req, res) => {
   res.json({ ok: true, message: "vendor exams", data: exams });
 };
 
+const search_exams = (req, res) => {
+  let { query } = req.body;
+
+  res.json({
+    ok: true,
+    message: "exams result",
+    data: certificate_joins(EXAMS.read(null, { search_param: query })),
+  });
+};
+
 export {
   create_exam,
   exams,
   vendor_exams,
   certificate_joins,
   certification_exams,
+  search_exams,
 };

@@ -4,6 +4,7 @@ import {
   certification_exams,
   create_exam,
   exams,
+  search_exams,
   vendor_exams,
 } from "./handlers/exams";
 import { login, signup, user, verify_email } from "./handlers/users";
@@ -37,6 +38,7 @@ const routes = (app) => {
   app.post("/add_certificate", add_certificate);
   app.post("/create_exam", create_exam);
   app.post("/search_ebooks", search_ebooks);
+  app.post("/search_exams", search_exams);
 };
 
 export default routes;
