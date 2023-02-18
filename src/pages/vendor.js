@@ -2,6 +2,7 @@ import React from "react";
 import { get_request } from "../assets/js/services";
 import Certification_exam from "../components/certification_exam";
 import Loadindicator from "../components/loadindicator";
+import Vendor_certificate from "../components/vendor_certificate";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
 
@@ -15,6 +16,7 @@ class Vendor extends React.Component {
   fetch_certifications = async () => {
     let { vendor } = this.state;
     let certificates = await get_request(`vendor_certificates/${vendor._id}`);
+    console.log(certificates);
     this.setState({ certificates });
   };
 
@@ -45,9 +47,8 @@ class Vendor extends React.Component {
               {certificates ? (
                 certificates.length ? (
                   certificates.map((certification, index) => (
-                    <Certification_exam
-                      certification={certification}
-                      index={index}
+                    <Vendor_certificate
+                      certificate={certification}
                       key={index}
                     />
                   ))

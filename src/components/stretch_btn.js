@@ -12,7 +12,7 @@ class Stretch_btn extends React.Component {
     let { disabled, loading, action, title } = this.props;
 
     return (
-      <button disabled={disabled} type="submit" onClick={action}>
+      <button disabled={disabled || loading} type="submit" onClick={action}>
         {to_title(title)}
       </button>
     );

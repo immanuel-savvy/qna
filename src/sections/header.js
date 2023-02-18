@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { client_domain } from "../assets/js/utils";
 import Loadindicator from "../components/loadindicator";
 import Nav from "../components/nav";
 import { Nav_context } from "../contexts";
@@ -19,6 +20,16 @@ class Header extends React.Component {
       );
   };
 
+  reload_ebooks = (free) => {
+    let href = window.location.href.split("/").slice(-1)[0];
+
+    if (href && href.startsWith("ebooks")) {
+      if (free && !href.endsWith("free"))
+        window.location.assign(`${client_domain}/ebooks?free`);
+      else window.location.assign(`${client_domain}/ebooks`);
+    }
+  };
+
   render() {
     let { admin } = this.state;
 
@@ -31,7 +42,15 @@ class Header extends React.Component {
               <header>
                 <div className="nav2">
                   <Link to="/">Home</Link>
-                  <Link to="/ebooks">E-books</Link>
+                  <Link onClick={() => this.reload_ebooks()} to="/ebooks">
+                    E-books
+                  </Link>
+                  <Link
+                    onClick={() => this.reload_ebooks(true)}
+                    to="/ebooks?free"
+                  >
+                    Free Downloads
+                  </Link>
                   <Link to="/forum">Forum</Link>
                   <Link to="/faq">FAQ</Link>
                   {admin ? <Link to="/admin">Admin</Link> : null}

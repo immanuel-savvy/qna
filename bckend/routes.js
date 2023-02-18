@@ -1,6 +1,6 @@
 import { admin_login, create_admin, get_admins } from "./handlers/admin";
-import { ebook, ebooks, upload_ebook } from "./handlers/ebooks";
-import { create_exam, exams } from "./handlers/exams";
+import { ebook, ebooks, search_ebooks, upload_ebook } from "./handlers/ebooks";
+import { certification_exams, create_exam, exams } from "./handlers/exams";
 import { login, signup, user, verify_email } from "./handlers/users";
 import {
   add_certificate,
@@ -17,6 +17,7 @@ const routes = (app) => {
   app.get("/ebooks/:limit", ebooks);
   app.get("/ebook/:ebook", ebook);
   app.get("/exams/:limit", exams);
+  app.get("/certification_exams/:certificate", certification_exams);
   app.get("/certificates/:limit", certificates);
   app.get("/vendor_certificates/:vendor", vendor_certificates);
 
@@ -29,6 +30,7 @@ const routes = (app) => {
   app.post("/new_vendor", new_vendor);
   app.post("/add_certificate", add_certificate);
   app.post("/create_exam", create_exam);
+  app.post("/search_ebooks", search_ebooks);
 };
 
 export default routes;

@@ -12,8 +12,8 @@ class Certification_exam extends React.Component {
   }
 
   render() {
-    let { index, certification } = this.props;
-    let { title, exams, questions } = certification;
+    let { index, exam } = this.props;
+    let { title, exams, year, certificate, questions } = exam;
 
     return (
       <div
@@ -21,18 +21,33 @@ class Certification_exam extends React.Component {
         style={index % 2 ? null : { backgroundColor: "#fff" }}
       >
         <div class="table_active_item">
-          <small>Certificate</small>
+          <small>Exam</small>
           <Link onClick={scroll_to_top} to="/take_exam">
             <span>{to_title(title)}</span>
           </Link>
         </div>
         <div class="table_active_item">
-          <small>Exams</small>
-          <a href="#">{exams || 0}</a>
+          <small>Year</small>
+          <a href="#">{year}</a>
         </div>
         <div class="table_active_item">
           <small>Questions</small>
           <p>{questions || 0}</p>
+        </div>
+        <div class="table_active_item">
+          <small>Vendor</small>
+          <Link
+            onClick={() => {
+              window.sessionStorage.setItem(
+                "vendor",
+                JSON.stringify(certificate.vendor)
+              );
+              scroll_to_top();
+            }}
+            to="/vendor"
+          >
+            {certificate.vendor.name}
+          </Link>
         </div>
       </div>
     );

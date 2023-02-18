@@ -1,6 +1,7 @@
 import React from "react";
 import { to_title } from "../assets/js/functions";
-import { domain } from "../assets/js/utils";
+import { get_request } from "../assets/js/services";
+import { domain, month_index } from "../assets/js/utils";
 import Certification_exam from "../components/certification_exam";
 import Loadindicator from "../components/loadindicator";
 import Footer from "../sections/footer";
@@ -13,17 +14,25 @@ class Ebook extends React.Component {
     this.state = {};
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     let ebook = window.sessionStorage.getItem("ebook");
     if (ebook) {
       ebook = JSON.parse(ebook);
       this.setState({ ebook });
-    }
+    } else return;
+
+    let certifcation_exams = await get_request(
+      `certification_exams/${ebook.certificate._id}`
+    );
+    this.setState({ certifcation_exams });
   };
 
   render() {
-    let { ebook } = this.state;
-    let { description, cover, title, exam, price } = ebook || new Object();
+    let { ebook, certifcation_exams } = this.state;
+    let { description, book, created, cover, title, price, certificate } =
+      ebook || new Object();
+
+    created = new Date(created);
 
     return (
       <>
@@ -32,7 +41,7 @@ class Ebook extends React.Component {
           <main>
             <section class="sectiona">
               <h3 style={{ fontWeight: 700, fontSize: 18 }}>
-                Pass Your CompTIA A+ Certification Easy!
+                Pass Your {certificate.title} Certification Easy!
               </h3>
 
               {description.split("\n").map((d) => (
@@ -43,23 +52,46 @@ class Ebook extends React.Component {
                 <div class="image_container">
                   <img
                     src={`${domain}/images/${cover}`}
-                    style={{ width: 150, marginRight: 20, borderRadius: 20 }}
+                    style={{ width: 150, marginRight: 20, borderRadius: 10 }}
                     alt=""
                   />
                   <h3>{to_title(title)}</h3>
                 </div>
 
-                {exam ? (
-                  <div class="product_description">
-                    <a href="">220-1101 Exam:</a>
-                    <p>CompTIA A+ Certification Exam: Core 1</p>
-                    <span>Includes 163 Questions & Answers</span>
-                  </div>
+                {certificate ? (
+                  <>
+                    {certifcation_exams && certifcation_exams[0] ? (
+                      <div class="product_description">
+                        <a href="">{certifcation_exams[0].year} Exam:</a>
+                        <p>{to_title(certifcation_exams[0].title)}:</p>
+                        <span>
+                          Includes {certifcation_exams[0].questions} Questions &
+                          Answers
+                        </span>
+                      </div>
+                    ) : null}
+                    <div class="product_description">
+                      <span>
+                        Uploaded: {to_title(month_index[created.getMonth()])}{" "}
+                        {created.getDate()}, {created.getFullYear()}
+                      </span>
+                    </div>
+                  </>
                 ) : null}
 
                 <div class="product_description price_container">
                   {price ? <h2>&#8358; {price}</h2> : null}
-                  <a href="#">{price ? "Buy" : "Download"}</a>
+                  {price ? (
+                    <a href="#">Buy</a>
+                  ) : (
+                    <a
+                      target="_blank"
+                      href={`${domain}/files/${book}`}
+                      download
+                    >
+                      Download
+                    </a>
+                  )}
                 </div>
 
                 <span class="extra_description">
@@ -70,27 +102,25 @@ class Ebook extends React.Component {
             </section>
 
             <div class="sectionb">
-              <h2>Access Free CompTIA A+ Practice Test Questions</h2>
+              <h2>Access Free {certificate.title} Practice Test Questions</h2>
 
-              <div class="table_container">
-                <Certification_exam />
-                <Certification_exam />
-                <Certification_exam />
-                <Certification_exam />
-                <Certification_exam />
-              </div>
+              {certifcation_exams ? (
+                <div class="table_container">
+                  {certifcation_exams.map((cert) => (
+                    <Certification_exam exam={cert} key={cert._id} />
+                  ))}
+                </div>
+              ) : (
+                <Loadindicator />
+              )}
             </div>
 
             <div class="sectionc">
               <h3>
-                CompTIA A+ Certification Exam Dumps & Practice Test Questions
+                {certificate.title} Certification Exam Dumps & Practice Test
+                Questions
               </h3>
-              <p>
-                Prepare with top-notch CompTIA A+ certification practice test
-                questions and answers, vce exam dumps, study guide, video
-                training course from ExamCollection. All CompTIA A+
-              </p>
-              <a href="#">Read More</a>
+              <p>{certificate.description}</p>
             </div>
           </main>
         ) : (

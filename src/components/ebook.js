@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { domain } from "../assets/js/utils";
+import { to_title } from "../assets/js/functions";
+import { domain, month_index } from "../assets/js/utils";
 
 const scroll_to_top = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -14,6 +15,7 @@ class Ebook extends React.Component {
   render() {
     let { ebook } = this.props;
     let { cover, title, description, price, created } = ebook;
+    created = new Date(created);
 
     return (
       <Link
@@ -23,6 +25,10 @@ class Ebook extends React.Component {
           scroll_to_top();
         }}
         className="ebook"
+        style={{
+          boxShadow: "0 0 60px 0 rgb(170, 170, 170, 0.4)",
+          border: "none",
+        }}
       >
         <div
           className="img"
@@ -35,13 +41,14 @@ class Ebook extends React.Component {
             {title}{" "}
           </p>
           <p style={{ marginBottom: 0 }} className="ebookdate">
-            Upload date: Nov 11, 2022
+            Upload date: {to_title(month_index[created.getMonth()])}{" "}
+            {created.getDate()}, {created.getFullYear()}
           </p>
           <p style={{ marginBottom: 0 }} className="ebookdetails">
             {description.slice(0, 150)}
           </p>
           <p style={{ marginBottom: 0 }} className="ebookprice">
-            NGN {price || "Free"}
+            {price ? `NGN ${price}` : "Free"}
           </p>
         </span>
       </Link>

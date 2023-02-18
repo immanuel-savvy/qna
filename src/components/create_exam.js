@@ -106,7 +106,7 @@ class Create_exam extends React.Component {
                 }
               />
 
-              <label>Vendor</label>
+              <label>Certificate</label>
               <div className="select">
                 {certificates ? (
                   <select

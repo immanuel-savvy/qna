@@ -12,7 +12,7 @@ const create_exam = (req, res) => {
   });
 };
 
-const stuff_exam_certificates = (exams) => {
+const certificate_joins = (exams) => {
   let cert_ids = new Set(),
     vendor_ids = new Set();
 
@@ -37,11 +37,19 @@ const stuff_exam_certificates = (exams) => {
 const exams = (req, res) => {
   let { limit } = req.params;
 
-  let exams_ = stuff_exam_certificates(
-    EXAMS.read(null, { limit: Number(limit) })
-  );
+  let exams_ = certificate_joins(EXAMS.read(null, { limit: Number(limit) }));
 
   res.json({ ok: true, message: "exams", data: exams_ });
 };
 
-export { create_exam, exams };
+const certification_exams = (req, res) => {
+  let { certificate } = req.params;
+
+  res.json({
+    ok: true,
+    message: "certification exams",
+    data: certificate_joins(EXAMS.read({ certificate })),
+  });
+};
+
+export { create_exam, exams, certificate_joins, certification_exams };

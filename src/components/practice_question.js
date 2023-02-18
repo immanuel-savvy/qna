@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { to_title } from "../assets/js/functions";
+import { scroll_to_top } from "./ebook";
 
 class Practice_question extends React.Component {
   constructor(props) {
@@ -20,7 +21,10 @@ class Practice_question extends React.Component {
       <span class="">
         <Link
           to="/vendor"
-          onClick={() => this.save_to_session("vendor", vendor)}
+          onClick={() => {
+            this.save_to_session("vendor", certificate.vendor);
+            scroll_to_top();
+          }}
           class="vendor"
         >
           {certificate.vendor.name}
