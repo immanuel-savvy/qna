@@ -8,6 +8,8 @@ import Create_exam from "./create_exam";
 import Add_new_vendor from "./add_new_vendor";
 import Sidenav from "./sidenav";
 import Upload_ebook from "./upload_ebook";
+import { save_to_session } from "./practice_question";
+import { client_domain } from "../assets/js/utils";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -55,6 +57,16 @@ class Nav extends React.Component {
 
   close_discussion = () => this.setState({ question: null });
 
+  search = async (e) => {
+    e.preventDefault();
+
+    let { query } = this.state;
+    if (!query) return;
+
+    save_to_session("query", query);
+    window.location.assign(`${client_domain}/exams_search_result`);
+  };
+
   render() {
     let {
       sidenav_on,
@@ -98,8 +110,16 @@ class Nav extends React.Component {
                   <p>Digitalised assessment</p>
                 </Link>
                 <form action="">
-                  <input type="search" name="" id="" placeholder="Search... " />
-                  <button type="submit">
+                  <input
+                    onChange={({ target }) =>
+                      this.setState({ query: target.value })
+                    }
+                    type="search"
+                    name=""
+                    id=""
+                    placeholder="Search... "
+                  />
+                  <button type="submit" onClick={this.search}>
                     <i className="material-icons">search</i>
                   </button>
                 </form>

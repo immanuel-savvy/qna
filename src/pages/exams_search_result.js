@@ -1,5 +1,6 @@
 import React from "react";
 import { post_request } from "../assets/js/services";
+import { scroll_to_top } from "../components/ebook";
 import Loadindicator from "../components/loadindicator";
 import { get_session } from "../components/practice_question";
 import Vendor_exam from "../components/vendor_exam";
@@ -14,12 +15,11 @@ class Exams_search_result extends React.Component {
   }
 
   componentDidMount = async () => {
-    let query = get_session("query");
+    scroll_to_top();
+    let query = get_session("query")?.toLowerCase();
 
-    console.log(query);
     let exams = await post_request("search_exams", { query });
-    console.log(exams);
-    this.setState({ exams });
+    this.setState({ exams, query });
   };
 
   render() {
