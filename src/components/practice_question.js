@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { to_title } from "../assets/js/functions";
 
 class Practice_question extends React.Component {
   constructor(props) {
@@ -8,16 +9,41 @@ class Practice_question extends React.Component {
     this.state = {};
   }
 
+  save_to_session = (key, value) =>
+    window.sessionStorage.setItem(key, JSON.stringify(value));
+
   render() {
+    let { exam } = this.props;
+    let { certificate, title, year } = exam;
+
     return (
       <span class="">
-        <Link to="/vendor" class="vendor">
-          Microsoft
+        <Link
+          to="/vendor"
+          onClick={() => this.save_to_session("vendor", vendor)}
+          class="vendor"
+        >
+          {certificate.vendor.name}
         </Link>
-        <Link to="/start_exam" class="exam">
-          DOY24
+        <Link
+          onClick={() => this.save_to_session("exam", exam)}
+          to="/start_exam"
+          class="exam"
+        >
+          {to_title(title)}
         </Link>
-        <Link class="file">MCSE</Link>
+        <Link
+          onClick={() => this.save_to_session("certificate", certificate)}
+          class="file"
+        >
+          {certificate.title}
+        </Link>
+        <Link
+          style={{ color: "#000", textDecoration: "none", cursor: "none" }}
+          class="file"
+        >
+          {year}
+        </Link>
       </span>
     );
   }

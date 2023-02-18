@@ -1,5 +1,6 @@
-import React, { createFactory } from "react";
-import { get_request } from "../assets/js/services";
+import React from "react";
+import { to_title } from "../assets/js/functions";
+import { get_request, post_request } from "../assets/js/services";
 import Alert_message from "./alert_msg";
 import Loadindicator from "./loadindicator";
 import Stretch_btn from "./stretch_btn";
@@ -12,18 +13,51 @@ class Create_exam extends React.Component {
   }
 
   componentDidMount = async () => {
-    let certificates = await get_request("certifications/all");
+    let certificates = await get_request("certificates/all");
     certificates = Array.isArray(certificates) ? certificates : new Array();
     this.setState({ certificates });
   };
 
   is_set = () => {
-    let { title, certificate, year, duration, questions } = this.state;
+    let { title, certificate, year, loading, duration } = this.state;
 
-    return title && duration && questions && certificate && year;
+    return (
+      title &&
+      Number(duration) > 0 &&
+      certificate &&
+      Number(year) > 0 &&
+      !loading
+    );
   };
 
-  submit = () => {};
+  submit = async () => {
+    let { toggle } = this.props;
+    let { title, duration, vendor, year, certificate } = this.state;
+
+    this.setState({ loading: true });
+
+    let exam = {
+      title,
+      duration: Number(duration),
+      year,
+      vendor,
+      certificate,
+    };
+
+    let result = await post_request("create_exam", exam);
+    console.log(result);
+
+    if (result && result._id) {
+      exam._id = result._id;
+      exam.created = result.created;
+
+      toggle();
+    } else
+      this.setState({
+        message: "Cannot create exam at the moment",
+        loading: false,
+      });
+  };
 
   render() {
     let { toggle } = this.props;
@@ -78,13 +112,17 @@ class Create_exam extends React.Component {
                   <select
                     id="selection"
                     onChange={({ target }) => {
-                      this.setState({ certificate: target.value });
+                      let val = target.value.split(":");
+                      this.setState({
+                        certificate: val[0],
+                        vendor: val[1],
+                      });
                     }}
                     aria-valuenow="20"
                   >
                     <option>-- Select Certificate --</option>
-                    {certificates.map(({ title, _id }) => (
-                      <option key={_id} value={_id}>
+                    {certificates.map(({ vendor, title, _id }) => (
+                      <option key={_id} value={`${_id}:${vendor._id}`}>
                         {to_title(title)}
                       </option>
                     ))}

@@ -11,7 +11,7 @@ class Top_certifications extends React.Component {
   }
 
   componentDidMount = async () => {
-    let certificates = await get_request("top_certificates");
+    let certificates = await get_request("certificates/50");
     this.setState({ certificates });
   };
 

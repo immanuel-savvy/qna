@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { domain } from "../assets/js/utils";
 
 class Certification extends React.Component {
   constructor(props) {
@@ -8,17 +10,20 @@ class Certification extends React.Component {
   }
 
   render() {
+    let { certificate } = this.props;
+    let { image, title, _id } = certificate;
+
     return (
-      <a
-        href=""
+      <Link
+        to={`/exams?${_id}`}
         style={{
-          backgroundImage: `url('${require("../assets/images/aws-certified-solutions-architect-associate.png")}')`,
+          backgroundImage: `url('${`${domain}/images/${image}`}')`,
         }}
       >
         <div class="content">
-          <p>AWS TITLE Lorem, ipsum dolor.</p>
+          <p style={{ textTransform: "capitalize" }}>{title}</p>
         </div>
-      </a>
+      </Link>
     );
   }
 }

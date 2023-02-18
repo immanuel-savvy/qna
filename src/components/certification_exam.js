@@ -11,7 +11,7 @@ class Certification_exam extends React.Component {
   }
 
   render() {
-    let { index } = this.props;
+    let { index, exam } = this.props;
 
     return (
       <div
