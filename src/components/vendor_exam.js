@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { to_title } from "../assets/js/functions";
 import { scroll_to_top } from "./ebook";
+import { save_to_session } from "./practice_question";
 
 class Vendor_exam extends React.Component {
   constructor(props) {
@@ -31,7 +32,15 @@ class Vendor_exam extends React.Component {
         </div>
         <div class="table_active_item">
           <small>Certificate</small>
-          <p>{certificate.title}</p>
+          <Link
+            to="/certificate"
+            onClick={() => {
+              save_to_session("certificate".certificate);
+              scroll_to_top();
+            }}
+          >
+            {certificate.title}
+          </Link>
         </div>
       </div>
     );

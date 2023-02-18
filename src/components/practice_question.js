@@ -3,15 +3,24 @@ import { Link } from "react-router-dom";
 import { to_title } from "../assets/js/functions";
 import { scroll_to_top } from "./ebook";
 
+const save_to_session = (key, value) =>
+  window.sessionStorage.setItem(key, JSON.stringify(value));
+
+const get_session = (key) => {
+  let val = window.sessionStorage.getItem(key);
+  if (val) {
+    try {
+      return JSON.parse(val);
+    } catch (e) {}
+  }
+};
+
 class Practice_question extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {};
   }
-
-  save_to_session = (key, value) =>
-    window.sessionStorage.setItem(key, JSON.stringify(value));
 
   render() {
     let { exam } = this.props;
@@ -22,7 +31,7 @@ class Practice_question extends React.Component {
         <Link
           to="/vendor"
           onClick={() => {
-            this.save_to_session("vendor", certificate.vendor);
+            save_to_session("vendor", certificate.vendor);
             scroll_to_top();
           }}
           class="vendor"
@@ -31,7 +40,7 @@ class Practice_question extends React.Component {
         </Link>
         <Link
           onClick={() => {
-            this.save_to_session("exam", exam);
+            save_to_session("exam", exam);
             scroll_to_top();
           }}
           to="/take_exam"
@@ -40,7 +49,7 @@ class Practice_question extends React.Component {
           {to_title(title)}
         </Link>
         <Link
-          onClick={() => this.save_to_session("certificate", certificate)}
+          onClick={() => save_to_session("certificate", certificate)}
           // class="file"
         >
           {certificate.title}
@@ -57,3 +66,4 @@ class Practice_question extends React.Component {
 }
 
 export default Practice_question;
+export { save_to_session, get_session };

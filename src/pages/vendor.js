@@ -45,6 +45,7 @@ class Vendor extends React.Component {
 
             <Top_certifications vendor={vendor} />
 
+            <h3>Exams by {name}</h3>
             <div class="table_container">
               {exams ? (
                 exams.length ? (
