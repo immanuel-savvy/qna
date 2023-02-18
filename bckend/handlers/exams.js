@@ -52,4 +52,21 @@ const certification_exams = (req, res) => {
   });
 };
 
-export { create_exam, exams, certificate_joins, certification_exams };
+const vendor_exams = (req, res) => {
+  let { vendor } = req.params;
+
+  let certifcates = CERTIFICATES.read({ vendor });
+  let exams = certificate_joins(
+    EXAMS.read({ certificate: certifcates.map((c) => c._id) })
+  );
+
+  res.json({ ok: true, message: "vendor exams", data: exams });
+};
+
+export {
+  create_exam,
+  exams,
+  vendor_exams,
+  certificate_joins,
+  certification_exams,
+};

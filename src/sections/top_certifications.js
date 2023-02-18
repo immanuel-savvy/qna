@@ -11,18 +11,32 @@ class Top_certifications extends React.Component {
   }
 
   componentDidMount = async () => {
-    let certificates = await get_request("certificates/50");
+    let { vendor } = this.props;
+    let certificates = await get_request(
+      vendor ? `vendor_certificates/${vendor._id}` : "certificates/50"
+    );
     this.setState({ certificates });
   };
 
   render() {
+    let { vendor } = this.props;
     let { certificates } = this.state;
     if (certificates && !certificates.length) return;
 
     return (
-      <section class="sectionii">
-        <p class="txt">Top Certifications</p>
-        <div class="fl">
+      <section
+        class="sectionii"
+        style={vendor ? { backgroundColor: "transparent" } : null}
+      >
+        {vendor ? null : <p class="txt">Top Certifications</p>}
+        <div
+          class="fl"
+          style={
+            vendor
+              ? { overflow: "visible", display: "flex", flexWrap: "wrap" }
+              : null
+          }
+        >
           <div className="span">
             {certificates ? (
               certificates.map((certificate) => (

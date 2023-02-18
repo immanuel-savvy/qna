@@ -30,7 +30,10 @@ class Practice_question extends React.Component {
           {certificate.vendor.name}
         </Link>
         <Link
-          onClick={() => this.save_to_session("exam", exam)}
+          onClick={() => {
+            this.save_to_session("exam", exam);
+            scroll_to_top();
+          }}
           to="/take_exam"
           class="exam"
         >
@@ -38,13 +41,13 @@ class Practice_question extends React.Component {
         </Link>
         <Link
           onClick={() => this.save_to_session("certificate", certificate)}
-          class="file"
+          // class="file"
         >
           {certificate.title}
         </Link>
         <Link
           style={{ color: "#000", textDecoration: "none", cursor: "none" }}
-          class="file"
+          // class="file"
         >
           {year}
         </Link>

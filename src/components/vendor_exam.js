@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { to_title } from "../assets/js/functions";
 import { scroll_to_top } from "./ebook";
 
-class Vendor_certificate extends React.Component {
+class Vendor_exam extends React.Component {
   constructor(props) {
     super(props);
 
@@ -11,8 +11,8 @@ class Vendor_certificate extends React.Component {
   }
 
   render() {
-    let { index, certificate } = this.props;
-    let { title, exams, vendor, questions } = certificate;
+    let { index, exam } = this.props;
+    let { title, year, certificate } = exam;
 
     return (
       <div
@@ -27,15 +27,15 @@ class Vendor_certificate extends React.Component {
         </div>
         <div class="table_active_item">
           <small>Year</small>
-          {/* <a href="#">{year}</a> */}
+          <a href="#">{year}</a>
         </div>
         <div class="table_active_item">
-          <small>Exams</small>
-          <p>{exams || 0}</p>
+          <small>Certificate</small>
+          <p>{certificate.title}</p>
         </div>
       </div>
     );
   }
 }
 
-export default Vendor_certificate;
+export default Vendor_exam;
