@@ -9,6 +9,7 @@ import {
   search_exams,
   vendor_exams,
 } from "./handlers/exams";
+import { comments, new_comment } from "./handlers/forum";
 import { login, signup, user, verify_email } from "./handlers/users";
 import {
   add_certificate,
@@ -43,6 +44,8 @@ const routes = (app) => {
   app.post("/search_exams", search_exams);
   app.post("/add_question", add_question);
   app.post("/exam_questions/:exam", exam_questions);
+  app.post("/new_comment", new_comment);
+  app.post("/comments/:question", comments);
 };
 
 export default routes;

@@ -12,10 +12,35 @@ class Question extends React.Component {
   toggle_answer = () => this.setState({ show_answer: !this.state.show_answer });
 
   toggle_discussions = () =>
-    emitter.emit("question_discussion", this.props.question?._id || true);
+    emitter.emit("question_discussion", this.props.question || true);
+
+  set_answer = (op) => {
+    let { question, set_answer } = this.props;
+
+    set_answer(question._id, op);
+  };
+
+  option = (option, image, answer, op) => {
+    return (
+      <li
+        style={{
+          cursor: "pointer",
+          backgroundColor: answer === op ? "#54c547" : null,
+        }}
+        onClick={() => this.set_answer(op)}
+        className="question_option"
+      >
+        {option}{" "}
+        {image ? (
+          <img src={`${domain}/images/${image}`} className="img img-fluid" />
+        ) : null}
+      </li>
+    );
+  };
 
   render() {
-    let { question: question_ } = this.props;
+    let { question: question_, index, answer } = this.props;
+
     let {
       question,
       image,
@@ -37,49 +62,17 @@ class Question extends React.Component {
           border: "none",
         }}
       >
-        <span className="t1">Question 1</span>
+        <span className="t1">Question {index + 1}</span>
         <span className="Question">
           <p className="t">{question}</p>
           {image ? (
             <img src={`${domain}/images/${image}`} className="img img-fluid" />
           ) : null}
           <ol type="A">
-            <li>
-              {options.a}{" "}
-              {aimage ? (
-                <img
-                  src={`${domain}/images/${aimage}`}
-                  className="img img-fluid"
-                />
-              ) : null}
-            </li>
-            <li>
-              {options.b}
-              {bimage ? (
-                <img
-                  src={`${domain}/images/${bimage}`}
-                  className="img img-fluid"
-                />
-              ) : null}
-            </li>
-            <li>
-              {options.c}
-              {cimage ? (
-                <img
-                  src={`${domain}/images/${cimage}`}
-                  className="img img-fluid"
-                />
-              ) : null}
-            </li>
-            <li>
-              {options.d}
-              {dimage ? (
-                <img
-                  src={`${domain}/images/${dimage}`}
-                  className="img img-fluid"
-                />
-              ) : null}
-            </li>
+            {this.option(options.a, aimage, answer, "a")}
+            {this.option(options.b, bimage, answer, "b")}
+            {this.option(options.c, cimage, answer, "c")}
+            {this.option(options.d, dimage, answer, "d")}
           </ol>
           <span className="ansdiv">
             <a

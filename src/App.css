@@ -1689,6 +1689,10 @@ main .sectiona1 .existingebooks .ebook .text .ebookprice {
   padding: 30px;
 }
 
+.question_option:hover {
+  background-color: #54c547;
+}
+
 .addmodal form .clo {
   width: 100%;
   display: flex;
