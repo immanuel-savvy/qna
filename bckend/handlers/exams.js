@@ -1,4 +1,5 @@
-import { CERTIFICATES, EXAMS } from "../ds/conn";
+import { CERTIFICATES, EXAMS, QUESTIONS } from "../ds/conn";
+import { save_image } from "./utils";
 
 const create_exam = (req, res) => {
   let exam = req.body;
@@ -73,6 +74,37 @@ const search_exams = (req, res) => {
   });
 };
 
+const add_question = (req, res) => {
+  let question = req.body;
+
+  question.image = save_image(question.image);
+  question.aimage = save_image(question.aimage);
+  question.bimage = save_image(question.bimage);
+  question.cimage = save_image(question.cimage);
+  question.dimage = save_image(question.dimage);
+  question.solution_image = save_image(question.solution_image);
+
+  let result = QUESTIONS.write(question);
+
+  res.json({
+    ok: true,
+    message: "question added",
+    data: { _id: result._id, created: result.created },
+  });
+};
+
+const exam_questions = (req, res) => {
+  let { exam } = req.params;
+  let { limit, skip } = req.body;
+
+  let questions = QUESTIONS.read(
+    { exam },
+    { limit: Number(limit), skip: Number(skip) }
+  );
+
+  res.json({ ok: true, message: "exam questions", data: questions });
+};
+
 export {
   create_exam,
   exams,
@@ -80,4 +112,6 @@ export {
   certificate_joins,
   certification_exams,
   search_exams,
+  add_question,
+  exam_questions,
 };

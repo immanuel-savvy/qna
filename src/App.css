@@ -1463,7 +1463,7 @@ main .sectiontop .examquestions .ex .Question .answer {
   justify-content: flex-start;
   width: 100%;
   border-top: solid 1px silver;
-  margin: 20px 0;
+  margin-top: 20px;
   display: none;
 }
 

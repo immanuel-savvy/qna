@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { client_domain } from "../assets/js/utils";
 import Loadindicator from "../components/loadindicator";
 import Nav from "../components/nav";
+import { get_session } from "../components/practice_question";
 import { Nav_context } from "../contexts";
 
 class Header extends React.Component {
@@ -14,7 +15,11 @@ class Header extends React.Component {
 
   componentDidMount = () => {
     let href = window.location.href.split("?")[1];
-    if (href === "admin" || window.sessionStorage.getItem("admin_header"))
+    if (
+      href === "admin" ||
+      get_session("admin_header") ||
+      get_session("logged_admin")
+    )
       this.setState({ admin: true }, () =>
         window.sessionStorage.setItem("admin_header", true)
       );

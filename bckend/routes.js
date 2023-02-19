@@ -1,9 +1,11 @@
 import { admin_login, create_admin, get_admins } from "./handlers/admin";
 import { ebook, ebooks, search_ebooks, upload_ebook } from "./handlers/ebooks";
 import {
+  add_question,
   certification_exams,
   create_exam,
   exams,
+  exam_questions,
   search_exams,
   vendor_exams,
 } from "./handlers/exams";
@@ -39,6 +41,8 @@ const routes = (app) => {
   app.post("/create_exam", create_exam);
   app.post("/search_ebooks", search_ebooks);
   app.post("/search_exams", search_exams);
+  app.post("/add_question", add_question);
+  app.post("/exam_questions/:exam", exam_questions);
 };
 
 export default routes;

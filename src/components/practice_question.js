@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { to_title } from "../assets/js/functions";
-import { emitter } from "../Qna";
 import { scroll_to_top } from "./ebook";
 
 const save_to_session = (key, value) =>

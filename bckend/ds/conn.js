@@ -11,6 +11,7 @@ let USERS,
   FAQS,
   EXAMS,
   GLOBALS,
+  QUESTIONS,
   USERS_HASH;
 
 const ds_conn = () => {
@@ -25,6 +26,7 @@ const ds_conn = () => {
   USERS_HASH = gds.folder("user_hash", "user");
   EXAMS = gds.folder("exams", "certificate", "certificate");
   EBOOKS = gds.folder("ebooks", null, "exam");
+  QUESTIONS = gds.folder("questions", "exam");
   FAQS = gds.folder("faqs");
 };
 
@@ -32,6 +34,7 @@ export {
   gds,
   USERS,
   ADMIN_HASH,
+  QUESTIONS,
   ADMINSTRATORS,
   CERTIFICATES,
   USERS_HASH,
