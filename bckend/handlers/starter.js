@@ -3,6 +3,8 @@ import { ADMINSTRATORS, ADMIN_HASH, USERS, USERS_HASH } from "../ds/conn";
 let default_admin = "adminstrators~123QNA~1234567890123",
   default_user = "users~123QNA~1234567890123";
 
+const site_metric = "site_metric";
+
 const create_default_admin = () => {
   if (!ADMINSTRATORS.readone(default_admin)) {
     ADMINSTRATORS.write({
@@ -27,4 +29,4 @@ const create_default_admin = () => {
   }
 };
 
-export { create_default_admin };
+export { create_default_admin, site_metric };

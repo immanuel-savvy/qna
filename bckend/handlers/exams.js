@@ -1,10 +1,13 @@
-import { CERTIFICATES, EXAMS, QUESTIONS } from "../ds/conn";
+import { CERTIFICATES, EXAMS, GLOBALS, QUESTIONS } from "../ds/conn";
+import { site_metric } from "./starter";
 import { save_image } from "./utils";
 
 const create_exam = (req, res) => {
   let exam = req.body;
 
   let result = EXAMS.write(exam);
+
+  GLOBALS.update({ global: site_metric }, { exams: { $inc: 1 } });
 
   res.json({
     ok: true,
@@ -97,6 +100,12 @@ const add_question = (req, res) => {
   });
 };
 
+const exam_taken = (req, res) => {
+  let { exam, certificate } = req.body;
+  EXAMS.update({ _id: exam, certificate }, { taken: { $inc: 1 } });
+  GLOBALS.update({ global: site_metric }, { exams_taken: { $inc: 1 } });
+};
+
 const exam_questions = (req, res) => {
   let { exam } = req.params;
   let { limit, skip } = req.body;
@@ -118,4 +127,5 @@ export {
   search_exams,
   add_question,
   exam_questions,
+  exam_taken,
 };

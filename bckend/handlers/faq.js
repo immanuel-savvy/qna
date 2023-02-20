@@ -1,7 +1,10 @@
-import { FAQS } from "../ds/conn";
+import { FAQS, GLOBALS } from "../ds/conn";
+import { site_metric } from "./starter";
 
 const add_faq = (req, res) => {
   let result = FAQS.write(req.body);
+
+  GLOBALS.update({ global: site_metric }, { faqs: { $inc: 1 } });
 
   res.json({
     ok: true,
@@ -26,6 +29,7 @@ const remove_faq = (req, res) => {
   let { faq } = req.params;
 
   FAQS.remove(faq);
+  GLOBALS.update({ global: site_metric }, { faqs: { $dec: 1 } });
 
   res.end();
 };

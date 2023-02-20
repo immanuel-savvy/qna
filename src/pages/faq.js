@@ -2,6 +2,7 @@ import React from "react";
 import { post_request } from "../assets/js/services";
 import Faq from "../components/faq";
 import Loadindicator from "../components/loadindicator";
+import { get_session } from "../components/practice_question";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
 
@@ -17,11 +18,11 @@ class FAQ extends React.Component {
 
   componentDidMount = async () => {
     let faqs = await post_request("faqs");
-    this.setState({ faqs });
+    this.setState({ faqs, admin: !!get_session("logged_admin") });
   };
 
   render() {
-    let { faqs } = this.state;
+    let { faqs, admin } = this.state;
 
     return (
       <>
@@ -40,7 +41,9 @@ class FAQ extends React.Component {
             <div className="faq_container">
               {faqs ? (
                 faqs.length ? (
-                  faqs.map((faq) => <Faq faq={faq} key={faq._id} />)
+                  faqs.map((faq) => (
+                    <Faq admin={admin} faq={faq} key={faq._id} />
+                  ))
                 ) : (
                   <span>Nothing yet yet.</span>
                 )

@@ -10,13 +10,15 @@ class FAQS extends React.Component {
   }
 
   render() {
+    let { faqs } = this.props;
+
     return (
       <div class="exams">
         <p class="title">FAQS</p>
         <div class="sec">
           <div class="item">
             <span class="created">
-              <p> Total FAQS: 300</p>{" "}
+              <p> Total FAQS: {faqs}</p>{" "}
               <Link to="/faq">
                 View all <i class="material-icons">chevron_right</i>
               </Link>

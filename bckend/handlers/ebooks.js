@@ -1,5 +1,6 @@
-import { EBOOKS } from "../ds/conn";
+import { EBOOKS, GLOBALS } from "../ds/conn";
 import { certificate_joins } from "./exams";
+import { site_metric } from "./starter";
 import { save_file, save_image } from "./utils";
 
 const upload_ebook = (req, res) => {
@@ -27,6 +28,8 @@ const upload_ebook = (req, res) => {
     certificate,
     book,
   });
+
+  GLOBALS.update({ global: site_metric }, { ebooks: { $inc: 1 } });
 
   res.json({
     ok: true,

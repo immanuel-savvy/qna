@@ -8,6 +8,7 @@ class Site_metric extends React.Component {
   }
 
   render() {
+    let { visits, users } = this.props;
     return (
       <div class="sp1 sp2">
         <div class="exams">
@@ -15,31 +16,20 @@ class Site_metric extends React.Component {
           <div class="sec sec2">
             <div class="item">
               <span class="created">
-                <p> Total site visits</p> <a>30, 000</a>
+                <p> Total site visits</p> <a>{visits}</a>
               </span>
               <span class="created">
-                <p> Total site users</p> <a>400</a>
+                <p> Total site users</p> <a>{users}</a>
               </span>
             </div>
           </div>
-          <div class="sec">
+          {/* <div class="sec">
             <div class="item">
               <span class="created">
                 <p> Total sales revenue</p> <a>NGN 9,000</a>
               </span>
-              <span class="created">
-                <p> Active users</p> <a>3,000</a>
-              </span>
             </div>
-            <div class="item">
-              <span class="created">
-                <p> Active users</p> <a>3,000</a>
-              </span>
-              <span class="created">
-                <p> Online users</p> <a>3,000</a>
-              </span>
-            </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );

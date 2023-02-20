@@ -1,8 +1,13 @@
-import { ADMINSTRATORS, ADMIN_HASH } from "../ds/conn";
+import { ADMINSTRATORS, ADMIN_HASH, GLOBALS } from "../ds/conn";
+import { site_metric } from "./starter";
 
 const domain_name = "https://api.voupon.com";
 
 const client_domain = "http://voupon.com";
+
+const site_visit = (req, res) => {
+  GLOBALS.update({ global: site_metric }, { visits: { $inc: 1 } });
+};
 
 const admin_login = (req, res) => {
   let { email, password } = req.body;
@@ -38,4 +43,11 @@ const create_admin = (req, res) => {
   res.json({ ok: true, message: "admin created", data: admin });
 };
 
-export { admin_login, create_admin, get_admins, client_domain, domain_name };
+export {
+  admin_login,
+  create_admin,
+  get_admins,
+  client_domain,
+  domain_name,
+  site_visit,
+};

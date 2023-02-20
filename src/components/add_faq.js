@@ -7,7 +7,8 @@ class Add_faq extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    let { faq } = this.props;
+    this.state = { ...faq, image_filename: faq && faq.image };
   }
 
   is_set = () => {
@@ -25,12 +26,11 @@ class Add_faq extends React.Component {
 
     let result = await post_request(_id ? "update_faq" : "add_faq", faq);
 
-    console.log(result);
-
     if (result && result._id) {
       faq._id = result._id;
       faq.created = result.created;
       toggle();
+      window.location.reload();
     } else this.setState({ message: "Cannot add FAQ atm.", loading: false });
   };
 

@@ -79,7 +79,14 @@ class Take_exam extends React.Component {
 
     let { exam } = this.state;
     if (!exam) return;
-    this.setState({ start_exam: Date.now(), calculate_result: false });
+    this.setState(
+      { start_exam: Date.now(), calculate_result: false },
+      async () =>
+        await post_request("exam_taken", {
+          exam: exam._id,
+          certificate: exam.certificate._id,
+        })
+    );
     await this.fetch_questions();
   };
 

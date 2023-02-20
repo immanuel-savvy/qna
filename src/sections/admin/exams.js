@@ -9,35 +9,24 @@ class Exams extends React.Component {
   }
 
   render() {
+    let { exams, exams_taken } = this.props;
     return (
       <div class="exams">
         <p class="title">Exams</p>
         <div class="sec sec2">
           <div class="item">
             <span class="created">
-              <p> Exams created: 300</p>{" "}
+              <p> Exams created: {exams}</p>{" "}
               <a href="ebook.html">
                 View all <i class="material-icons">chevron_right</i>
               </a>
             </span>
             <span class="created purchased">
-              <p> Exams Taken: 250</p>{" "}
+              <p> Exams Taken: {exams_taken}</p>{" "}
             </span>
           </div>
         </div>
         <div class="sec">
-          <div class="item">
-            <span class="created">
-              <p> Exams created: 300</p>{" "}
-              <a href="ebook.html">
-                View all <i class="material-icons">chevron_right</i>
-              </a>
-            </span>
-            <span class="created purchased">
-              <p> Exams purchased: 200</p>{" "}
-              <a href="ebook.html">Total Revenue: NGN 3,000,000</a>
-            </span>
-          </div>
           <div class="item">
             <a
               onClick={() => emitter.emit("toggle_create_exam")}

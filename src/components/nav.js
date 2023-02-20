@@ -10,7 +10,6 @@ import Sidenav from "./sidenav";
 import Upload_ebook from "./upload_ebook";
 import { save_to_session } from "./practice_question";
 import { client_domain } from "../assets/js/utils";
-import Add_question from "./add_question";
 import Add_faq from "./add_faq";
 
 class Nav extends React.Component {
@@ -26,7 +25,8 @@ class Nav extends React.Component {
         this.setState({ question: question.question, exam: question.exam });
       else this.setState({ question: null, exam: null });
     };
-    this.toggle_faq = () => this.setState({ faq: !this.state.faq });
+    this.toggle_faq = (faq) =>
+      this.setState({ faq: this.state.faq ? null : faq || true });
     this.toggle_questions_upload = (exam) => this.setState({ exam });
     this.toggle_add_vendor = () =>
       this.setState({ add_vendor: !this.state.add_vendor });
@@ -106,7 +106,7 @@ class Nav extends React.Component {
 
           return (
             <>
-              {faq ? <Add_faq toggle={this.toggle_faq} /> : null}
+              {faq ? <Add_faq faq={faq} toggle={this.toggle_faq} /> : null}
               {upload_ebook ? (
                 <Upload_ebook toggle={this.toggle_upload_ebook} />
               ) : null}

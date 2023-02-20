@@ -9,13 +9,15 @@ class Certificates extends React.Component {
   }
 
   render() {
+    let { certificates } = this.props;
+
     return (
       <div class="exams">
         <p class="title">Certificates</p>
         <div class="sec">
           <div class="item">
             <span class="created">
-              <p> Total Certificates: 300</p>{" "}
+              <p> Total Certificates: {certificates}</p>{" "}
               <a href="ebook.html">
                 View all <i class="material-icons">chevron_right</i>
               </a>

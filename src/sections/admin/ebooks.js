@@ -8,12 +8,11 @@ class Admin_ebooks extends React.Component {
     this.state = {};
   }
 
-  toggle_upload_ebook = () => {
-    console.log("here");
-    emitter.emit("toggle_upload_ebook");
-  };
+  toggle_upload_ebook = () => emitter.emit("toggle_upload_ebook");
 
   render() {
+    let { ebooks, ebooks_sales } = this.props;
+
     return (
       <div class="ebooks">
         <p class="title">eBooks</p>
@@ -22,14 +21,14 @@ class Admin_ebooks extends React.Component {
           <p class="txt">Upload a new ebook</p>
         </a>
         <span class="created">
-          <p> eBooks created: 300</p>{" "}
+          <p> eBooks created: {ebooks}</p>{" "}
           <a href="ebook.html">
             View all <i class="material-icons">chevron_right</i>
           </a>
         </span>
         <span class="created purchased">
           <p> eBooks purchased: 200</p>{" "}
-          <a href="ebook.html">Total Revenue: NGN 3,000,000</a>
+          <a href="ebook.html">Total Revenue: NGN {ebooks_sales}</a>
         </span>
       </div>
     );

@@ -20,7 +20,7 @@ import Ebook from "./pages/ebook";
 import Ebooks from "./pages/ebooks";
 import Take_exam from "./pages/take_exam";
 import Admin from "./pages/admin";
-import { get_request } from "./assets/js/services";
+import { get_request, post_request } from "./assets/js/services";
 import Certificate from "./pages/certificate";
 import Exams_search_result from "./pages/exams_search_result";
 import Add_question from "./components/add_question";
@@ -43,6 +43,8 @@ class Qna extends React.Component {
     }
     let vendors = await get_request("vendors/all");
     this.setState({ vendors });
+
+    await post_request("site_visit");
   };
 
   logout = () =>

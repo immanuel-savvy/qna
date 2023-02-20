@@ -1,10 +1,12 @@
-import { CERTIFICATES, VENDORS } from "../ds/conn";
+import { CERTIFICATES, GLOBALS, VENDORS } from "../ds/conn";
+import { site_metric } from "./starter";
 import { remove_image, save_image } from "./utils";
 
 const new_vendor = (req, res) => {
   let vendor = req.body;
 
   let result = VENDORS.write(vendor);
+  GLOBALS.update({ global: site_metric }, { vendors: { $inc: 1 } });
 
   res.json({
     ok: true,
@@ -27,6 +29,7 @@ const add_certificate = (req, res) => {
   certificate.image = save_image(certificate.image);
 
   let result = CERTIFICATES.write(certificate);
+  GLOBALS.update({ global: site_metric }, { certificates: { $inc: 1 } });
 
   res.json({
     ok: true,
@@ -68,6 +71,8 @@ const remove_certification = (req, res) => {
 
   let result = CERTIFICATES.remove(query);
   result && remove_image(result.image);
+
+  GLOBALS.update({ global: site_metric }, { certificates: { $dec: 1 } });
 
   res.end;
 };

@@ -1,4 +1,9 @@
-import { admin_login, create_admin, get_admins } from "./handlers/admin";
+import {
+  admin_login,
+  create_admin,
+  get_admins,
+  site_visit,
+} from "./handlers/admin";
 import { ebook, ebooks, search_ebooks, upload_ebook } from "./handlers/ebooks";
 import {
   add_question,
@@ -6,6 +11,7 @@ import {
   create_exam,
   exams,
   exam_questions,
+  exam_taken,
   search_exams,
   vendor_exams,
 } from "./handlers/exams";
@@ -37,12 +43,14 @@ const routes = (app) => {
 
   app.post("/admin_login", admin_login);
   app.post("/create_admin", create_admin);
+  app.post("/site_visit", site_visit);
   app.post("/login", login);
   app.post("/signup", signup);
   app.post("/verify_email", verify_email);
   app.post("/upload_ebook", upload_ebook);
   app.post("/new_vendor", new_vendor);
   app.post("/add_certificate", add_certificate);
+  app.post("/exam_taken", exam_taken);
   app.post("/create_exam", create_exam);
   app.post("/search_ebooks", search_ebooks);
   app.post("/search_exams", search_exams);
