@@ -11,8 +11,11 @@ class Question extends React.Component {
 
   toggle_answer = () => this.setState({ show_answer: !this.state.show_answer });
 
-  toggle_discussions = () =>
-    emitter.emit("question_discussion", this.props.question || true);
+  toggle_discussions = () => {
+    let { question, exam } = this.props;
+
+    emitter.emit("question_discussion", { question, exam });
+  };
 
   set_answer = (op) => {
     let { question, set_answer } = this.props;
@@ -51,6 +54,7 @@ class Question extends React.Component {
       solution_image,
       solution,
       options,
+      discussions,
     } = question_;
     let { show_answer } = this.state;
 
@@ -87,7 +91,8 @@ class Question extends React.Component {
               className="a2"
               onClick={this.toggle_discussions}
             >
-              <i className="material-icons">question_answer</i> Discussion
+              <i className="material-icons">question_answer</i> Discussion{" "}
+              {discussions ? `(${discussions})` : null}
             </a>
           </span>
           {show_answer ? (

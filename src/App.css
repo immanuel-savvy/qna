@@ -371,7 +371,8 @@ main .sectioni .srch {
 main .sectioni .srch input {
   height: 100%;
   width: 350px;
-  border-radius: 5px;
+  min-height: 70px !important;
+  border-radius: 10px;
   border: none;
   outline: solid 1px silver;
   padding: 0 15px;

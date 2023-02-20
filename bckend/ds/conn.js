@@ -11,6 +11,7 @@ let USERS,
   FAQS,
   EXAMS,
   GLOBALS,
+  REPLIES,
   DISCUSSIONS,
   FORUMS,
   QUESTIONS,
@@ -30,6 +31,7 @@ const ds_conn = () => {
   EXAMS = gds.folder("exams", "certificate", "certificate");
   EBOOKS = gds.folder("ebooks", null, "exam");
   FORUMS = gds.folder("forums");
+  REPLIES = gds.folder("replies", "comment");
   QUESTIONS = gds.folder("questions", "exam");
   FAQS = gds.folder("faqs");
 };
@@ -45,6 +47,7 @@ export {
   DISCUSSIONS,
   FORUMS,
   EBOOKS,
+  REPLIES,
   VENDORS,
   GLOBALS,
   EXAMS,

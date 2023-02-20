@@ -172,6 +172,7 @@ class Take_exam extends React.Component {
                       index={skip + index}
                       question={question}
                       key={question._id}
+                      exam={exam}
                       answer={answers[question._id]}
                       set_answer={this.set_answer}
                     />

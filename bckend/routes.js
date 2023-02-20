@@ -9,7 +9,7 @@ import {
   search_exams,
   vendor_exams,
 } from "./handlers/exams";
-import { comments, new_comment } from "./handlers/forum";
+import { comments, new_comment, new_reply, replies } from "./handlers/forum";
 import { login, signup, user, verify_email } from "./handlers/users";
 import {
   add_certificate,
@@ -22,6 +22,7 @@ import {
 const routes = (app) => {
   app.get("/user/:user", user);
   app.get("/get_admins", get_admins);
+  app.get("/replies/:comment", replies);
   app.get("/vendors/:limit", vendors);
   app.get("/ebooks/:limit", ebooks);
   app.get("/ebook/:ebook", ebook);
@@ -46,6 +47,7 @@ const routes = (app) => {
   app.post("/exam_questions/:exam", exam_questions);
   app.post("/new_comment", new_comment);
   app.post("/comments/:question", comments);
+  app.post("/new_reply", new_reply);
 };
 
 export default routes;

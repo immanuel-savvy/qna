@@ -20,7 +20,11 @@ class Nav extends React.Component {
   }
 
   componentDidMount = () => {
-    this.question_discussion = (question) => this.setState({ question });
+    this.question_discussion = (question) => {
+      if (question)
+        this.setState({ question: question.question, exam: question.exam });
+      else this.setState({ question: null, exam: null });
+    };
     this.toggle_questions_upload = (exam) => this.setState({ exam });
     this.toggle_add_vendor = () =>
       this.setState({ add_vendor: !this.state.add_vendor });
@@ -96,9 +100,6 @@ class Nav extends React.Component {
               {upload_ebook ? (
                 <Upload_ebook toggle={this.toggle_upload_ebook} />
               ) : null}
-              {exam ? (
-                <Add_question exam={exam} toggle={this.toggle_upload_ebook} />
-              ) : null}
               {create_exam ? (
                 <Create_exam toggle={this.toggle_create_exam} />
               ) : null}
@@ -112,6 +113,7 @@ class Nav extends React.Component {
                 <Question_discussion
                   toggle={this.close_discussion}
                   question={question}
+                  exam={exam}
                 />
               ) : null}
               {sidenav_on ? <Sidenav /> : null}

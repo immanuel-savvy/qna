@@ -1,4 +1,10 @@
 import React from "react";
+import { date_string, generate_random_string } from "../assets/js/functions";
+import { get_request, post_request } from "../assets/js/services";
+import { emitter } from "../Qna";
+import Comment_form from "./comment_form";
+import Loadindicator from "./loadindicator";
+import Reply from "./reply";
 
 class Comment extends React.Component {
   constructor(props) {
@@ -7,45 +13,115 @@ class Comment extends React.Component {
     this.state = {};
   }
 
+  componentDidMount = () => {
+    let { comment } = this.props;
+    this.toggle_post_reply = (comment_id) => {
+      if (comment_id !== comment._id && this.state.post_reply)
+        this.setState({ post_reply: false });
+    };
+
+    emitter.listen("toggle_post_reply", this.toggle_post_reply);
+  };
+
+  componentWillUnmount = () => {
+    emitter.remove_listener("toggle_post_reply", this.toggle_post_reply);
+  };
+
+  fetch_replies = async () => {
+    let { comment } = this.props;
+    let { replies } = this.state;
+    if (replies) return;
+
+    replies = await get_request(`replies/${comment._id}`);
+    console.log(replies);
+    this.setState({ replies });
+  };
+
+  view_replies = () => {
+    this.setState(
+      { show_replies: !this.state.show_replies },
+      this.fetch_replies
+    );
+  };
+
+  toggle_reply = () =>
+    this.setState(
+      { post_reply: !this.state.post_reply, show_replies: true },
+      () => {
+        emitter.emit("toggle_post_reply", this.props.comment._id);
+        this.state.show_replies && this.fetch_replies();
+      }
+    );
+
+  post_reply = async ({ fullname, user, comment: reply }) => {
+    let { comment } = this.props;
+    let { replies } = this.state;
+
+    reply = {
+      reply,
+      comment: comment._id,
+      question: comment.question,
+      fullname,
+      user,
+    };
+
+    let result = await post_request("new_reply", reply);
+    if (!result || (result && !result._id))
+      return this.setState({ message: "Cannot post reply at the moment" });
+
+    reply._id = result._id;
+    reply.created = result.created || Date.now();
+    console.log(reply);
+    if (!replies) replies = new Array();
+    replies = new Array(reply, ...replies);
+    this.setState({ replies, message: "", show_replies: true });
+  };
+
   render() {
+    let { replies, show_replies, post_reply } = this.state;
+    let { comment: comment_ } = this.props;
+    let { fullname, comment, replies: replies_, created } = comment_;
+
     return (
       <div class="comment">
         <div class="top">
           <i class="material-icons">person</i>
-          <p class="username">Mr. wamet</p>
-          <p class="time">(2 years, 8 months ago)</p>
+          <p class="username">
+            {fullname || generate_random_string(8, "alnum")}
+          </p>
+          <p class="time">({date_string(created)})</p>
         </div>
-        <div class="com">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus
-          corrupti, ipsum sapiente voluptate itaque inventore?
-        </div>
+        <div class="com">{comment}</div>
         <div class="like">
           {" "}
-          <i class="material-icons-outlined">thumb_up</i>{" "}
-          <i class="material-icons-outlined">thumb_down</i>{" "}
-          <i class="material-icons-outlined">bookmark_border</i>{" "}
+          <i onClick={this.thumbup} class="material-icons-outlined">
+            thumb_up
+          </i>{" "}
+          <i onClick={this.thumbup} class="material-icons-outlined">
+            thumb_down
+          </i>{" "}
+          <i onClick={this.toggle_reply} class="material-icons-outlined">
+            reply
+          </i>
+          <span onClick={this.view_replies}>
+            {replies_ || (replies && replies.length) || ""}
+          </span>
         </div>
-        <div class="replies">
-          <div class="comment">
-            <div class="top">
-              <i class="material-icons">person</i>
-              <p class="username">Mr. wamet</p>
-              <p class="time">(2 years, 8 months ago)</p>
-            </div>
-            <div class="com">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Temporibus corrupti, ipsum sapiente voluptate itaque inventore?
-            </div>
-            <div class="like">
-              {" "}
-              <i class="material-icons-outlined">thumb_up</i>{" "}
-              <i class="material-icons-outlined">thumb_down</i>{" "}
-              <i class="material-icons-outlined">bookmark_border</i>{" "}
-              <p>Reply</p>
-            </div>
-            <div class="replies"></div>
+
+        {post_reply ? <Comment_form action={this.post_reply} /> : null}
+        {show_replies ? (
+          <div class="replies">
+            {replies ? (
+              replies.length ? (
+                replies.map((reply) => <Reply reply={reply} key={reply._id} />)
+              ) : (
+                <span>No replies yet.</span>
+              )
+            ) : (
+              <Loadindicator />
+            )}
           </div>
-        </div>
+        ) : null}
       </div>
     );
   }

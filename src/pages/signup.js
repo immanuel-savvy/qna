@@ -16,7 +16,7 @@ class Signup extends React.Component {
   }
 
   is_set = () => {
-    let { email, password, loading, message, confirm_password, confirm } =
+    let { email, fullname, password, message, confirm_password, confirm } =
       this.state;
 
     return (
@@ -24,7 +24,7 @@ class Signup extends React.Component {
       password.trim() &&
       password === confirm_password &&
       confirm &&
-      !loading &&
+      fullname &&
       !message
     );
   };
@@ -32,12 +32,12 @@ class Signup extends React.Component {
   signup = async (e) => {
     e.preventDefault();
 
-    let { email, password, loading } = this.state;
+    let { email, fullname, password, loading } = this.state;
     if (loading) return;
 
     this.setState({ loading: true });
 
-    let user = { email, password };
+    let user = { email, fullname, password };
     let res = await post_request("signup", user);
 
     if (!res._id) return this.setState({ message: res, loading: false });
@@ -72,6 +72,15 @@ class Signup extends React.Component {
                       }
                       type="email"
                       placeholder="E-mail"
+                    />
+                  </div>
+                  <div class="input_container">
+                    <p>Fullname*</p>
+                    <input
+                      onChange={({ target }) =>
+                        this.setState({ fullname: target.value, message: "" })
+                      }
+                      placeholder="Fullname"
                     />
                   </div>
 

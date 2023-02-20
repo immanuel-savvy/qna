@@ -1,4 +1,4 @@
-import { DISCUSSIONS, FORUMS, QUESTIONS } from "../ds/conn";
+import { DISCUSSIONS, FORUMS, QUESTIONS, REPLIES } from "../ds/conn";
 
 const comments = (req, res) => {
   let { question } = req.params;
@@ -38,8 +38,30 @@ const new_comment = (req, res) => {
   res.json({
     ok: true,
     message: "comment posted",
-    data: { _id: result._id, created: result._id },
+    data: { _id: result._id, created: result.created },
   });
 };
 
-export { comments, new_comment };
+const new_reply = (req, res) => {
+  let reply = req.body;
+
+  let result = REPLIES.write(reply);
+  DISCUSSIONS.update(
+    { comment: reply.comment, question: reply.question },
+    { replies: { $inc: 1 } }
+  );
+
+  res.json({
+    ok: true,
+    message: "reply posted",
+    data: { _id: result._id, created: result.created },
+  });
+};
+
+const replies = (req, res) => {
+  let { comment } = req.params;
+
+  res.json({ ok: true, message: "replies", data: REPLIES.read({ comment }) });
+};
+
+export { comments, new_comment, new_reply, replies };
