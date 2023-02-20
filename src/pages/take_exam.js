@@ -20,6 +20,7 @@ class Take_exam extends React.Component {
       page: 1,
       questions: new Array(),
       answers: new Object(),
+      admin: !!get_session("logged_admin"),
     };
   }
 
@@ -105,11 +106,13 @@ class Take_exam extends React.Component {
     this.setState({ answers });
   };
 
-  search = async () => {
+  search = async (e) => {
+    e.preventDefault();
+
     let { query, searching, exam } = this.state;
     if (searching || !query) return;
 
-    this.setState({ searching: true });
+    this.setState({ searching: true, start_exam: false });
 
     let results = await post_request("search_questions", {
       query,
@@ -131,6 +134,7 @@ class Take_exam extends React.Component {
       searching,
       fetching,
       query,
+      admin,
       results,
     } = this.state;
     if (!exam) return <Loadindicator />;
@@ -185,49 +189,54 @@ class Take_exam extends React.Component {
                   </p>
                 ) : null}
 
-                <div
-                  style={{
-                    boxShadow: "0 0 60px 0 rgb(170, 170, 170, 0.4)",
-                    padding: 20,
-                    borderRadius: 10,
-                    width: "100%",
-                    marginBottom: 40,
-                  }}
-                >
-                  <label>
-                    <b>Admin Action</b>
-                  </label>
-                  <div style={{ width: "100%" }}>
-                    <label style={{ marginTop: 20 }}>Search Question</label>
-                    <form
-                      action=""
-                      style={{
-                        display: "flex",
-                        // flexDirection: "column",
-                      }}
-                    >
-                      <input
-                        value={query}
-                        onChange={({ target }) =>
-                          this.setState({ query: target.value })
-                        }
+                {admin ? (
+                  <div
+                    style={{
+                      boxShadow: "0 0 60px 0 rgb(170, 170, 170, 0.4)",
+                      padding: 20,
+                      borderRadius: 10,
+                      width: "100%",
+                      marginBottom: 40,
+                    }}
+                  >
+                    <label>
+                      <b>Admin Action</b>
+                    </label>
+                    <div style={{ width: "100%" }}>
+                      <label style={{ marginTop: 20 }}>Search Question</label>
+                      <form
+                        action=""
                         style={{
-                          height: 50,
-                          borderRadius: 10,
-                          paddingLeft: 15,
-                          width: "75%",
+                          display: "flex",
+                          // flexDirection: "column",
                         }}
-                        placeholder="Search question to update"
-                      />
-                      <Stretch_btn
-                        style={{ width: "30%", marginLeft: 15 }}
-                        title="Search"
-                        action={this.search}
-                        color="grey"
-                      />
-                    </form>
+                      >
+                        <input
+                          value={query}
+                          onChange={({ target }) =>
+                            this.setState({
+                              searching: false,
+                              query: target.value,
+                            })
+                          }
+                          style={{
+                            height: 50,
+                            borderRadius: 10,
+                            paddingLeft: 15,
+                            width: "75%",
+                          }}
+                          placeholder="Search question to update"
+                        />
+                        <Stretch_btn
+                          style={{ width: "30%", marginLeft: 15 }}
+                          title="Search"
+                          action={this.search}
+                          color="grey"
+                        />
+                      </form>
+                    </div>
                   </div>
-                </div>
+                ) : null}
               </span>
 
               {calculate_result ? (
@@ -262,14 +271,16 @@ class Take_exam extends React.Component {
                 )}
               </form>
             </div>
-            {
+            {admin && !start_exam ? (
               <>
-                <h4 className="mt-5">Search Results for "{query}"</h4>
+                {!searching ? null : (
+                  <h4 className="mt-5">Search Results for "{query}"</h4>
+                )}
                 <div class="examquestions">
                   {searching ? (
                     <Loadindicator />
                   ) : results && results.length ? (
-                    results.map((question) => (
+                    results.map((question, index) => (
                       <Question
                         index={skip + index}
                         question={question}
@@ -277,7 +288,6 @@ class Take_exam extends React.Component {
                         exam={exam}
                         reveal_answer={calculate_result}
                         answer={answers[question._id]}
-                        set_answer={this.set_answer}
                       />
                     ))
                   ) : (
@@ -285,8 +295,8 @@ class Take_exam extends React.Component {
                   )}
                 </div>
               </>
-            }
-            {start_exam ? (
+            ) : null}
+            {start_exam && !searching ? (
               <div class="examquestions">
                 {fetching ? (
                   <Loadindicator />
