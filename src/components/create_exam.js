@@ -45,8 +45,7 @@ class Create_exam extends React.Component {
     };
 
     let result = await post_request("create_exam", exam);
-    console.log(result);
-
+    ``;
     if (result && result._id) {
       exam._id = result._id;
       exam.created = result.created;

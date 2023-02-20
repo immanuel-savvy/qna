@@ -10,7 +10,9 @@ class Comment extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    let { comment } = this.props;
+    let { likes, dislikes } = comment;
+    this.state = { likes: likes || 0, dislikes: dislikes || 0 };
   }
 
   componentDidMount = () => {
@@ -71,14 +73,39 @@ class Comment extends React.Component {
 
     reply._id = result._id;
     reply.created = result.created || Date.now();
-    console.log(reply);
+
     if (!replies) replies = new Array();
     replies = new Array(reply, ...replies);
     this.setState({ replies, message: "", show_replies: true });
   };
 
+  thumbup = async () => {
+    let { comment } = this.props;
+    let { likes } = this.state;
+
+    likes++;
+    this.setState({ likes });
+
+    await post_request("like_comment", {
+      comment: comment._id,
+      question: comment.question,
+    });
+  };
+
+  thumbdown = async () => {
+    let { comment } = this.props;
+    let { dislikes } = this.state;
+
+    dislikes++;
+    this.setState({ dislikes });
+    await post_request("dislike_comment", {
+      comment: comment._id,
+      question: comment.question,
+    });
+  };
+
   render() {
-    let { replies, show_replies, post_reply } = this.state;
+    let { replies, show_replies, likes, dislikes, post_reply } = this.state;
     let { comment: comment_ } = this.props;
     let { fullname, comment, replies: replies_, created } = comment_;
 
@@ -96,10 +123,12 @@ class Comment extends React.Component {
           {" "}
           <i onClick={this.thumbup} class="material-icons-outlined">
             thumb_up
-          </i>{" "}
-          <i onClick={this.thumbup} class="material-icons-outlined">
+          </i>
+          {likes || ""}{" "}
+          <i onClick={this.thumbdown} class="material-icons-outlined">
             thumb_down
           </i>{" "}
+          {dislikes || ""}{" "}
           <i onClick={this.toggle_reply} class="material-icons-outlined">
             reply
           </i>

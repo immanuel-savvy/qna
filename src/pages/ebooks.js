@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/css/ebook.css";
 import { get_request, post_request } from "../assets/js/services";
-import Ebook from "../components/ebook";
+import Ebook, { scroll_to_top } from "../components/ebook";
 import Loadindicator from "../components/loadindicator";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
@@ -14,6 +14,7 @@ class Ebooks extends React.Component {
   }
 
   componentDidMount = async () => {
+    scroll_to_top();
     let free = window.location.href.split("?")[1];
 
     let ebooks = await get_request(`ebooks/${free ? "free" : "all"}`);

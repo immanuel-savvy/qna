@@ -1,4 +1,11 @@
-import { CERTIFICATES, EXAMS, GLOBALS, QUESTIONS } from "../ds/conn";
+import {
+  CERTIFICATES,
+  DISCUSSIONS,
+  EXAMS,
+  GLOBALS,
+  QUESTIONS,
+  REPLIES,
+} from "../ds/conn";
 import { site_metric } from "./starter";
 import { save_image } from "./utils";
 
@@ -89,11 +96,19 @@ const add_question = (req, res) => {
   question.dimage = save_image(question.dimage);
   question.solution_image = save_image(question.solution_image);
 
-  let result = QUESTIONS.write(question);
-  EXAMS.update(
-    { _id: question.exam, certificate: question.certificate },
-    { questions: { $inc: 1 } }
-  );
+  let result;
+
+  if (!question._id) {
+    result = QUESTIONS.write(question);
+    EXAMS.update(
+      { _id: question.exam, certificate: question.certificate },
+      { questions: { $inc: 1 } }
+    );
+  } else
+    result = QUESTIONS.update(
+      { _id: question._id, exam: question.exam },
+      question
+    );
 
   res.json({
     ok: true,
@@ -120,6 +135,17 @@ const exam_questions = (req, res) => {
   res.json({ ok: true, message: "exam questions", data: questions });
 };
 
+const remove_question = (req, res) => {
+  let { question, exam } = req.body;
+
+  QUESTIONS.remove({ _id: question, exam });
+  let result = DISCUSSIONS.remove_several({ question });
+  Array.isArray(result) &&
+    REPLIES.remove_several({ comment: result.map((r) => r.comment) });
+
+  res.end();
+};
+
 export {
   create_exam,
   exams,
@@ -130,4 +156,5 @@ export {
   add_question,
   exam_questions,
   exam_taken,
+  remove_question,
 };

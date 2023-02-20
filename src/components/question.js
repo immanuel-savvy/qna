@@ -1,6 +1,9 @@
 import React from "react";
-import { domain } from "../assets/js/utils";
+import { to_title } from "../assets/js/functions";
+import { post_request } from "../assets/js/services";
+import { client_domain, domain } from "../assets/js/utils";
 import { emitter } from "../Qna";
+import { save_to_session } from "./practice_question";
 
 class Question extends React.Component {
   constructor(props) {
@@ -50,6 +53,26 @@ class Question extends React.Component {
     );
   };
 
+  update_question = () => {
+    let { question, exam } = this.props;
+
+    save_to_session("question", question);
+    save_to_session("exam_question", exam);
+    window.location.assign(`${client_domain}/add_question`);
+  };
+
+  remove_question = async () => {
+    let { question } = this.props;
+
+    if (!window.confirm("Are you sure to remove question?")) return;
+
+    this.setState({ removed: true });
+    await post_request("remove_question", {
+      question: question._id,
+      exam: question.exam,
+    });
+  };
+
   render() {
     let { question: question_, index, answer } = this.props;
 
@@ -64,8 +87,10 @@ class Question extends React.Component {
       solution,
       options,
       discussions,
+      answer: q_answer,
     } = question_;
-    let { show_answer } = this.state;
+    let { show_answer, removed } = this.state;
+    if (removed) return;
 
     return (
       <div
@@ -75,7 +100,18 @@ class Question extends React.Component {
           border: "none",
         }}
       >
-        <span className="t1">Question {index + 1}</span>
+        <span className="t1">
+          Question {index + 1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span className="ml-5">
+            <span style={{ cursor: "pointer" }} onClick={this.update_question}>
+              <i className="material-icons-outlined">edit</i>
+            </span>
+            &nbsp;&nbsp;&nbsp;
+            <span style={{ cursor: "pointer" }} onClick={this.remove_question}>
+              <i className="material-icons-outlined">close</i>
+            </span>
+          </span>
+        </span>
         <span className="Question">
           <p className="t">{question}</p>
           {image ? (
@@ -110,7 +146,10 @@ class Question extends React.Component {
               id="answer"
               style={{ display: "flex" }}
             >
-              <p className="t">{solution}</p>
+              <p className="t">
+                <b>{to_title(q_answer)}: </b>
+                {`${solution}`}
+              </p>
               {solution_image ? (
                 <img
                   src={`${domain}/images/${solution_image}`}

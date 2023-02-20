@@ -1,5 +1,4 @@
 import React from "react";
-import { async } from "semitter";
 import { minutes_to_hours, to_title } from "../assets/js/functions";
 import { post_request } from "../assets/js/services";
 import { month_index } from "../assets/js/utils";

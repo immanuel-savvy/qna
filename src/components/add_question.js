@@ -15,7 +15,21 @@ class Add_question extends Handle_file_upload {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    let question = get_session("question") || new Object();
+    this.state = {
+      ...question,
+      image_filename: question.image,
+      cimage_filename: question.cimage,
+      aimage_filename: question.aimage,
+      bimage_filename: question.bimage,
+      dimage_filename: question.dimage,
+      solution_image_filename: question.solution_image,
+      optiona: question.options?.a,
+      optionb: question.options?.b,
+      optionc: question.options?.c,
+      optiond: question.options?.d,
+      answer: question.answer,
+    };
   }
 
   is_set = () => {
@@ -26,10 +40,15 @@ class Add_question extends Handle_file_upload {
       optiona && answer && optionb && optionc && optiond && question && solution
     );
   };
+
   componentDidMount = () => {
     let exam = get_session("exam_question");
     if (exam) this.setState({ exam });
     else window.history.go(-1);
+  };
+
+  componentWillUnmount = () => {
+    window.sessionStorage.removeItem("question");
   };
 
   add_question = async () => {
@@ -46,6 +65,8 @@ class Add_question extends Handle_file_upload {
       optiond,
       exam,
       question,
+      _id,
+      created,
       solution,
       answer,
     } = this.state;
@@ -69,6 +90,8 @@ class Add_question extends Handle_file_upload {
       image,
       solution_image,
       exam: exam._id,
+      _id,
+      created,
     };
 
     let result = await post_request("add_question", exam_question);
@@ -78,6 +101,8 @@ class Add_question extends Handle_file_upload {
       exam_question.created = result.created;
 
       this.reset_state();
+
+      _id && window.history.go(-1);
     } else
       this.setState({
         loading: false,
@@ -126,8 +151,16 @@ class Add_question extends Handle_file_upload {
       optiond,
       solution,
       question,
+      answer,
+      image_filename,
+      cimage_filename,
+      aimage_filename,
+      bimage_filename,
+      dimage_filename,
+      solution_image_filename,
       message,
       type,
+      _id,
     } = this.state;
     if (!exam) return <Loadindicator />;
 
@@ -158,7 +191,7 @@ class Add_question extends Handle_file_upload {
                   id=""
                   value={question}
                   onChange={({ target }) =>
-                    this.setState({ question: target.value })
+                    this.setState({ question: target.value, message: "" })
                   }
                   cols="30"
                   rows="10"
@@ -169,6 +202,7 @@ class Add_question extends Handle_file_upload {
                   accept="image/*"
                   onChange={(e) => this.handle_file(e, "image")}
                 />
+                {image_filename}
               </span>
               <span class="sp">
                 <label for="">
@@ -184,7 +218,7 @@ class Add_question extends Handle_file_upload {
                   placeholder="Option A"
                   value={optiona}
                   onChange={({ target }) =>
-                    this.setState({ optiona: target.value })
+                    this.setState({ optiona: target.value, message: "" })
                   }
                 />
                 <input
@@ -192,6 +226,7 @@ class Add_question extends Handle_file_upload {
                   accept="image/*"
                   onChange={(e) => this.handle_file(e, "aimage")}
                 />
+                {aimage_filename}
                 <label for="">
                   <small>
                     Option B <span className="text-dangeer">*</span>
@@ -210,6 +245,7 @@ class Add_question extends Handle_file_upload {
                   accept="image/*"
                   onChange={(e) => this.handle_file(e, "bimage")}
                 />
+                {bimage_filename}
                 <label for="">
                   <small>
                     Option C <span className="text-dangeer">*</span>
@@ -228,6 +264,7 @@ class Add_question extends Handle_file_upload {
                   accept="image/*"
                   onChange={(e) => this.handle_file(e, "cimage")}
                 />
+                {cimage_filename}
                 <label for="">
                   <small>
                     Option D <span className="text-dangeer">*</span>
@@ -246,6 +283,7 @@ class Add_question extends Handle_file_upload {
                   accept="image/*"
                   onChange={(e) => this.handle_file(e, "dimage")}
                 />
+                {dimage_filename}
               </span>
               <span class="sp">
                 <label for="">
@@ -256,6 +294,7 @@ class Add_question extends Handle_file_upload {
                 <div className="select">
                   <select
                     id="selection"
+                    defaultValue={answer}
                     onChange={({ target }) =>
                       this.setState({
                         answer: target.value,
@@ -288,11 +327,12 @@ class Add_question extends Handle_file_upload {
                   accept="image/*"
                   onChange={(e) => this.handle_file(e, "solution_image")}
                 />
+                {solution_image_filename}
               </span>
               {message ? <Alert_message msg={message} type={type} /> : null}
               <Stretch_btn
                 action={this.add_question}
-                title="Add Question"
+                title={_id ? "Update Question" : "Add Question"}
                 disabled={!this.is_set()}
                 loading={loading}
               />

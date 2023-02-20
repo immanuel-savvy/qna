@@ -16,9 +16,13 @@ class Ebook extends React.Component {
   constructor(props) {
     super(props);
 
+    let purchased_ebooks = get_session("purchased_ebooks");
+    let ebook = get_session("ebook");
     this.state = {
-      ebook: get_session("ebook"),
+      ebook,
       loggeduser: get_session("loggeduser"),
+      purchased:
+        ebook && purchased_ebooks && purchased_ebooks.includes(ebook._id),
     };
   }
 
@@ -32,7 +36,7 @@ class Ebook extends React.Component {
     this.setState({ certifcation_exams, admin: get_session("logged_admin") });
   };
 
-  payment_successful = async () => {
+  payment_successful = () => {
     let { email, loggeduser, ebook } = this.state;
     let user = loggeduser && loggeduser._id;
     email = email || (loggeduser && loggeduser.email);
@@ -41,12 +45,13 @@ class Ebook extends React.Component {
       user,
       email,
       ebook: ebook._id,
-      certificate: ebook.certificate._id,
+      certificate: ebook.certificate?._id,
       price: ebook.price,
     };
 
-    let res = await post_request("ebook_purchased", token);
-    res._id && this.setState({ purchased: true });
+    post_request("ebook_purchased", token).then((res) => {
+      res._id && this.setState({ purchased: true });
+    });
   };
 
   has_purchased = async () => {
@@ -56,9 +61,21 @@ class Ebook extends React.Component {
     return await post_request("has_purchased", {
       ebook: ebook._id,
       email,
-      certificate: certificate._id,
+      certificate: ebook.certificate?._id,
     });
   };
+
+  downloaded = async () => {
+    let { ebook } = this.state;
+    if (!ebook) return;
+
+    await post_request("ebook_downloaed", {
+      ebook: ebook._id,
+      certificate: ebook.certificate?._id,
+    });
+  };
+
+  cancel = () => {};
 
   render() {
     let { ebook, certifcation_exams, purchased, email, loggeduser, admin } =

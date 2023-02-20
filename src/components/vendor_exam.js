@@ -23,7 +23,13 @@ class Vendor_exam extends React.Component {
       >
         <div class="table_active_item">
           <small>Exam</small>
-          <Link onClick={scroll_to_top} to="/take_exam">
+          <Link
+            onClick={() => {
+              save_to_session("exam", exam);
+              scroll_to_top();
+            }}
+            to="/take_exam"
+          >
             <span>{to_title(title)}</span>
           </Link>
         </div>

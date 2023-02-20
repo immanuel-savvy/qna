@@ -48,7 +48,7 @@ class FAQ extends React.Component {
                     <Faq admin={admin} faq={faq} key={faq._id} />
                   ))
                 ) : (
-                  <span>Nothing yet yet.</span>
+                  <b className="mt-5">Nothing here yet.</b>
                 )
               ) : (
                 <Loadindicator />

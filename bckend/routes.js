@@ -21,11 +21,21 @@ import {
   exams,
   exam_questions,
   exam_taken,
+  remove_question,
   search_exams,
   vendor_exams,
 } from "./handlers/exams";
 import { add_faq, faqs, remove_faq, update_faq } from "./handlers/faq";
-import { comments, new_comment, new_reply, replies } from "./handlers/forum";
+import {
+  comments,
+  dislike_comment,
+  dislike_reply,
+  like_comment,
+  like_reply,
+  new_comment,
+  new_reply,
+  replies,
+} from "./handlers/forum";
 import { login, signup, user, verify_email } from "./handlers/users";
 import {
   add_certificate,
@@ -78,6 +88,11 @@ const routes = (app) => {
   app.post("/has_purchased", has_purchased);
   app.post("/ebook_downloaded", ebook_downloaded);
   app.post("/ebook_purchased", ebook_purchased);
+  app.post("/remove_question", remove_question);
+  app.post("/like_comment", like_comment);
+  app.post("/dislike_comment", dislike_comment);
+  app.post("/like_reply", like_reply);
+  app.post("/dislike_reply", dislike_reply);
 };
 
 export default routes;

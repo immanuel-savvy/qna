@@ -47,7 +47,9 @@ class Comment_form extends React.Component {
           placeholder="Type your comment..."
         ></textarea>
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
+
             action && action({ fullname, user, comment });
 
             this.setState({ comment: "", fullname: "" });

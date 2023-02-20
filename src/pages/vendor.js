@@ -1,6 +1,7 @@
 import React from "react";
 import { get_request } from "../assets/js/services";
 import Loadindicator from "../components/loadindicator";
+import { get_session } from "../components/practice_question";
 import Vendor_exam from "../components/vendor_exam";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
@@ -25,12 +26,15 @@ class Vendor extends React.Component {
     if (vendor) {
       vendor = JSON.parse(vendor);
 
-      this.setState({ vendor }, this.fetch_certifications);
+      this.setState(
+        { vendor, admin: get_session("logged_admin") },
+        this.fetch_certifications
+      );
     }
   };
 
   render() {
-    let { exams, vendor } = this.state;
+    let { exams, vendor, admin } = this.state;
     if (!vendor) return <Loadindicator />;
 
     let { name, description } = vendor;
@@ -50,7 +54,11 @@ class Vendor extends React.Component {
               {exams ? (
                 exams.length ? (
                   exams.map((certification, index) => (
-                    <Vendor_exam exam={certification} key={index} />
+                    <Vendor_exam
+                      admin={admin}
+                      exam={certification}
+                      key={index}
+                    />
                   ))
                 ) : (
                   <></>

@@ -47,7 +47,7 @@ const new_reply = (req, res) => {
 
   let result = REPLIES.write(reply);
   DISCUSSIONS.update(
-    { comment: reply.comment, question: reply.question },
+    { _id: reply.comment, question: reply.question },
     { replies: { $inc: 1 } }
   );
 
@@ -64,4 +64,45 @@ const replies = (req, res) => {
   res.json({ ok: true, message: "replies", data: REPLIES.read({ comment }) });
 };
 
-export { comments, new_comment, new_reply, replies };
+const like_comment = (req, res) => {
+  let { comment, question } = req.body;
+
+  DISCUSSIONS.update({ _id: comment, question }, { likes: { $inc: 1 } });
+
+  res.end();
+};
+
+const dislike_comment = (req, res) => {
+  let { comment, question } = req.body;
+
+  DISCUSSIONS.update({ _id: comment, question }, { dislikes: { $inc: 1 } });
+
+  res.end();
+};
+
+const like_reply = (req, res) => {
+  let { comment, reply } = req.body;
+
+  REPLIES.update({ _id: reply, comment }, { likes: { $inc: 1 } });
+
+  res.end();
+};
+
+const dislike_reply = (req, res) => {
+  let { comment, reply } = req.body;
+
+  REPLIES.update({ _id: reply, comment }, { dislikes: { $inc: 1 } });
+
+  res.end();
+};
+
+export {
+  comments,
+  like_comment,
+  dislike_comment,
+  like_reply,
+  dislike_reply,
+  new_comment,
+  new_reply,
+  replies,
+};

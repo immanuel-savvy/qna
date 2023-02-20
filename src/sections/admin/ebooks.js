@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { emitter } from "../../Qna";
 
 class Admin_ebooks extends React.Component {
@@ -11,7 +12,7 @@ class Admin_ebooks extends React.Component {
   toggle_upload_ebook = () => emitter.emit("toggle_upload_ebook");
 
   render() {
-    let { ebooks, ebooks_sales, ebooks_sold } = this.props;
+    let { ebooks, ebooks_purchased, ebooks_sold } = this.props;
 
     return (
       <div class="ebooks">
@@ -22,13 +23,13 @@ class Admin_ebooks extends React.Component {
         </a>
         <span class="created">
           <p> eBooks created: {ebooks}</p>{" "}
-          <a href="ebook.html">
+          <Link to="/ebooks">
             View all <i class="material-icons">chevron_right</i>
-          </a>
+          </Link>
         </span>
         <span class="created purchased">
           <p> eBooks purchased: {ebooks_sold}</p>{" "}
-          <a href="ebook.html">Total Revenue: NGN {ebooks_sales}</a>
+          <Link to="/ebooks">Total Revenue: NGN {ebooks_purchased}</Link>
         </span>
       </div>
     );

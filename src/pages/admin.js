@@ -62,7 +62,7 @@ class Admin extends React.Component {
                   <div className="sp1">
                     <Admin_ebooks
                       ebooks={site_metric.ebooks}
-                      ebooks_sales={site_metric.ebooks_sales}
+                      ebooks_purchased={site_metric.ebooks_purchased}
                       ebooks_sold={site_metric.ebooks_sold}
                     />
                     <Vendors vendors={site_metric.vendors} />
