@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { to_title } from "../assets/js/functions";
 import { domain, month_index } from "../assets/js/utils";
+import { save_to_session } from "./practice_question";
 
 const scroll_to_top = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -21,7 +22,7 @@ class Ebook extends React.Component {
       <Link
         to="/ebook"
         onClick={() => {
-          window.sessionStorage.setItem("ebook", JSON.stringify(ebook));
+          save_to_session("ebook", ebook);
           scroll_to_top();
         }}
         className="ebook"

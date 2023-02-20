@@ -1,4 +1,4 @@
-import { EBOOKS, GLOBALS } from "../ds/conn";
+import { EBOOKS, GLOBALS, PURCHASED_EBOOKS } from "../ds/conn";
 import { certificate_joins } from "./exams";
 import { site_metric, update_site_metric } from "./starter";
 import { save_file, save_image } from "./utils";
@@ -73,4 +73,55 @@ const ebook = (req, res) => {
   });
 };
 
-export { upload_ebook, ebooks, ebook, search_ebooks };
+const has_purchased = (req, res) => {
+  let token = req.body;
+
+  res.json({
+    ok: true,
+    message: "has purchased ebook?",
+    data: {
+      purchased: !!PURCHASED_EBOOKS.readone({
+        ebook: token._id,
+        email: token.email.toLowerCase(),
+      }),
+    },
+  });
+};
+
+const ebook_purchased = (req, res) => {
+  let token = req.body;
+
+  let result = PURCHASED_EBOOKS.write(token);
+  EBOOKS.update(
+    { _id: token.ebook, certificate: token.certificate },
+    { purchased: { $inc: 1 } }
+  );
+  update_site_metric({
+    ebooks_sold: { $inc: 1 },
+    ebooks_purchased: { $inc: token.price },
+  });
+
+  res.json({
+    ok: true,
+    message: "ebook purchased",
+    data: { _id: result._id, created: result.created },
+  });
+};
+
+const ebook_downloaded = (req, res) => {
+  let { ebook, certificate } = req.body;
+
+  EBOOKS.update({ _id: ebook, certificate }, { downloads: { $inc: 1 } });
+
+  res.end();
+};
+
+export {
+  upload_ebook,
+  ebooks,
+  ebook_purchased,
+  has_purchased,
+  ebook,
+  ebook_downloaded,
+  search_ebooks,
+};

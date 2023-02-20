@@ -17,6 +17,7 @@ class Ebooks extends React.Component {
     let free = window.location.href.split("?")[1];
 
     let ebooks = await get_request(`ebooks/${free ? "free" : "all"}`);
+
     this.setState({ ebooks, free });
   };
 

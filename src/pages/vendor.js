@@ -63,8 +63,6 @@ class Vendor extends React.Component {
           <p class="list_info">
             The questions are group by certifications, you can click into a
             certification to see the full list of exams there.
-            {/*  You can also see the{" "}
-            <a href="#">full list</a> of questions. */}
           </p>
 
           <div class="sectionc">

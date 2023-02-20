@@ -5,7 +5,15 @@ import {
   site_metric_data,
   site_visit,
 } from "./handlers/admin";
-import { ebook, ebooks, search_ebooks, upload_ebook } from "./handlers/ebooks";
+import {
+  ebook,
+  ebooks,
+  ebook_downloaded,
+  ebook_purchased,
+  has_purchased,
+  search_ebooks,
+  upload_ebook,
+} from "./handlers/ebooks";
 import {
   add_question,
   certification_exams,
@@ -67,6 +75,9 @@ const routes = (app) => {
   app.post("/update_faq", update_faq);
   app.post("/remove_faq/:faq", remove_faq);
   app.post("/faqs", faqs);
+  app.post("/has_purchased", has_purchased);
+  app.post("/ebook_downloaded", ebook_downloaded);
+  app.post("/ebook_purchased", ebook_purchased);
 };
 
 export default routes;

@@ -1,5 +1,6 @@
 import React from "react";
 import { post_request } from "../assets/js/services";
+import { scroll_to_top } from "../components/ebook";
 import Faq from "../components/faq";
 import Loadindicator from "../components/loadindicator";
 import { get_session } from "../components/practice_question";
@@ -17,6 +18,8 @@ class FAQ extends React.Component {
   }
 
   componentDidMount = async () => {
+    scroll_to_top();
+
     let faqs = await post_request("faqs");
     this.setState({ faqs, admin: !!get_session("logged_admin") });
   };

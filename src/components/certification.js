@@ -32,7 +32,7 @@ class Certification extends React.Component {
 
   render() {
     if (this.state.removed) return;
-    let { certificate } = this.props;
+    let { certificate, admin } = this.props;
     let { image, title, _id } = certificate;
 
     return (
@@ -40,7 +40,7 @@ class Certification extends React.Component {
         <Link
           to="/certificate"
           onClick={() => {
-            save_to_session("certificate".certificate);
+            save_to_session("certificate", certificate);
             scroll_to_top();
           }}
           style={{
@@ -51,21 +51,23 @@ class Certification extends React.Component {
             <p style={{ textTransform: "capitalize" }}>{title}</p>
           </div>
         </Link>
-        <span>
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={this.toggle_certification}
-          >
-            <i className="material-icons-outlined">edit</i>
+        {admin ? (
+          <span>
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={this.toggle_certification}
+            >
+              <i className="material-icons-outlined">edit</i>
+            </span>
+            <br />
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={this.remove_certification}
+            >
+              <i className="material-icons-outlined">close</i>
+            </span>
           </span>
-          <br />
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={this.remove_certification}
-          >
-            <i className="material-icons-outlined">close</i>
-          </span>
-        </span>
+        ) : null}
       </>
     );
   }
