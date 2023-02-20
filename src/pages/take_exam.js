@@ -3,6 +3,7 @@ import { async } from "semitter";
 import { minutes_to_hours, to_title } from "../assets/js/functions";
 import { post_request } from "../assets/js/services";
 import { month_index } from "../assets/js/utils";
+import Calculate_result from "../components/calculate_result";
 import Exam_countdown from "../components/exam_countdown";
 import Loadindicator from "../components/loadindicator";
 import { get_session } from "../components/practice_question";
@@ -33,7 +34,7 @@ class Take_exam extends React.Component {
     let { exam, no_more } = this.state;
     if (no_more) return this.setState({ page: this.state.page - 1 });
 
-    let { limit, questions: questions_array, page } = this.state;
+    let { limit, questions: questions_array } = this.state;
     this.setState({ fetching: true });
     let questions = await post_request(`exam_questions/${exam._id}`, {
       limit,
@@ -56,7 +57,7 @@ class Take_exam extends React.Component {
   };
 
   next = () => {
-    let { questions, fetching, page, no_more } = this.state;
+    let { questions, fetching, page } = this.state;
     if (fetching) return;
 
     let skip = this.skip(page + 1);
@@ -78,7 +79,7 @@ class Take_exam extends React.Component {
 
     let { exam } = this.state;
     if (!exam) return;
-    this.setState({ start_exam: Date.now() });
+    this.setState({ start_exam: Date.now(), calculate_result: false });
     await this.fetch_questions();
   };
 
@@ -88,6 +89,10 @@ class Take_exam extends React.Component {
     return questions.slice(this.skip(), this.skip() + limit);
   };
 
+  stop = () => {
+    this.setState({ calculate_result: true });
+  };
+
   set_answer = async (question, answer) => {
     let { answers } = this.state;
     answers[question] = answer;
@@ -95,11 +100,19 @@ class Take_exam extends React.Component {
   };
 
   render() {
-    let { exam, limit, answers, page, questions, start_exam, fetching } =
-      this.state;
+    let {
+      exam,
+      limit,
+      calculate_result,
+      answers,
+      page,
+      questions,
+      start_exam,
+      fetching,
+    } = this.state;
     if (!exam) return <Loadindicator />;
 
-    let { title, year, duration, updated, certificate } = exam,
+    let { title, duration, updated, certificate } = exam,
       skip = limit * (page - 1);
     updated = new Date(updated);
 
@@ -140,7 +153,7 @@ class Take_exam extends React.Component {
                     </em>
                   </b>
                 </p>
-                {start_exam ? (
+                {!calculate_result && start_exam ? (
                   <p class="t1" style={{ textAlign: "center" }}>
                     Time Left - &nbsp;&nbsp;
                     <b>
@@ -150,8 +163,28 @@ class Take_exam extends React.Component {
                 ) : null}
               </span>
 
+              {calculate_result ? (
+                <Calculate_result
+                  try_again={() =>
+                    this.setState(
+                      {
+                        start_exam: Date.now(),
+                        calculate_result: false,
+                        questions: new Array(),
+                        answers: new Object(),
+                        no_more: false,
+                        page: 1,
+                      },
+                      this.fetch_questions
+                    )
+                  }
+                  questions={questions}
+                  answers={answers}
+                />
+              ) : null}
+
               <form class="forms mb-5">
-                {fetching ? null : start_exam ? (
+                {calculate_result ? null : fetching ? null : start_exam ? (
                   <Stretch_btn
                     title="Stop exam"
                     action={this.stop}
@@ -173,6 +206,7 @@ class Take_exam extends React.Component {
                       question={question}
                       key={question._id}
                       exam={exam}
+                      reveal_answer={calculate_result}
                       answer={answers[question._id]}
                       set_answer={this.set_answer}
                     />
@@ -186,13 +220,17 @@ class Take_exam extends React.Component {
                     justifyContent: "space-between",
                   }}
                 >
-                  <a href="#" onClick={this.prev} class="next">
-                    <i class="material-icons">chevron_left</i> Prev page
-                  </a>
+                  {page === 1 ? null : (
+                    <a href="#" onClick={this.prev} class="next">
+                      <i class="material-icons">chevron_left</i> Prev page
+                    </a>
+                  )}
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  <a href="#" onClick={this.next} class="next">
-                    Next page <i class="material-icons">chevron_right</i>
-                  </a>
+                  {
+                    <a href="#" onClick={this.next} class="next">
+                      Next page <i class="material-icons">chevron_right</i>
+                    </a>
+                  }
                 </div>
               </div>
             ) : null}

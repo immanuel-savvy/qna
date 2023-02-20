@@ -1,5 +1,5 @@
 import React from "react";
-import { get_request, post_request } from "../assets/js/services";
+import { post_request } from "../assets/js/services";
 import Alert_message from "../components/alert_msg";
 import Comment from "../components/comment";
 import Comment_form from "../components/comment_form";

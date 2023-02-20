@@ -24,11 +24,21 @@ class Question extends React.Component {
   };
 
   option = (option, image, answer, op) => {
+    let { reveal_answer, question } = this.props;
+    console.log(reveal_answer);
+    if (!question.answer) question.answer = "c";
     return (
       <li
         style={{
           cursor: "pointer",
-          backgroundColor: answer === op ? "#54c547" : null,
+          backgroundColor:
+            reveal_answer && question.answer === op
+              ? "#54c547"
+              : answer === op
+              ? reveal_answer
+                ? "#ccc"
+                : "#54c547"
+              : null,
         }}
         onClick={() => this.set_answer(op)}
         className="question_option"
