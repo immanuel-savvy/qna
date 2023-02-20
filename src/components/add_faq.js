@@ -17,12 +17,15 @@ class Add_faq extends React.Component {
   };
 
   submit = async () => {
+    let { toggle } = this.props;
     let { question, answer, _id, created } = this.state;
     let faq = { question, answer, _id, created };
 
     this.setState({ loading: true });
 
     let result = await post_request(_id ? "update_faq" : "add_faq", faq);
+
+    console.log(result);
 
     if (result && result._id) {
       faq._id = result._id;

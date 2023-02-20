@@ -17,7 +17,7 @@ class Take_exam extends React.Component {
     super(props);
 
     this.state = {
-      limit: 2,
+      limit: 10,
       page: 1,
       questions: new Array(),
       answers: new Object(),
