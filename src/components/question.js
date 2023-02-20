@@ -74,7 +74,7 @@ class Question extends React.Component {
   };
 
   render() {
-    let { question: question_, index, answer } = this.props;
+    let { question: question_, admin, index, answer } = this.props;
 
     let {
       question,
@@ -102,16 +102,25 @@ class Question extends React.Component {
       >
         <span className="t1">
           Question {index + 1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span className="ml-5">
-            <span style={{ cursor: "pointer" }} onClick={this.update_question}>
-              <i className="material-icons-outlined">edit</i>
+          {admin ? (
+            <span className="ml-5">
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={this.update_question}
+              >
+                <i className="material-icons-outlined">edit</i>
+              </span>
+              &nbsp;&nbsp;&nbsp;
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={this.remove_question}
+              >
+                <i className="material-icons-outlined">close</i>
+              </span>
             </span>
-            &nbsp;&nbsp;&nbsp;
-            <span style={{ cursor: "pointer" }} onClick={this.remove_question}>
-              <i className="material-icons-outlined">close</i>
-            </span>
-          </span>
+          ) : null}
         </span>
+
         <span className="Question">
           <p className="t">{question}</p>
           {image ? (

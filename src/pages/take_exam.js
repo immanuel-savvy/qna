@@ -286,6 +286,7 @@ class Take_exam extends React.Component {
                         question={question}
                         key={question._id}
                         exam={exam}
+                        admin={admin}
                         reveal_answer={calculate_result}
                         answer={answers[question._id]}
                       />
@@ -307,6 +308,7 @@ class Take_exam extends React.Component {
                       question={question}
                       key={question._id}
                       exam={exam}
+                      admin={admin}
                       reveal_answer={calculate_result}
                       answer={answers[question._id]}
                       set_answer={this.set_answer}
