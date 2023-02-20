@@ -64,19 +64,23 @@ class Header extends React.Component {
                   <span className="title">Vendors :</span>
                   <span className="exams">
                     {vendors ? (
-                      vendors.map((vendor) => (
-                        <Link
-                          onClick={() =>
-                            window.sessionStorage.setItem(
-                              "vendor",
-                              JSON.stringify(vendor)
-                            )
-                          }
-                          to={`/vendor?${vendor._id}`}
-                        >
-                          {vendor.name}
-                        </Link>
-                      ))
+                      vendors.length ? (
+                        vendors.map((vendor) => (
+                          <Link
+                            onClick={() =>
+                              window.sessionStorage.setItem(
+                                "vendor",
+                                JSON.stringify(vendor)
+                              )
+                            }
+                            to={`/vendor?${vendor._id}`}
+                          >
+                            {vendor.name}
+                          </Link>
+                        ))
+                      ) : (
+                        <></>
+                      )
                     ) : (
                       <Loadindicator small />
                     )}

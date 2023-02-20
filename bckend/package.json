@@ -5,7 +5,7 @@
   "main": "Qna.js",
   "scripts": {
     "start": "nodemon -r esm Qna.js",
-    "build": "babel ./routes.js ./Qna.js ./functions.js -d build",
+    "build": "babel ./routes.js ./Qna.js ./functions.js ./handlers/admin.js ./handlers/users.js ./handlers/starter.js ./handlers/forum.js ./handlers/faq.js ./handlers/exams.js ./handlers/ebooks.js ./handlers/emails.js ./handlers/utils.js ./handlers/vendors.js ./ds/conn.js   -d build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Savvy",

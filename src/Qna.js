@@ -41,7 +41,8 @@ class Qna extends React.Component {
         this.setState({ loggeduser: JSON.parse(loggeduser) });
       } catch (e) {}
     }
-    let vendors = await get_request("vendors/all");
+    let vendors = (await get_request("vendors/all")) || new Array();
+
     this.setState({ vendors });
 
     await post_request("site_visit");

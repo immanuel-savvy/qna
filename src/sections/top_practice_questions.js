@@ -38,9 +38,13 @@ class Top_practice_questions extends React.Component {
           </span>
 
           {exams ? (
-            exams.map((exam) => (
-              <Practice_question admin={admin} exam={exam} key={exam._id} />
-            ))
+            exams.length ? (
+              exams.map((exam) => (
+                <Practice_question admin={admin} exam={exam} key={exam._id} />
+              ))
+            ) : (
+              <></>
+            )
           ) : (
             <Loadindicator />
           )}
