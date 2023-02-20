@@ -17,7 +17,9 @@ class Admin extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      site_metric: new Object(),
+    };
   }
 
   componentDidMount = async () => {
@@ -61,6 +63,7 @@ class Admin extends React.Component {
                     <Admin_ebooks
                       ebooks={site_metric.ebooks}
                       ebooks_sales={site_metric.ebooks_sales}
+                      ebooks_sold={site_metric.ebooks_sold}
                     />
                     <Vendors vendors={site_metric.vendors} />
                     <Certificates certificates={site_metric.certificates} />
