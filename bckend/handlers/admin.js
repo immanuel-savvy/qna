@@ -43,6 +43,10 @@ const create_admin = (req, res) => {
   res.json({ ok: true, message: "admin created", data: admin });
 };
 
+const site_metric_data = (req, res) => {
+  res.json({ ok: true, data: GLOBALS.readone({ global: site_metric }) });
+};
+
 export {
   admin_login,
   create_admin,
@@ -50,4 +54,5 @@ export {
   client_domain,
   domain_name,
   site_visit,
+  site_metric_data,
 };

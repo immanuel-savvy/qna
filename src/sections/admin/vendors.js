@@ -9,7 +9,7 @@ class Vendors extends React.Component {
   }
 
   render() {
-    let { total_vendors } = this.props;
+    let { vendors } = this.props;
 
     return (
       <div class="exams">
@@ -17,7 +17,7 @@ class Vendors extends React.Component {
         <div class="sec">
           <div class="item">
             <span class="created">
-              <p> Total Vendors: {total_vendors}</p>{" "}
+              <p> Total Vendors: {vendors}</p>{" "}
               <a href="ebook.html">
                 View all <i class="material-icons">chevron_right</i>
               </a>

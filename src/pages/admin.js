@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/admin.css";
+import { get_request } from "../assets/js/services";
 import { get_session } from "../components/practice_question";
 import { Logged_admin } from "../contexts";
 import Certificates from "../sections/admin/certificates";
@@ -19,15 +20,20 @@ class Admin extends React.Component {
     this.state = {};
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     let admin = window.sessionStorage.getItem("admin");
     if (admin && !this.admin) {
       admin = JSON.parse(admin);
       this.admin_login(admin);
     }
+
+    let site_metric = (await get_request("site_metric_data")) || new Object();
+    this.setState({ site_metric });
   };
 
   render() {
+    let { site_metric } = this.state;
+
     return (
       <Logged_admin.Consumer>
         {({ admin, admin_login, logout }) => {
@@ -52,14 +58,23 @@ class Admin extends React.Component {
                     Sign-out Admin
                   </span>
                   <div className="sp1">
-                    <Admin_ebooks />
-                    <Vendors />
-                    <Certificates />
-                    <Exams />
-                    <FAQS />
+                    <Admin_ebooks
+                      ebooks={site_metric.ebooks}
+                      ebooks_sales={site_metric.ebooks_sales}
+                    />
+                    <Vendors vendors={site_metric.vendors} />
+                    <Certificates certificates={site_metric.certificates} />
+                    <Exams
+                      exams={site_metric.exams}
+                      exams_taken={site_metric.exams_taken}
+                    />
+                    <FAQS faqs={site_metric.faqs} />
                   </div>
 
-                  <Site_metric />
+                  <Site_metric
+                    visits={site_metric.visits}
+                    users={site_metric.users}
+                  />
                 </main>
               ) : (
                 <Admin_login login={admin_login} />

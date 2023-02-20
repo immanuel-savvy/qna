@@ -1,4 +1,10 @@
-import { ADMINSTRATORS, ADMIN_HASH, USERS, USERS_HASH } from "../ds/conn";
+import {
+  ADMINSTRATORS,
+  ADMIN_HASH,
+  GLOBALS,
+  USERS,
+  USERS_HASH,
+} from "../ds/conn";
 
 let default_admin = "adminstrators~123QNA~1234567890123",
   default_user = "users~123QNA~1234567890123";
@@ -27,6 +33,8 @@ const create_default_admin = () => {
     });
     USERS_HASH.write({ user: default_user, key: "adminstrator#1" });
   }
+
+  GLOBALS.write({ global: site_metric });
 };
 
 export { create_default_admin, site_metric };

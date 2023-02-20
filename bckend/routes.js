@@ -2,6 +2,7 @@ import {
   admin_login,
   create_admin,
   get_admins,
+  site_metric_data,
   site_visit,
 } from "./handlers/admin";
 import { ebook, ebooks, search_ebooks, upload_ebook } from "./handlers/ebooks";
@@ -31,6 +32,7 @@ import {
 const routes = (app) => {
   app.get("/user/:user", user);
   app.get("/get_admins", get_admins);
+  app.get("/site_metric_data", site_metric_data);
   app.get("/replies/:comment", replies);
   app.get("/vendors/:limit", vendors);
   app.get("/ebooks/:limit", ebooks);

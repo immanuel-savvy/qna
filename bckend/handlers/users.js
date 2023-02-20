@@ -1,7 +1,8 @@
-import { USERS, USERS_HASH } from "../ds/conn";
+import { GLOBALS, USERS, USERS_HASH } from "../ds/conn";
 import nodemailer from "nodemailer";
 import { generate_random_string } from "generalised-datastore/utils/functions";
 import { verification } from "./emails";
+import { site_metric } from "./starter";
 
 let email_verification_codes = new Object();
 
@@ -84,6 +85,8 @@ const signup = (req, res) => {
     sender_pass: "signupgiitafrica",
     html: verification(code, ""),
   });
+
+  GLOBALS.update({ global: site_metric }, { users: { $inc: 1 } });
 
   res.json({
     ok: true,
