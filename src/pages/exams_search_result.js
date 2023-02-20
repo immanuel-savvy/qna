@@ -19,11 +19,11 @@ class Exams_search_result extends React.Component {
     let query = get_session("query")?.toLowerCase();
 
     let exams = await post_request("search_exams", { query });
-    this.setState({ exams, query });
+    this.setState({ exams, query, admin: get_session("logged_admin") });
   };
 
   render() {
-    let { query, exams } = this.state;
+    let { query, exams, admin } = this.state;
 
     return (
       <>
@@ -37,7 +37,7 @@ class Exams_search_result extends React.Component {
               {exams ? (
                 exams.length ? (
                   exams.map((exam) => (
-                    <Vendor_exam key={exam._id} exam={exam} />
+                    <Vendor_exam admin={admin} key={exam._id} exam={exam} />
                   ))
                 ) : (
                   <h3>No result found!</h3>

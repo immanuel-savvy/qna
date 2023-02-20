@@ -26,6 +26,7 @@ class Practice_question extends React.Component {
   render() {
     let { exam, admin } = this.props;
     let { certificate, title, year } = exam;
+    if (!certificate || !exam) return;
 
     return (
       <span class="">
@@ -47,7 +48,13 @@ class Practice_question extends React.Component {
         >
           {to_title(title)}
         </Link>
-        <Link onClick={() => save_to_session("certificate", certificate)}>
+        <Link
+          to="/certificate"
+          onClick={() => {
+            save_to_session("certificate".certificate);
+            scroll_to_top();
+          }}
+        >
           {certificate.title}
         </Link>
         <Link style={{ color: "#000", textDecoration: "none", cursor: "none" }}>

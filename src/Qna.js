@@ -73,11 +73,23 @@ class Qna extends React.Component {
       window.sessionStorage.setItem("logged_admin", JSON.stringify(admin));
     });
 
+  admin_logout = () => {
+    this.setState({ admin: false }, () =>
+      window.sessionStorage.removeItem("logged_admin")
+    );
+  };
+
   render() {
     let { loggeduser, admin, vendors } = this.state;
 
     return (
-      <Logged_admin.Provider value={{ admin, admin_login: this.log_admin }}>
+      <Logged_admin.Provider
+        value={{
+          logout: this.admin_logout,
+          admin,
+          admin_login: this.log_admin,
+        }}
+      >
         <Loggeduser.Provider
           value={{ loggeduser, login: this.login, logout: this.logout }}
         >

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { to_title } from "../assets/js/functions";
+import { save_to_session } from "./practice_question";
 
 const scroll_to_top = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -12,8 +13,10 @@ class Certification_exam extends React.Component {
   }
 
   render() {
-    let { index, exam } = this.props;
+    let { index, exam, admin } = this.props;
     let { title, exams, year, certificate, questions } = exam;
+
+    if (!certificate) return;
 
     return (
       <div
@@ -49,6 +52,22 @@ class Certification_exam extends React.Component {
             {certificate.vendor.name}
           </Link>
         </div>
+
+        {admin ? (
+          <div class="table_active_item">
+            {" "}
+            <small>Admin Action</small>
+            <Link
+              onClick={(e) => {
+                save_to_session("exam_question", exam);
+                scroll_to_top();
+              }}
+              to="/add_question"
+            >
+              Add Question
+            </Link>
+          </div>
+        ) : null}
       </div>
     );
   }

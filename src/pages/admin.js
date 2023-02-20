@@ -1,9 +1,11 @@
 import React from "react";
 import "../assets/css/admin.css";
+import { get_session } from "../components/practice_question";
 import { Logged_admin } from "../contexts";
 import Certificates from "../sections/admin/certificates";
 import Admin_ebooks from "../sections/admin/ebooks";
 import Exams from "../sections/admin/exams";
+import FAQS from "../sections/admin/faqs";
 import Site_metric from "../sections/admin/site_metric";
 import Vendors from "../sections/admin/vendors";
 import Admin_login from "../sections/admin_login";
@@ -28,21 +30,33 @@ class Admin extends React.Component {
   render() {
     return (
       <Logged_admin.Consumer>
-        {({ admin, admin_login }) => {
+        {({ admin, admin_login, logout }) => {
           this.admin = admin;
           this.admin_login = admin_login;
 
           return (
             <>
               <Header />
-              {admin ? (
+              {admin || get_session("logged_admin") ? (
                 <main>
-                  <p class="dashboard">Dashboard</p>
-                  <div class="sp1">
+                  <p className="dashboard">Dashboard</p>
+                  <span
+                    onClick={logout}
+                    className=""
+                    style={{
+                      alignSelf: "flex-end",
+                      cursor: "pointer",
+                      color: "blue",
+                    }}
+                  >
+                    Sign-out Admin
+                  </span>
+                  <div className="sp1">
                     <Admin_ebooks />
                     <Vendors />
                     <Certificates />
                     <Exams />
+                    <FAQS />
                   </div>
 
                   <Site_metric />

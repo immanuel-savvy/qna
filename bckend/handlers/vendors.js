@@ -1,5 +1,5 @@
 import { CERTIFICATES, VENDORS } from "../ds/conn";
-import { save_image } from "./utils";
+import { remove_image, save_image } from "./utils";
 
 const new_vendor = (req, res) => {
   let vendor = req.body;
@@ -49,6 +49,29 @@ const vendor_certificates = (req, res) => {
   });
 };
 
+const update_certification = (req, res) => {
+  let cert = req.body;
+
+  cert.image = save_image(cert.image);
+
+  CERTIFICATES.update({ _id: cert._id, vendor: cert.vendor }, cert);
+
+  res.json({
+    ok: true,
+    message: "certificate updated",
+    data: { _id: cert._id, created: cert.created },
+  });
+};
+
+const remove_certification = (req, res) => {
+  let query = req.body;
+
+  let result = CERTIFICATES.remove(query);
+  result && remove_image(result.image);
+
+  res.end;
+};
+
 const certificates = (req, res) => {
   let { limit } = req.params;
 
@@ -67,4 +90,6 @@ export {
   certificates,
   add_certificate,
   vendor_certificates,
+  update_certification,
+  remove_certification,
 };

@@ -85,6 +85,10 @@ const add_question = (req, res) => {
   question.solution_image = save_image(question.solution_image);
 
   let result = QUESTIONS.write(question);
+  EXAMS.update(
+    { _id: question.exam, certificate: question.certificate },
+    { questions: { $inc: 1 } }
+  );
 
   res.json({
     ok: true,

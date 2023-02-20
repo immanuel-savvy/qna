@@ -18,12 +18,12 @@ class Certificate extends React.Component {
     if (certificate) {
       this.setState({ certificate });
       let exams = await get_request(`certification_exams/${certificate._id}`);
-      this.setState({ exams });
+      this.setState({ exams, admin: !!get_session("logged_admin") });
     }
   };
 
   render() {
-    let { exams, certificate } = this.state;
+    let { exams, certificate, admin } = this.state;
     if (!certificate) return <Loadindicator />;
 
     let { title } = certificate;
@@ -40,7 +40,7 @@ class Certificate extends React.Component {
               {exams ? (
                 exams.length ? (
                   exams.map((exam, index) => (
-                    <Certification_exam exam={exam} key={index} />
+                    <Certification_exam admin={admin} exam={exam} key={index} />
                   ))
                 ) : (
                   <></>

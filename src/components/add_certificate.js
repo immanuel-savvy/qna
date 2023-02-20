@@ -10,7 +10,13 @@ class Add_certificate extends Handle_file_upload {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    let { certificate } = this.props;
+
+    this.state = {
+      ...certificate,
+      vendor: certificate && certificate?.vendor?._id,
+      image_filename: certificate && certificate?.image,
+    };
   }
 
   is_set = () => {
@@ -20,7 +26,7 @@ class Add_certificate extends Handle_file_upload {
   };
 
   componentDidMount = async () => {
-    let vendors = await get_request("vendors/all");
+    let vendors = !this.state._id && (await get_request("vendors/all"));
     vendors = Array.isArray(vendors) ? vendors : new Array();
 
     this.setState({ vendors });
@@ -28,21 +34,25 @@ class Add_certificate extends Handle_file_upload {
 
   submit = async () => {
     let { toggle } = this.props;
-    let { title, description, vendor, image } = this.state;
+    let { title, description, vendor, _id, created, image } = this.state;
 
     this.setState({ loading: true });
-    let certificate = { title, vendor, image, description };
-    let res = await post_request("add_certificate", certificate);
-    console.log(res);
+    let certificate = { title, vendor, _id, created, image, description };
+    let res = await post_request(
+      _id ? "update_certificate" : "add_certificate",
+      certificate
+    );
+
     if (res._id) {
       certificate._id = res._id;
       certificate.image = res.image;
       certificate.created = res.created;
 
       toggle();
+      _id && window.location.reload();
     } else {
       this.setState({
-        message: "Cannot add certificate at the moment",
+        message: `Cannot ${_id ? "update" : "add"} certificate at the moment`,
         loading: false,
       });
     }
@@ -51,7 +61,8 @@ class Add_certificate extends Handle_file_upload {
   render() {
     let { toggle } = this.props;
 
-    let { message, vendors, image_filename } = this.state;
+    let { message, vendors, _id, image_filename, title, description } =
+      this.state;
 
     return (
       <div class="addmodal" id="modal" style={{ display: "flex" }}>
@@ -61,7 +72,7 @@ class Add_certificate extends Handle_file_upload {
           </i>
           <div class="forms">
             <span class="sp">
-              <h2>Add Certification</h2>
+              <h2>{_id ? "Update" : "Add"} Certification</h2>
 
               <span class="file" style={{ width: "100%" }}>
                 <div class="cover">
@@ -87,6 +98,7 @@ class Add_certificate extends Handle_file_upload {
               <input
                 type="text"
                 placeholder="Name"
+                value={title}
                 onChange={({ target }) =>
                   this.setState({ message: "", title: target.value })
                 }
@@ -100,40 +112,45 @@ class Add_certificate extends Handle_file_upload {
                 id=""
                 cols="30"
                 rows="10"
+                value={description}
                 placeholder="Description..."
                 onChange={({ target }) =>
                   this.setState({ message: "", description: target.value })
                 }
               ></textarea>
 
-              <label>Vendor</label>
-              <div className="select">
-                {vendors ? (
-                  <select
-                    id="selection"
-                    onChange={({ target }) => {
-                      this.setState({ vendor: target.value });
-                    }}
-                    aria-valuenow="20"
-                  >
-                    <option>-- Select Vendor --</option>
-                    {vendors.map(({ name, _id }) => (
-                      <option key={_id} value={_id}>
-                        {to_title(name)}
-                      </option>
-                    ))}
-                  </select>
-                ) : (
-                  <Loadindicator smalls />
-                )}
-              </div>
+              {_id ? null : (
+                <>
+                  <label>Vendor</label>
+                  <div className="select">
+                    {vendors ? (
+                      <select
+                        id="selection"
+                        onChange={({ target }) => {
+                          this.setState({ vendor: target.value });
+                        }}
+                        aria-valuenow="20"
+                      >
+                        <option>-- Select Vendor --</option>
+                        {vendors.map(({ name, _id }) => (
+                          <option key={_id} value={_id}>
+                            {to_title(name)}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <Loadindicator smalls />
+                    )}
+                  </div>
+                </>
+              )}
             </span>
           </div>
 
           {message ? <Alert_message msg={message} /> : null}
 
           <Stretch_btn
-            title="Add certificate"
+            title={_id ? "Update certificate" : "Add certificate"}
             action={this.submit}
             disabled={!this.is_set()}
           />

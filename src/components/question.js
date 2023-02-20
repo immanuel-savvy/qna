@@ -25,8 +25,7 @@ class Question extends React.Component {
 
   option = (option, image, answer, op) => {
     let { reveal_answer, question } = this.props;
-    console.log(reveal_answer);
-    if (!question.answer) question.answer = "c";
+
     return (
       <li
         style={{

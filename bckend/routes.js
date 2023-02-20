@@ -15,6 +15,8 @@ import {
   add_certificate,
   certificates,
   new_vendor,
+  remove_certification,
+  update_certification,
   vendors,
   vendor_certificates,
 } from "./handlers/vendors";
@@ -48,6 +50,8 @@ const routes = (app) => {
   app.post("/new_comment", new_comment);
   app.post("/comments/:question", comments);
   app.post("/new_reply", new_reply);
+  app.post("/update_certificate", update_certification);
+  app.post("/remove_certificate", remove_certification);
 };
 
 export default routes;

@@ -50,9 +50,6 @@ class Top_certifications extends React.Component {
             )}
           </div>
         </div>
-        {/* <a href="" class="seeall">
-          See all <i class="material-icons">chevron_right</i>
-        </a> */}
       </section>
     );
   }

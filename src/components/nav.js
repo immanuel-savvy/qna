@@ -11,6 +11,7 @@ import Upload_ebook from "./upload_ebook";
 import { save_to_session } from "./practice_question";
 import { client_domain } from "../assets/js/utils";
 import Add_question from "./add_question";
+import Add_faq from "./add_faq";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -25,16 +26,22 @@ class Nav extends React.Component {
         this.setState({ question: question.question, exam: question.exam });
       else this.setState({ question: null, exam: null });
     };
+    this.toggle_faq = () => this.setState({ faq: !this.state.faq });
     this.toggle_questions_upload = (exam) => this.setState({ exam });
     this.toggle_add_vendor = () =>
       this.setState({ add_vendor: !this.state.add_vendor });
     this.toggle_create_exam = () =>
       this.setState({ create_exam: !this.state.create_exam });
-    this.toggle_add_certificate = () =>
-      this.setState({ add_certificate: !this.state.add_certificate });
+    this.toggle_add_certificate = (certificate) =>
+      this.setState({
+        add_certificate: !!this.state.add_certificate
+          ? null
+          : certificate || true,
+      });
     this.toggle_upload_ebook = () =>
       this.setState({ upload_ebook: !this.state.upload_ebook });
 
+    emitter.listen("toggle_faq", this.toggle_faq);
     emitter.listen("toggle_questions_upload", this.toggle_questions_upload);
     emitter.listen("toggle_add_vendor", this.toggle_add_vendor);
     emitter.listen("toggle_create_exam", this.toggle_create_exam);
@@ -44,6 +51,7 @@ class Nav extends React.Component {
   };
 
   componentWillUnmount = () => {
+    emitter.remove_listener("toggle_faq", this.toggle_faq);
     emitter.remove_listener(
       "toggle_add_certificate",
       this.toggle_add_certificate
@@ -86,6 +94,7 @@ class Nav extends React.Component {
       add_certificate,
       add_vendor,
       upload_ebook,
+      faq,
       exam,
     } = this.state;
 
@@ -97,6 +106,7 @@ class Nav extends React.Component {
 
           return (
             <>
+              {faq ? <Add_faq toggle={this.toggle_faq} /> : null}
               {upload_ebook ? (
                 <Upload_ebook toggle={this.toggle_upload_ebook} />
               ) : null}
@@ -104,7 +114,10 @@ class Nav extends React.Component {
                 <Create_exam toggle={this.toggle_create_exam} />
               ) : null}
               {add_certificate ? (
-                <Add_certificate toggle={this.toggle_add_certificate} />
+                <Add_certificate
+                  certificate={add_certificate}
+                  toggle={this.toggle_add_certificate}
+                />
               ) : null}
               {add_vendor ? (
                 <Add_new_vendor toggle={this.toggle_add_vendor} />

@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/add_questions.css";
+import { to_title } from "../assets/js/functions";
 import { post_request } from "../assets/js/services";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
@@ -18,11 +19,13 @@ class Add_question extends Handle_file_upload {
   }
 
   is_set = () => {
-    let { optiona, optionb, optionc, optiond, question, solution } = this.state;
+    let { optiona, answer, optionb, optionc, optiond, question, solution } =
+      this.state;
 
-    return optiona && optionb && optionc && optiond && question && solution;
+    return (
+      optiona && answer && optionb && optionc && optiond && question && solution
+    );
   };
-
   componentDidMount = () => {
     let exam = get_session("exam_question");
     if (exam) this.setState({ exam });
@@ -44,12 +47,15 @@ class Add_question extends Handle_file_upload {
       exam,
       question,
       solution,
+      answer,
     } = this.state;
     this.setState({ loading: true });
 
     let exam_question = {
       question,
       solution,
+      answer,
+      certificate: exam.certificate?._id,
       options: {
         a: optiona,
         b: optionb,
@@ -245,6 +251,27 @@ class Add_question extends Handle_file_upload {
                 <label for="">
                   Solution <h6>(Ensure accuracy*)</h6>
                 </label>
+
+                {/* <label>Certificate</label> */}
+                <div className="select">
+                  <select
+                    id="selection"
+                    onChange={({ target }) =>
+                      this.setState({
+                        answer: target.value,
+                      })
+                    }
+                    aria-valuenow="20"
+                  >
+                    <option>-- Choose Answer --</option>
+                    {new Array("a", "b", "c", "d").map((ans, index) => (
+                      <option key={index} value={ans}>
+                        {to_title(ans)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 <textarea
                   name=""
                   value={solution}
@@ -254,7 +281,7 @@ class Add_question extends Handle_file_upload {
                   id=""
                   cols="30"
                   rows="10"
-                  placeholder="Enter full solution..."
+                  placeholder="Explain full solution..."
                 ></textarea>
                 <input
                   type="file"

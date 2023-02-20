@@ -12,8 +12,9 @@ class Vendor_exam extends React.Component {
   }
 
   render() {
-    let { index, exam } = this.props;
+    let { index, exam, admin } = this.props;
     let { title, year, certificate } = exam;
+    if (!certificate) return;
 
     return (
       <div
@@ -42,6 +43,20 @@ class Vendor_exam extends React.Component {
             {certificate.title}
           </Link>
         </div>
+        {admin ? (
+          <div class="table_active_item">
+            <small>Admin Action</small>
+            <Link
+              onClick={(e) => {
+                save_to_session("exam_question", exam);
+                scroll_to_top();
+              }}
+              to="/add_question"
+            >
+              Add Question
+            </Link>
+          </div>
+        ) : null}
       </div>
     );
   }

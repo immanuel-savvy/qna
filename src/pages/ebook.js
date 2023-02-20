@@ -4,6 +4,7 @@ import { get_request } from "../assets/js/services";
 import { domain, month_index } from "../assets/js/utils";
 import Certification_exam from "../components/certification_exam";
 import Loadindicator from "../components/loadindicator";
+import { get_session } from "../components/practice_question";
 import Footer from "../sections/footer";
 import Header from "../sections/header";
 
@@ -24,15 +25,17 @@ class Ebook extends React.Component {
     let certifcation_exams = await get_request(
       `certification_exams/${ebook.certificate._id}`
     );
-    this.setState({ certifcation_exams });
+    this.setState({ certifcation_exams, admin: get_session("logged_admin") });
   };
 
   render() {
-    let { ebook, certifcation_exams } = this.state;
+    let { ebook, certifcation_exams, admin } = this.state;
     let { description, book, created, cover, title, price, certificate } =
       ebook || new Object();
 
     created = new Date(created);
+
+    if (!certificate) window.history.go(-1);
 
     return (
       <>
@@ -107,7 +110,11 @@ class Ebook extends React.Component {
               {certifcation_exams ? (
                 <div class="table_container">
                   {certifcation_exams.map((cert) => (
-                    <Certification_exam exam={cert} key={cert._id} />
+                    <Certification_exam
+                      admin={admin}
+                      exam={cert}
+                      key={cert._id}
+                    />
                   ))}
                 </div>
               ) : (
