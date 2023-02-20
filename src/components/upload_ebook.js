@@ -17,6 +17,7 @@ class Upload_ebook extends Handle_file_upload {
 
   componentDidMount = async () => {
     let certificates = await get_request("certificates/all");
+    console.log(certificates);
     certificates = Array.isArray(certificates) ? certificates : new Array();
     this.setState({ certificates });
   };
@@ -75,6 +76,7 @@ class Upload_ebook extends Handle_file_upload {
       certificate: "",
       price: "",
       book: "",
+      cover_filename: "",
     });
   };
 
@@ -85,6 +87,7 @@ class Upload_ebook extends Handle_file_upload {
       certificates,
       price,
       title,
+      description,
       cover_filename,
       loading,
       ebook,
@@ -133,6 +136,7 @@ class Upload_ebook extends Handle_file_upload {
               <input
                 type="text"
                 placeholder="eBook title"
+                value={title}
                 onChange={({ target }) =>
                   this.setState({ message: "", title: target.value })
                 }
@@ -147,6 +151,7 @@ class Upload_ebook extends Handle_file_upload {
                 id=""
                 cols="30"
                 rows="10"
+                value={description}
                 placeholder="Description..."
                 onChange={({ target }) =>
                   this.setState({ message: "", description: target.value })
@@ -158,6 +163,7 @@ class Upload_ebook extends Handle_file_upload {
               <input
                 type="number"
                 placeholder="NGN 0.00"
+                value={price}
                 onChange={({ target }) =>
                   this.setState({ message: "", price: target.value })
                 }

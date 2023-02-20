@@ -23,7 +23,7 @@ class Ebook extends React.Component {
     } else return;
 
     let certifcation_exams = await get_request(
-      `certification_exams/${ebook.certificate._id}`
+      `certification_exams/${ebook.certificate._id || ebook.certificate}`
     );
     this.setState({ certifcation_exams, admin: get_session("logged_admin") });
   };
