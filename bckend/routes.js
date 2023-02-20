@@ -23,6 +23,7 @@ import {
   exam_taken,
   remove_question,
   search_exams,
+  search_questions,
   vendor_exams,
 } from "./handlers/exams";
 import { add_faq, faqs, remove_faq, update_faq } from "./handlers/faq";
@@ -93,6 +94,7 @@ const routes = (app) => {
   app.post("/dislike_comment", dislike_comment);
   app.post("/like_reply", like_reply);
   app.post("/dislike_reply", dislike_reply);
+  app.post("/search_questions", search_questions);
 };
 
 export default routes;

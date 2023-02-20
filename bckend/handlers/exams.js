@@ -146,6 +146,16 @@ const remove_question = (req, res) => {
   res.end();
 };
 
+const search_questions = (req, res) => {
+  let { query, exam } = req.body;
+
+  res.json({
+    ok: true,
+    message: "search results in questions",
+    data: QUESTIONS.read({ exam }, { search_param: query }),
+  });
+};
+
 export {
   create_exam,
   exams,
@@ -156,5 +166,6 @@ export {
   add_question,
   exam_questions,
   exam_taken,
+  search_questions,
   remove_question,
 };
