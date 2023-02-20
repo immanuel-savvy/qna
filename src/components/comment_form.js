@@ -7,6 +7,14 @@ class Comment_form extends React.Component {
     this.state = {};
   }
 
+  set_fullname = () => {
+    let loggeduser = get_sessions("loggeduser");
+    if (loggeduser) {
+      let { fullname, _id } = loggeduser;
+      this.setState({ fullname, user: _id });
+    }
+  };
+
   render() {
     let { action } = this.props;
     let { fullname, comment, user } = this.state;

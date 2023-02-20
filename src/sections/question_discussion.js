@@ -12,22 +12,41 @@ class Question_discussion extends React.Component {
     super(props);
 
     this.state = {
-      limit: 10,
-      page: 0,
+      limit: 2,
+      page: 1,
     };
   }
 
-  componentDidMount = async () => {
-    let { question, limit, page } = this.props;
+  fetch_comments = async () => {
+    let { question } = this.props;
+    let { limit, page, comments } = this.state;
 
-    let comments = await post_request(`comments/${question._id}`, {
+    this.setState({ fetching_comments: true });
+    comments = comments || new Array();
+
+    let more_comments = await post_request(`comments/${question._id}`, {
       limit,
       skip: (page - 1) * limit,
     });
 
-    this.setState({ comments });
+    comments = new Array(...comments, ...more_comments);
+    this.setState({
+      comments,
+      fetching_comments: false,
+      can_fetch_more: (more_comments && more_comments.length) === limit,
+    });
+  };
+
+  componentDidMount = async () => {
+    await this.fetch_comments();
 
     this.set_fullname();
+  };
+
+  more = () => {
+    let { page } = this.state;
+    page++;
+    this.setState({ page }, this.fetch_comments);
   };
 
   set_fullname = () => {
@@ -65,7 +84,7 @@ class Question_discussion extends React.Component {
 
   render() {
     let { toggle } = this.props;
-    let { comments, message, fullname, comment } = this.state;
+    let { comments, message, can_fetch_more, fetching_comments } = this.state;
 
     return (
       <Loggeduser.Consumer>
@@ -101,8 +120,18 @@ class Question_discussion extends React.Component {
                         No discussions yet. Start one.
                       </span>
                     )
-                  ) : (
+                  ) : null}
+                  {!can_fetch_more ? null : fetching_comments ? (
                     <Loadindicator />
+                  ) : (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        this.more();
+                      }}
+                    >
+                      Load more comments
+                    </button>
                   )}
                 </div>
               </div>
