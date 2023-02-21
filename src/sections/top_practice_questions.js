@@ -15,7 +15,6 @@ class Top_practice_questions extends React.Component {
   componentDidMount = async () => {
     let exams = await get_request("exams/all");
     let admin = !!get_session("logged_admin");
-    console.log(admin);
 
     this.setState({ exams, admin });
   };
