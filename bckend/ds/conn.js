@@ -31,7 +31,7 @@ const ds_conn = () => {
   USERS_HASH = gds.folder("user_hash", "user");
   EXAMS = gds.folder("exams", "certificate", "certificate");
   EBOOKS = gds.folder("ebooks", null, "exam");
-  FORUMS = gds.folder("forums");
+  FORUMS = gds.folder("forums", null, new Array("exam"));
   PURCHASED_EBOOKS = gds.folder("purchased_ebooks");
   REPLIES = gds.folder("replies", "comment");
   QUESTIONS = gds.folder("questions", "exam");

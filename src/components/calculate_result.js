@@ -35,17 +35,17 @@ class Calculate_result extends React.Component {
         <h4>
           <b>Test Results</b>
         </h4>
-        <span class="instructions">
-          <p class="t1">
+        <span className="instructions">
+          <p className="t1">
             Total Questions Answered:{" "}
             <b>{Array.from(Object.keys(answers)).length}</b>
           </p>
-          <p class="t1">
+          <p className="t1">
             Total Correct Answers: <b>{this.calculate_correct_answers()}</b>
           </p>
         </span>
 
-        <form class="forms mb-5">
+        <form className="forms mb-5">
           <Stretch_btn title="Take test again" action={try_again} />
         </form>
       </span>

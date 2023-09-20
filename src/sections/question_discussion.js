@@ -93,15 +93,15 @@ class Question_discussion extends React.Component {
 
           return (
             <div
-              class="discussionmodal"
+              className="discussionmodal"
               id="discussionnmodal"
               style={{ display: "flex" }}
             >
-              <div class="disc">
+              <div className="disc">
                 <i
                   onClick={toggle}
                   style={{ cursor: "pointer" }}
-                  class="material-icons c"
+                  className="material-icons c"
                   onclick="closeModal()"
                 >
                   close
@@ -109,7 +109,7 @@ class Question_discussion extends React.Component {
                 <Comment_form action={this.send_comment} />
 
                 {message ? <Alert_message msg={message} /> : null}
-                <div class="comments">
+                <div className="comments">
                   {comments ? (
                     comments.length ? (
                       comments.map((comment) => (

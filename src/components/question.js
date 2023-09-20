@@ -47,7 +47,13 @@ class Question extends React.Component {
       >
         {option}{" "}
         {image ? (
-          <img src={`${domain}/images/${image}`} className="img img-fluid" />
+          <>
+            <img
+              style={{ height: 300, display: "block" }}
+              src={`${domain}/images/${image}`}
+              className="img img-fluid img-responsive"
+            />
+          </>
         ) : null}
       </li>
     );
@@ -74,8 +80,17 @@ class Question extends React.Component {
   };
 
   render() {
-    let { question: question_, admin, index, answer } = this.props;
+    let {
+      question: question_,
+      admin,
+      reveal_answer,
+      index,
+      answer,
+      style,
+      exam,
+    } = this.props;
 
+    if (!question_) return;
     let {
       question,
       image,
@@ -94,14 +109,16 @@ class Question extends React.Component {
 
     return (
       <div
-        className="ex"
+        className="ex col-md-6 col-sm-12 col-lg-4"
         style={{
           boxShadow: "0 0 60px 0 rgb(170, 170, 170, 0.4)",
           border: "none",
+          ...style,
         }}
       >
         <span className="t1">
-          Question {index + 1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {!reveal_answer ? exam.title : `Question ${index + 1}`}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           {admin ? (
             <span className="ml-5">
               <span
@@ -126,12 +143,14 @@ class Question extends React.Component {
           {image ? (
             <img src={`${domain}/images/${image}`} className="img img-fluid" />
           ) : null}
-          <ol type="A">
-            {this.option(options.a, aimage, answer, "a")}
-            {this.option(options.b, bimage, answer, "b")}
-            {this.option(options.c, cimage, answer, "c")}
-            {this.option(options.d, dimage, answer, "d")}
-          </ol>
+          {reveal_answer ? (
+            <ol type="A">
+              {this.option(options.a, aimage, answer, "a")}
+              {this.option(options.b, bimage, answer, "b")}
+              {this.option(options.c, cimage, answer, "c")}
+              {this.option(options.d, dimage, answer, "d")}
+            </ol>
+          ) : null}
           <span className="ansdiv">
             <a
               style={{ cursor: "pointer" }}

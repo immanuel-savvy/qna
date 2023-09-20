@@ -1,23 +1,28 @@
-import express from "express";
-import cors from "cors";
-import ds_conn from "./ds/conn";
-import router from "./routes";
-import bodyParser from "body-parser";
-import { create_default_admin } from "./handlers/starter";
-const app = express();
-app.use(cors());
-app.use(express.static(__dirname + "/assets"));
-app.use(bodyParser.urlencoded({
+"use strict";
+
+var _express = _interopRequireDefault(require("express"));
+var _cors = _interopRequireDefault(require("cors"));
+var _conn = _interopRequireDefault(require("./ds/conn"));
+var _routes = _interopRequireDefault(require("./routes"));
+var _bodyParser = _interopRequireDefault(require("body-parser"));
+var _starter = require("./handlers/starter");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var app = (0, _express.default)();
+app.use((0, _cors.default)());
+app.use(_express.default.static(__dirname + "/assets"));
+app.use(_bodyParser.default.urlencoded({
   extended: true,
   limit: "100mb"
 }));
-app.use(bodyParser.json({
+app.use(_bodyParser.default.json({
   limit: "100mb"
 }));
-router(app);
-app.get("/", (req, res) => res.send("<div><h1>Hi, its QNA.</h1></div>"));
-app.listen(1448, () => {
-  ds_conn();
-  create_default_admin();
+(0, _routes.default)(app);
+app.get("/", function (req, res) {
+  return res.send("<div><h1>Hi, its QNA.</h1></div>");
+});
+app.listen(1448, function () {
+  (0, _conn.default)();
+  (0, _starter.create_default_admin)();
   console.log("QNA Backend started on :1448");
 });

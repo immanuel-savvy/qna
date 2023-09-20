@@ -29,6 +29,7 @@ import {
 import { add_faq, faqs, remove_faq, update_faq } from "./handlers/faq";
 import {
   comments,
+  discussions,
   dislike_comment,
   dislike_reply,
   like_comment,
@@ -95,6 +96,7 @@ const routes = (app) => {
   app.post("/like_reply", like_reply);
   app.post("/dislike_reply", dislike_reply);
   app.post("/search_questions", search_questions);
+  app.post("/discussions", discussions);
 };
 
 export default routes;

@@ -1,4 +1,4 @@
-import { DISCUSSIONS, FORUMS, QUESTIONS, REPLIES } from "../ds/conn";
+import { DISCUSSIONS, EXAMS, FORUMS, QUESTIONS, REPLIES } from "../ds/conn";
 
 const comments = (req, res) => {
   let { question } = req.params;
@@ -29,7 +29,7 @@ const new_comment = (req, res) => {
       b: comment.answer === "b" ? 1 : 0,
       c: comment.answer === "c" ? 1 : 0,
       d: comment.answer === "d" ? 1 : 0,
-      certification: comment.certification,
+      certificate: comment.certificate,
     });
   }
 
@@ -96,6 +96,24 @@ const dislike_reply = (req, res) => {
   res.end();
 };
 
+const discussions = (req, res) => {
+  let { limit, skip } = req.body;
+
+  let discussions_ = FORUMS.read(null, { limit, skip });
+
+  for (let i = 0; i < discussions_.length; i++) {
+    let d = discussions_[i];
+
+    d.question = QUESTIONS.readone({
+      _id: d.question,
+      exam: (d.exam && d.exam._id) || d.exam,
+    });
+    d.exam = EXAMS.readone({ _id: d.exam, certificate: d.certificate });
+  }
+
+  res.json({ ok: true, data: discussions_ });
+};
+
 export {
   comments,
   like_comment,
@@ -105,4 +123,5 @@ export {
   new_comment,
   new_reply,
   replies,
+  discussions,
 };

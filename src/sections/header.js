@@ -66,17 +66,20 @@ class Header extends React.Component {
                     {vendors ? (
                       vendors.length ? (
                         vendors.map((vendor) => (
-                          <Link
-                            onClick={() =>
+                          <a
+                            href="#"
+                            onClick={() => {
                               window.sessionStorage.setItem(
                                 "vendor",
                                 JSON.stringify(vendor)
-                              )
-                            }
-                            to={`/vendor?${vendor._id}`}
+                              );
+                              window.location.assign(
+                                `${client_domain}/vendor?${vendor._id}`
+                              );
+                            }}
                           >
                             {vendor.name}
-                          </Link>
+                          </a>
                         ))
                       ) : (
                         <></>

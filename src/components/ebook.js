@@ -49,7 +49,7 @@ class Ebook extends React.Component {
             {description.slice(0, 150)}
           </p>
           <p style={{ marginBottom: 0 }} className="ebookprice">
-            {price ? `NGN ${price}` : "Free"}
+            <b>{price ? `NGN ${price}` : "Free"}</b>
           </p>
         </span>
       </Link>
