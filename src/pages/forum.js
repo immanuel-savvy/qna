@@ -15,7 +15,6 @@ class Forum extends React.Component {
   componentDidMount = async () => {
     let discussions = await post_request("discussions");
 
-    discussions = new Array(...discussions, ...discussions, ...discussions);
     this.setState({ discussions });
   };
 

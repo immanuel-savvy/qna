@@ -24,6 +24,12 @@ import { get_request, post_request } from "./assets/js/services";
 import Certificate from "./pages/certificate";
 import Exams_search_result from "./pages/exams_search_result";
 import Add_question from "./components/add_question";
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: "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",
+  dangerouslyAllowBrowser: true,
+});
 
 const emitter = new Emitter();
 
@@ -129,4 +135,4 @@ class Qna extends React.Component {
 }
 
 export default Qna;
-export { emitter };
+export { emitter, openai };

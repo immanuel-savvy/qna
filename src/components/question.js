@@ -2,7 +2,7 @@ import React from "react";
 import { to_title } from "../assets/js/functions";
 import { post_request } from "../assets/js/services";
 import { client_domain, domain } from "../assets/js/utils";
-import { emitter } from "../Qna";
+import { emitter, openai } from "../Qna";
 import { save_to_session } from "./practice_question";
 
 class Question extends React.Component {
@@ -12,7 +12,29 @@ class Question extends React.Component {
     this.state = {};
   }
 
-  toggle_answer = () => this.setState({ show_answer: !this.state.show_answer });
+  format_prompt = () => {
+    let { question } = this.props;
+
+    return `${question.question}
+
+    A. ${question.options.a}
+    B. ${question.options.b}
+    C. ${question.options.c}
+    D. ${question.options.d}
+    
+    Thats the problem above, I want you to give me a response based on the options and format your response in a JSON format of {option:a|b|c|d, reason: "explanation for that option in a paragraph"}
+    PROVIDE NO PREAMBLE WHATSOEVER, JUST THE JSON STRING.
+    `;
+  };
+
+  toggle_answer = async () => {
+    // let res = await openai.chat.completions.create({
+    //   messages: [{ role: "user", content: this.format_prompt() }],
+    //   model: "gpt-3.5-turbo",
+    // });
+
+    this.setState({ show_answer: !this.state.show_answer });
+  };
 
   toggle_discussions = () => {
     let { question, exam } = this.props;
@@ -85,6 +107,7 @@ class Question extends React.Component {
       admin,
       reveal_answer,
       index,
+      show_options,
       answer,
       style,
       exam,
@@ -117,7 +140,9 @@ class Question extends React.Component {
         }}
       >
         <span className="t1">
-          {!reveal_answer ? exam.title : `Question ${index + 1}`}
+          {!reveal_answer || show_options
+            ? exam?.title || "Question"
+            : `Question ${index + 1}`}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           {admin ? (
             <span className="ml-5">
@@ -143,7 +168,7 @@ class Question extends React.Component {
           {image ? (
             <img src={`${domain}/images/${image}`} className="img img-fluid" />
           ) : null}
-          {reveal_answer ? (
+          {reveal_answer || show_options ? (
             <ol type="A">
               {this.option(options.a, aimage, answer, "a")}
               {this.option(options.b, bimage, answer, "b")}
