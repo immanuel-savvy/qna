@@ -25,4 +25,6 @@ yarn-error.log*
 
 /qna-main
 /bckend/assets
+/bckend/build
+/bckend/.env
 /bckend/node_modules
