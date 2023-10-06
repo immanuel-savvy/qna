@@ -1,5 +1,6 @@
 import React from "react";
 import { to_title } from "../assets/js/functions";
+import Loadindicator from "./loadindicator";
 
 class Stretch_btn extends React.Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class Stretch_btn extends React.Component {
   render() {
     let { disabled, loading, style, action, title, color } = this.props;
 
-    return (
+    return loading ? (
+      <Loadindicator />
+    ) : (
       <button
         style={{ backgroundColor: color || null, ...style }}
         disabled={disabled || loading}
