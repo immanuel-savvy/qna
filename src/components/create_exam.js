@@ -60,7 +60,7 @@ class Create_exam extends React.Component {
 
   render() {
     let { toggle } = this.props;
-    let { message, certificates } = this.state;
+    let { message, certificates, loading } = this.state;
 
     return (
       <div class="addmodal" id="modal" style={{ display: "flex" }}>
@@ -139,6 +139,7 @@ class Create_exam extends React.Component {
             title="create exam"
             action={this.submit}
             disabled={!this.is_set()}
+            loading={loading}
           />
         </form>
       </div>

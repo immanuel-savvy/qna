@@ -61,7 +61,7 @@ class Add_certificate extends Handle_file_upload {
   render() {
     let { toggle } = this.props;
 
-    let { message, vendors, _id, image_filename, title, description } =
+    let { message, loading, vendors, _id, image_filename, title, description } =
       this.state;
 
     return (
@@ -153,6 +153,7 @@ class Add_certificate extends Handle_file_upload {
             title={_id ? "Update certificate" : "Add certificate"}
             action={this.submit}
             disabled={!this.is_set()}
+            loading={loading}
           />
         </form>
       </div>

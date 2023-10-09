@@ -38,7 +38,7 @@ class Add_new_vendor extends React.Component {
 
   render() {
     let { toggle } = this.props;
-    let { message } = this.state;
+    let { message, loading } = this.state;
 
     return (
       <div class="addmodal" id="modal" style={{ display: "flex" }}>
@@ -88,6 +88,7 @@ class Add_new_vendor extends React.Component {
             title="Add vendor"
             action={this.submit}
             disabled={!this.is_set()}
+            loading={loading}
           />
         </form>
       </div>

@@ -140,9 +140,7 @@ class Question extends React.Component {
         }}
       >
         <span className="t1">
-          {!reveal_answer || show_options
-            ? exam?.title || "Question"
-            : `Question ${index + 1}`}
+          {!show_options ? exam?.title || "Question" : `Question ${index + 1}`}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           {admin ? (
             <span className="ml-5">

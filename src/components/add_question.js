@@ -33,12 +33,9 @@ class Add_question extends Handle_file_upload {
   }
 
   is_set = () => {
-    let { optiona, answer, optionb, optionc, optiond, question, solution } =
-      this.state;
+    let { optiona, answer, optionb, optionc, optiond, question } = this.state;
 
-    return (
-      optiona && answer && optionb && optionc && optiond && question && solution
-    );
+    return optiona && answer && optionb && optionc && optiond && question;
   };
 
   componentDidMount = () => {
@@ -67,14 +64,13 @@ class Add_question extends Handle_file_upload {
       question,
       _id,
       created,
-      solution,
       answer,
     } = this.state;
     this.setState({ loading: true });
 
     let exam_question = {
       question,
-      solution,
+      solution: "",
       answer,
       certificate: exam.certificate?._id,
       options: {
@@ -149,7 +145,6 @@ class Add_question extends Handle_file_upload {
       optionb,
       optionc,
       optiond,
-      solution,
       question,
       answer,
       image_filename,
@@ -157,7 +152,6 @@ class Add_question extends Handle_file_upload {
       aimage_filename,
       bimage_filename,
       dimage_filename,
-      solution_image_filename,
       message,
       type,
       _id,
@@ -311,7 +305,7 @@ class Add_question extends Handle_file_upload {
                   </select>
                 </div>
 
-                <textarea
+                {/* <textarea
                   name=""
                   value={solution}
                   onChange={({ target }) =>
@@ -321,13 +315,13 @@ class Add_question extends Handle_file_upload {
                   cols="30"
                   rows="10"
                   placeholder="Explain full solution..."
-                ></textarea>
-                <input
+                ></textarea> */}
+                {/* <input
                   type="file"
                   accept="image/*"
                   onChange={(e) => this.handle_file(e, "solution_image")}
                 />
-                {solution_image_filename}
+                {solution_image_filename} */}
               </span>
               {message ? <Alert_message msg={message} type={type} /> : null}
               <Stretch_btn

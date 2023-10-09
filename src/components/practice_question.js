@@ -39,15 +39,25 @@ class Practice_question extends React.Component {
         >
           {certificate.vendor.name}
         </Link>
-        <Link
-          onClick={() => {
-            save_to_session("exam", exam);
-            scroll_to_top();
-          }}
-          to="/take_exam"
-        >
-          {to_title(title)}
-        </Link>
+        <span>
+          <Link
+            onClick={() => {
+              save_to_session("exam", exam);
+              scroll_to_top();
+            }}
+            to="/take_exam"
+          >
+            <p
+              style={{
+                wordBreak: "break-all",
+                wordWrap: "break-word",
+                flexWrap: "wrap",
+              }}
+            >
+              {to_title(title)}
+            </p>
+          </Link>
+        </span>
         <Link
           to="/certificate"
           onClick={() => {
@@ -55,7 +65,15 @@ class Practice_question extends React.Component {
             scroll_to_top();
           }}
         >
-          {certificate.title}
+          <p
+            style={{
+              wordBreak: "break-all",
+              wordWrap: "break-word",
+              flexWrap: "wrap",
+            }}
+          >
+            {certificate.title}
+          </p>
         </Link>
         <Link style={{ color: "#000", textDecoration: "none", cursor: "none" }}>
           {year}

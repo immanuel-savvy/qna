@@ -1,8 +1,8 @@
-const DEV = true;
+const DEV = false;
 
 const hostname = DEV ? "http://localhost" : "https://testnext.giitafrica.com";
 
-const client_domain = DEV ? `${hostname}:3001` : "https://exams.giitafrica.com";
+const client_domain = DEV ? `${hostname}:3000` : "https://exams.giitafrica.com";
 
 const domain = DEV ? `${hostname}:1448` : `https://testnext.giitafrica.com`;
 

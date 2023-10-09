@@ -27,7 +27,7 @@ import Add_question from "./components/add_question";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.REACT_APP_AI_KEY,
   dangerouslyAllowBrowser: true,
 });
 
