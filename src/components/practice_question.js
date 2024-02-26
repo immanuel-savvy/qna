@@ -29,23 +29,33 @@ class Practice_question extends React.Component {
     if (!certificate || !exam) return;
 
     return (
-      <span class="">
-        <Link
-          to="/vendor"
-          onClick={() => {
-            save_to_session("vendor", certificate.vendor);
-            scroll_to_top();
-          }}
-        >
-          {certificate.vendor.name}
-        </Link>
-        <span>
+      <tr>
+        <td>
+          <Link
+            to="/vendor"
+            onClick={() => {
+              save_to_session("vendor", certificate.vendor);
+              scroll_to_top();
+            }}
+            style={{ width: 200, wordBreak: "break-word" }}
+          >
+            {certificate.vendor.name}
+          </Link>
+        </td>
+
+        <td>
           <Link
             onClick={() => {
               save_to_session("exam", exam);
               scroll_to_top();
             }}
             to="/take_exam"
+            style={{
+              wordBreak: "break-all",
+              wordWrap: "break-word",
+              flexWrap: "wrap",
+              // width: 200,
+            }}
           >
             <p
               style={{
@@ -57,39 +67,48 @@ class Practice_question extends React.Component {
               {to_title(title)}
             </p>
           </Link>
-        </span>
-        <Link
-          to="/certificate"
-          onClick={() => {
-            save_to_session("certificate".certificate);
-            scroll_to_top();
-          }}
-        >
-          <p
-            style={{
-              wordBreak: "break-all",
-              wordWrap: "break-word",
-              flexWrap: "wrap",
-            }}
-          >
-            {certificate.title}
-          </p>
-        </Link>
-        <Link style={{ color: "#000", textDecoration: "none", cursor: "none" }}>
-          {year}
-        </Link>
-        {admin ? (
+        </td>
+        <td>
           <Link
-            onClick={(e) => {
-              save_to_session("exam_question", exam);
+            to="/certificate"
+            onClick={() => {
+              save_to_session("certificate".certificate);
               scroll_to_top();
             }}
-            to="/add_question"
           >
-            Add Question
+            <p
+              style={{
+                wordBreak: "break-all",
+                wordWrap: "break-word",
+                flexWrap: "wrap",
+              }}
+            >
+              {certificate.title}
+            </p>
           </Link>
+        </td>
+        <td>
+          <Link
+            style={{ color: "#000", textDecoration: "none", cursor: "none" }}
+          >
+            {year}
+          </Link>
+        </td>
+
+        {admin ? (
+          <td>
+            <Link
+              onClick={(e) => {
+                save_to_session("exam_question", exam);
+                scroll_to_top();
+              }}
+              to="/add_question"
+            >
+              Add Question
+            </Link>
+          </td>
         ) : null}
-      </span>
+      </tr>
     );
   }
 }

@@ -29,8 +29,7 @@ class Forum extends React.Component {
           <section className="sectioni sectionaa1">
             <h1> Join Hot Discussions Here !</h1>
             <h5>
-              A library of the best ebook to help you get prepared your your
-              exams faster
+              Cultivating Expertise, Fostering Solutions: Join the Conversation
             </h5>
 
             <form action="" className="srch">
@@ -52,10 +51,12 @@ class Forum extends React.Component {
           <section class="sectiontop">
             <div
               class="examtitle"
-              style={{
-                boxShadow: "0 0 60px 0 rgb(170, 170, 170, 0.4)",
-                border: "none",
-              }}
+              style={
+                {
+                  // boxShadow: "0 0 60px 0 rgb(170, 170, 170, 0.4)",
+                  // border: "none",
+                }
+              }
             >
               <div class="examquestions" style={{ width: "100%" }}>
                 <div

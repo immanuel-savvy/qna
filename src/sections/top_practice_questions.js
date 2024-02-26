@@ -1,5 +1,6 @@
 import React from "react";
 import { get_request } from "../assets/js/services";
+import { Table } from "react-bootstrap";
 import Loadindicator from "../components/loadindicator";
 import Practice_question, {
   get_session,
@@ -26,28 +27,38 @@ class Top_practice_questions extends React.Component {
     return (
       <section class="sectioniii">
         <p class="txt">Top practice exams</p>
-        <div class="list">
-          <span class="top">
-            <a class="p1">Vendor</a>
-            <a class="p1">Exam</a>
-            <a class=" p1">Certifications</a>
-            <a>Year</a>
+        <Table
+          style={{ width: "100%", textAlign: "center" }}
+          className="result_table"
+          striped
+          bordered
+          hover
+          responsive
+        >
+          <thead>
+            <tr>
+              <th>Vendor</th>
+              <th>Exam</th>
+              <th>Certifications</th>
+              <th></th>
+              {admin ? <th>Admin Action</th> : null}
+            </tr>
+          </thead>
 
-            {admin ? <a>Admin Action</a> : null}
-          </span>
-
-          {exams ? (
-            exams.length ? (
-              exams.map((exam) => (
-                <Practice_question admin={admin} exam={exam} key={exam._id} />
-              ))
+          <tbody>
+            {exams ? (
+              exams.length ? (
+                exams.map((exam) => (
+                  <Practice_question admin={admin} exam={exam} key={exam._id} />
+                ))
+              ) : (
+                <></>
+              )
             ) : (
-              <></>
-            )
-          ) : (
-            <Loadindicator />
-          )}
-        </div>
+              <Loadindicator />
+            )}
+          </tbody>
+        </Table>
       </section>
     );
   }

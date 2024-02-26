@@ -1,10 +1,10 @@
 const DEV = false;
 
-const hostname = DEV ? "http://localhost" : "https://testnext.giitafrica.com";
+const hostname = DEV ? "http://localhost" : "https://qna.giitafrica.com";
 
-const client_domain = DEV ? `${hostname}:3000` : "https://exams.giitafrica.com";
+const client_domain = DEV ? `${hostname}:3000` : "https://qna.giitafrica.com";
 
-const domain = DEV ? `${hostname}:1448` : `https://testnext.giitafrica.com`;
+const domain = DEV ? `${hostname}:1448` : `https://apiqna.giitafrica.com`;
 
 const month_index = new Object({
   0: "jan",
